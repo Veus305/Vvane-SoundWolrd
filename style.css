@@ -1,0 +1,432 @@
+#intro-text {
+    position: fixed;
+    bottom: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 23px;
+    font-style: italic;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    color: black;
+    padding: 8px 12px;
+    border-radius: 8px;
+    z-index: 9999;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+  .highlight {
+    color:rgb(0, 217, 255);
+    transition: color 0.5s;
+  }
+
+
+#navbar{
+    background-color:rgb(0, 217, 255) ;
+    font-family: Verdana, sans-serif;
+    margin-top: 0px;
+color: #fceb06;
+font-size: 30px;
+    font-weight: bold;
+    padding: 0px 0px;
+    z-index: 0;
+clip-path: polygon(5% 13%, 100% 13%, 100% 100%, 0% 100%);
+position: relative;
+top: -34px;
+margin-right: -19px;
+height: 100px;
+}
+ #downloadsighn{
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 1;
+    cursor: pointer;
+    text-decoration: none;
+    border-radius: 5px;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.753);
+    transition: transform 0.3s ease;
+    margin: 5px ;
+    margin-top: 15px;
+}
+body{
+  background-image:URL(sadblack2.jpeg) ;
+background-repeat: no-repeat;
+background-position:center;
+background-attachment: fixed;
+background-size: cover;
+margin: 0px;
+margin-top: 0px;
+ font-family: Verdana, sans-serif;
+ color:rgb(0, 217, 255);
+  z-index: 1;
+}
+audio{
+    width: 200px;
+    height: 20px;
+    color: #fceb06;
+
+}
+#logo{
+    display:flex;
+    align-items:center;
+    justify-content: center;
+    margin: 0px;
+    padding: 0px 0px;
+     z-index: 1;
+}
+.sample{
+color: #fceb06;
+font-size: 20px;
+font-weight: bold;
+}
+
+#sampleaudio{
+    width: 100%;
+    height: auto;
+    display: flex;
+
+}
+#sampleheading{
+    color: #fceb06;
+    font-size: 18px;
+    font-weight: bold;
+    padding-left: 50px;
+}
+#latin{
+    width: 23%;
+    height: auto;
+    display: inline-block;
+    z-index: 1;
+    overflow-y: auto;
+    border-radius: 10px;
+     background-image:URL(theboy3.jpeg) ;
+background-repeat: no-repeat;
+background-position:center;
+background-attachment: fixed;
+background-size: cover;
+backdrop-filter:blur(25px);
+-webkit-backdrop-filter: blur(7px);
+position: relative;
+box-shadow:  0 6px 10px rgba(0, 0, 0, 0.753);
+margin: 10px;
+
+}
+audio{
+    padding: 5px;
+}
+
+li{
+    z-index: 1;
+    display: flex;
+}
+#sampleimage{
+    width:60px;
+    height: 60px;
+    padding: 9px;
+    border-radius: 5px;
+}
+.playlist1{
+    width: 300px;
+    height: 300px;
+    display: inline-block;
+    background-image: url(theboy.jpeg);
+    background-position:center;
+    background-attachment: inherit;
+    background-size: cover;  
+    z-index: 1;
+    margin: 10px;
+    border-radius: 15px;
+    box-shadow:  0 6px 10px rgba(0, 0, 0, 0.753);
+     transition: opacity 1s ease;
+}
+.playlist2{
+    width: 300px;
+    height: 300px;
+    display: inline-block;
+    background-image: url(theboy.jpeg);
+    background-position:center;
+    background-attachment: inherit;
+    background-size: cover;  
+    z-index: 1;
+    margin: 10px;
+    border-radius: 15px;
+    box-shadow: 0 6px 10px  rgba(0, 0, 0, 0.753);
+     transition: opacity 1s ease;
+}
+.playlist3{
+    width: 300px;
+    height: 300px;
+    display: inline-block;
+    background-image: url(sadblack3.jpeg);
+    background-position:center;
+    background-attachment: inherit;
+    background-size: cover;  
+    z-index: 1;
+    margin: 10px;
+    border-radius: 15px;
+    box-shadow: 0 6px 10px  rgba(0, 0, 0, 0.753);
+     transition: opacity 1s ease;
+}
+.playlist4{
+    width: 300px;
+    height: 300px;
+    display: inline-block;
+    background-image: url(sadblack3.jpeg);
+    background-position:center;
+    background-attachment: inherit;
+    background-size: cover;  
+    z-index: 1;
+    margin: 10px;
+    border-radius: 15px;
+    box-shadow: 0 6px 10px  rgba(0, 0, 0, 0.753);
+     transition: opacity 1s ease;
+}
+.holdplaylist{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    margin-top: 40px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+}
+.hidden {
+      opacity: 0;
+    }
+label{
+   color:#fceb06; 
+    font-size: 24px;
+     font-weight: bold;
+     margin-top: 50px;
+     margin-left: 50px;
+}
+a{
+   display: inline-block ;
+   width: fit-content; 
+   height:fit-content ;
+   text-decoration:none ;
+   color: inherit;
+   z-index: 1;
+}
+.playlist1:hover{
+    background-size: 350px;
+}
+.playlist2:hover{
+    background-size: 350px;
+}
+.playlist3:hover{
+    background-size: 350px;
+}
+.playlist4:hover{
+    background-size: 350px;
+}
+
+body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden; /* Prevent scroll during intro */
+    }
+
+    /* Overlay Container */
+    
+
+    /* Downward Animation on Load */
+    @keyframes slideDown {
+      to {
+        top: 0;
+      }
+    }
+
+    /* Upward Animation on Click */
+    @keyframes slideUp {
+      to {
+        top: -100vh;
+      }
+    }
+
+    /* Your page content */
+    #content {
+      position: relative;
+      z-index: 1;
+      padding: 20px;
+    }
+     /* Fullscreen Blur Overlay */
+
+#bgradius{
+ background-image: url('sadblack4.jpeg') ;
+      background-position:center center;
+    background-attachment: fixed;
+    background-size:contain;
+  background-repeat: no-repeat;
+width: 50%;
+height: 50%;
+position: fixed;
+border-radius: 100px;
+border: #fded05;
+z-index: 2;
+}
+
+    #introOverlay{
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height:100vh ;
+      backdrop-filter: blur(20px);
+      display:flex ;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      animation: slideDown 1s ease forwards;
+    }
+
+    /* Make animation container visible over blur */
+    .container {
+      --uib-size: 45px;
+      --uib-color: rgb(0, 217, 255);
+      --uib-speed: 1.75s;
+      --uib-bg-opacity: .1;
+      height: 31.25px;
+      width: 50px;
+      overflow: visible;
+      position: relative;
+      top:143px ;
+      left:275px ;
+    }
+
+    .car {
+      stroke: var(--uib-color);
+      stroke-dasharray: 100;
+      stroke-dashoffset: 0;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      animation:
+        travel var(--uib-speed) ease-in-out infinite,
+        fade var(--uib-speed) ease-out infinite;
+      will-change: stroke-dasharray, stroke-dashoffset;
+      transition: stroke 0.5s ease;
+      
+    }
+
+    .track {
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke: var(--uib-color);
+      opacity: var(--uib-bg-opacity);
+      
+    }
+
+    @keyframes travel {
+      0% {
+        stroke-dashoffset: 100;
+      }
+      75% {
+        stroke-dashoffset: 0;
+      }
+    }
+
+    @keyframes fade {
+      0% {
+        opacity: 0;
+      }
+      20%, 55% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+      }
+    }
+
+    @keyframes slideUp {
+      0% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100%);
+        opacity: 0;
+      }
+    }
+
+    @keyframes slideDown {
+      0% {
+        transform: translateY(-100%);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+    #iconanim{
+    width: 50px; height: 50px; display: flex; align-items:
+   center; justify-content: center;
+    background-image: url(beamed1.png);
+    background-position:center;
+    background-attachment: inherit;
+    background-size: cover;  
+    z-index: 1;
+    border-radius: 5px;
+    box-shadow: 0 6px 10px  0 6px 10px rgba(0, 0, 0, 0.753);
+
+    }
+    .outer-div {
+    width: inherit;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+  }
+
+  .custom-container {
+    --uib-size: 35px;
+    --uib-color: #fded05;
+    --uib-speed: 1s;
+    --uib-stroke: 3.5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: var(--uib-size);
+    height: calc(var(--uib-size) * 0.9);
+  }
+
+  .custom-bar {
+    width: var(--uib-stroke);
+    height: 100%;
+    background-color: var(--uib-color);
+    transition: background-color 0.3s ease;
+  }
+
+  /* Animation will only be active when 'playing' class is added */
+  .playing .custom-bar:nth-child(1) {
+    animation: custom-grow var(--uib-speed) ease-in-out calc(var(--uib-speed) * -0.45) infinite;
+  }
+
+  .playing .custom-bar:nth-child(2) {
+    animation: custom-grow var(--uib-speed) ease-in-out calc(var(--uib-speed) * -0.3) infinite;
+  }
+
+  .playing .custom-bar:nth-child(3) {
+    animation: custom-grow var(--uib-speed) ease-in-out calc(var(--uib-speed) * -0.15) infinite;
+  }
+
+  .playing .custom-bar:nth-child(4) {
+    animation: custom-grow var(--uib-speed) ease-in-out infinite;
+  }
+
+  @keyframes custom-grow {
+    0%, 100% {
+      transform: scaleY(0.3);
+    }
+    50% {
+      transform: scaleY(1);
+    }
+  }

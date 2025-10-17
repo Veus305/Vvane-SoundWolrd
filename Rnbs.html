@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RNB VYBZ</title>
+    <link href="style2.css" rel="stylesheet">
+</head>
+<body>
+    <nav id="navbar">
+        <div id="logo">
+            <p id="tittle">Vvane Sound World</p>
+            <button id="homebutton" onclick="location.href='index.html'">Home</button>
+        </div>
+    </nav> 
+    
+    <div class="ad-overlay" id="adOverlay">
+    <div class="ad-container" id="adContainer">
+      <button class="skip-btn" id="skipBtn">Skip Ad</button>
+    </div>
+  </div>
+
+
+<table id="playlisttable" >
+   <tr id="playlistalbum" ><td class="blur-content">
+<img id="playlistimage" src="theboy.jpeg" alt="Latin Playlist Image">
+        <p id="playlistheading">RNB VYBZ</p>
+        <label id="notrack"> 45 Tracks</label>
+    </td>
+  </tr> 
+<tr id="Vsongs">
+<td>
+    <div id="Vsadsongs">
+        <label id="Vsadsongsheading">Sad Songs</label>
+    <div id="control-panel">
+    <label id="enterid">Enter Audio ID: </label>
+    <input type="number" id="audioIdInput" min="1" />
+    <button onclick="playById()">Play</button>
+    <button onclick="pauseCurrent()">Pause</button>
+    <button onclick="playAll()">Auto Play All</button>
+  </div>
+   <div class="search-container">
+    <input type="text" id="searchBar" placeholder="Search for a song..." autocomplete="off">
+    <div id="suggestions"></div>
+  </div>
+
+  <div class="audio-list" id="audioList">
+    <!-- Matching audio players will appear here -->
+  </div>
+  <div class="audio-container" id="audioContainer">
+    <!-- Audio Item 1 -->
+    <div class="audio-box" data-id="1" class="image-box">
+      <img  id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
+      <p>Track 1:David Kushner - Daylight </p>
+      <audio src="David Kushner - Daylight (Official Music Video)(MP3_160K).mp3"></audio>
+    </div>
+
+    <!-- Audio Item 2 -->
+    <div class="audio-box" data-id="2" class="image-box">
+      <img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
+      <p>Track 2:DJ Khaled - Just Us</p>
+      <audio src="DJ Khaled - Just Us (Official Video) ft. SZA(MP3_160K).mp3"></audio>
+    </div>
+
+    <!-- Audio Item 3 -->
+    <div class="audio-box" data-id="3" class="image-box">
+      <img  id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
+      <p>Track 3:Elley Duhé - MIDDLE OF THE NIGHT</p>
+      <audio src="Elley Duhé - MIDDLE OF THE NIGHT (Official Video)(MP3_160K).mp3"></audio>
+    </div>
+
+     <!-- Audio Item 4 -->
+    <div class="audio-box" data-id="4" class="image-box">
+      <img  id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
+      <p>Track 4:Enya - Only Time</p>
+      <audio src="Enya - Only Time (Official 4K Music Video)(MP3_160K).mp3"></audio>
+    </div>
+
+     <!-- Audio Item 5 -->
+    <div class="audio-box" data-id="5" class="image-box">
+      <img  id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
+      <p>Track 5:Glass Animals - Heat Waves</p>
+      <audio src="Glass Animals - Heat Waves (Official Video)(MP3_160K).mp3"></audio>
+    </div>
+
+     <!-- Audio Item 6 -->
+    <div class="audio-box" data-id="6" class="image-box">
+      <img  id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
+      <p>Track 6:James Blunt - You_re Beautiful</p>
+      <audio src="James Blunt - You_re Beautiful (Official Music Video) [4K](MP3_160K).mp3"></audio>
+    </div>
+
+    <!-- Audio Item 7 -->
+    <div class="audio-box" data-id="7" class="image-box">
+      <img  id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
+      <p>Track 7:Feid - Ferxxo 100</p>
+      <audio src="Feid - Ferxxo 100 (Official Video)(MP3_160K).mp3"></audio>
+    </div>
+
+    <!-- Audio Item 8 -->
+    <div class="audio-box" data-id="8" class="image-box">
+      <img  id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
+      <p>Track 8:Wake Up_ Julie and the Phantoms </p>
+      <audio src="Julie Sings _Wake Up_ Clip _ Julie and the Phantoms _ Netflix After School(MP3_160K).mp3"></audio>
+    </div>
+
+     <!-- Audio Item 9 -->
+    <div class="audio-box" data-id="9"  class="image-box">
+      <img  id="songimage" src="images/fire.jpg" onclick="toggleAudio(this)" onclick="playAudio(this)" />
+      <p>Track 9:Justin Bieber - Hold On </p>
+      <audio src="Justin Bieber - Hold On (Lyrics)(MP3_160K).mp3"></audio>
+    </div>
+
+    <!-- Audio Item 10 -->
+    <div class="audio-box" data-id="10" class="image-box">
+      <img  id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
+      <p>Track 10:Livingston - Last Man Standing</p>
+      <audio src="Livingston - Last Man Standing (Official Visualizer)(MP3_160K).mp3"></audio>
+    </div>
+
+    <!-- Audio Item 11-->
+    <div class="audio-box" data-id="11" class="image-box">
+      <img  id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
+      <p>Track 11:Lord Huron - The Night We Met</p>
+      <audio src="Lord Huron - The Night We Met (Lyrics)(MP3_160K).mp3"></audio>
+    </div> 
+
+    <!-- Audio Item 12-->
+    <div class="audio-box" data-id="12" class="image-box">
+      <img  id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
+      <p>Track 12:Selena Gomez - Lose You To Love Me</p>
+      <audio src="Selena Gomez - Lose You To Love Me (Official Music Video)(MP3_160K).mp3"></audio>
+    </div> 
+
+     <!-- Audio Item 13-->
+    <div class="audio-box" data-id="13" class="image-box">
+      <img  id="songimage" src="images/beamedsmoke.png" onclick="playAudio(this)" />
+      <p>Track 13:Shaboozey - Highway</p>
+      <audio src="Shaboozey - Highway (Official Video)(MP3_160K).mp3"></audio>
+    </div> 
+
+      <!-- Audio Item 14-->
+    <div class="audio-box" data-id="14"  class="image-box" >
+      <img  id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
+      <p>Track 14:Shaboozey - Vegas</p>
+      <audio src="Shaboozey - Vegas _ A COLORS SHOW(MP3_160K).mp3"></audio>
+    </div>
+
+      <!-- Audio Item 15-->
+    <div class="audio-box" data-id="15"  class="image-box" >
+      <img  id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
+      <p>Track 15:the 1975 - somebody else</p>
+      <audio src="the 1975 - somebody else __ lyrics(MP3_160K).mp3"></audio>
+    </div>
+
+      <!-- Audio Item 16-->
+    <div class="audio-box" data-id="16"  class="image-box">
+      <img  id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
+      <p>Track 16:The Climb - Miley Cyrus</p>
+      <audio src="The Climb - Miley Cyrus (Lyrics) 🎵(MP3_160K).mp3"></audio>
+    </div>
+
+      <!-- Audio Item 17-->
+    <div class="audio-box" data-id="17"  class="image-box">
+      <img  id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
+      <p>Track 17:Until you come back home - Selena ft Justin</p>
+      <audio src="Until you come back home - Selena ft Justin(MP3_160K).mp3"></audio>
+    </div>
+
+     <!-- Audio Item 18-->
+    <div class="audio-box" data-id="18"  class="image-box">
+      <img  id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
+      <p>Track 18:Artemas - i like the way you kiss me</p>
+      <audio src="Artemas - i like the way you kiss me (YDG Remix)(MP3_160K).mp3"></audio>
+    </div>
+
+     <!-- Audio Item 19-->
+    <div class="audio-box" data-id="19"  class="image-box">
+      <img  id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
+      <p>Track 19:Bayker Blankenship - Maxed Out</p>
+      <audio src="Bayker Blankenship - Maxed Out (Official Music Video)(MP3_160K).mp3"></audio>
+    </div>
+
+    <!-- Audio Item 20-->
+    <div class="audio-box" data-id="20"  class="image-box">
+      <img  id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
+      <p>Track 20:Dax - _Lonely Dirt Road_</p>
+      <audio src="Dax - _Lonely Dirt Road_ (Official Music Video)(MP3_160K).mp3"></audio>
+    </div>
+
+     <!-- Audio Item 21-->
+    <div class="audio-box" data-id="21"  class="image-box">
+      <img  id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
+      <p>Track 21: Lil Man J - Stuck In The Middle</p>
+      <audio src="Lil Man J - Stuck In The Middle (Official Visualizer)(MP3_160K).mp3"></audio>
+    </div>
+
+    <!-- Audio Item 22-->
+    <div class="audio-box" data-id="22"  class="image-box">
+      <img  id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
+      <p>Track 22: Morgan Wallen - Last Night</p>
+      <audio src="Morgan Wallen - Last Night (One Record At A Time Sessions)(MP3_160K).mp3"></audio>
+    </div>
+
+     <!-- Audio Item 23-->
+    <div class="audio-box" data-id="23"  class="image-box">
+      <img  id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
+      <p>Track 23: Morgan Wallen - Whiskey Glasses</p>
+      <audio src="Morgan Wallen - Whiskey Glasses (Official Video)(MP3_160K).mp3"></audio>
+    </div>
+
+     <!-- Audio Item 24-->
+    <div class="audio-box" data-id="24"  class="image-box">
+      <img  id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
+      <p>Track 24: Shaboozey - Anabelle</p>
+      <audio src="Shaboozey - Anabelle (Official Video)(MP3_160K).mp3"></audio>
+    </div>
+
+     <!-- Audio Item 25-->
+    <div class="audio-box" data-id="25"  class="image-box">
+      <img  id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
+      <p>Track 25: Shaboozey - Good News</p>
+      <audio src="Shaboozey - Good News(MP3_160K).mp3"></audio>
+    </div>
+
+     <!-- Audio Item 26-->
+    <div class="audio-box" data-id="26"  class="image-box">
+      <img  id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
+      <p>Track 26: Shaboozey - Let It Burn</p>
+      <audio src="Shaboozey - Let It Burn (Official Video)(MP3_160K).mp3"></audio>
+    </div>
+
+    <!-- Audio Item 26-->
+    <div class="audio-box" data-id="26"  class="image-box">
+      <img  id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
+      <p>Track 26: Shaboozey_ Jelly Roll - Amen </p>
+      <audio src="Shaboozey_ Jelly Roll - Amen (Visualizer)(MP3_160K).mp3"></audio>
+    </div>
+
+    <!-- Audio Item 27-->
+    <div class="audio-box" data-id="27"  class="image-box">
+      <img  id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
+      <p>Track 27: Shaboozey_ Myles Smith - Blink Twice </p>
+      <audio src="Shaboozey_ Myles Smith - Blink Twice (Official Video)(MP3_160K).mp3"></audio>
+    </div>
+
+     <!-- Audio Item 27-->
+    <div class="audio-box" data-id="27"  class="image-box">
+      <img  id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
+      <p>Track 27: twenty one pilots - Chlorine </p>
+      <audio src="twenty one pilots - Chlorine (Official Video)(MP3_160K).mp3"></audio>
+    </div>
+
+     <!-- Audio Item 28-->
+    <div class="audio-box" data-id="28"  class="image-box">
+      <img  id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
+      <p>Track 28: The Band Perry - If I Die Young</p>
+      <audio src="The Band Perry - If I Die Young (Official Music Video)(MP3_160K).mp3"></audio>
+    </div>
+
+    <!-- Audio Item 29-->
+    <div class="audio-box" data-id="29"  class="image-box">
+      <img  id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
+      <p>Track 29: Years And Years - Breathe</p>
+      <audio src="Years And Years - Breathe (Lyrics)(Olly Alexander)(MP3_160K).mp3"></audio>
+    </div>
+
+    <!-- Audio Item 30-->
+    <div class="audio-box" data-id="30"  class="image-box">
+      <img  id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
+      <p>Track 30: Tyler Braden - Devil You Know</p>
+      <audio src="Tyler Braden - Devil You Know (Official Music Video)(MP3_160K).mp3"></audio>
+    </div>
+
+     <!-- Audio Item 31-->
+    <div class="audio-box" data-id="31"  class="image-box">
+      <img  id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
+      <p>Track 31: Ben E. King - Stand By Me</p>
+      <audio src="Ben E. King - Stand By Me (Official Vinyl Video)(MP3_160K).mp3"></audio>
+    </div>
+
+    <!-- Audio Item 32-->
+    <div class="audio-box" data-id="32"  class="image-box">
+      <img  id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
+      <p>Track 32: Coldplay - Paradise</p>
+      <audio src="Coldplay - Paradise (Official Video)(MP3_160K).mp3"></audio>
+    </div>
+
+     <!-- Audio Item 32-->
+    <div class="audio-box" data-id="32"  class="image-box">
+      <img  id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
+      <p>Track 32: Coldplay - Paradise</p>
+      <audio src="Coldplay - Paradise (Official Video)(MP3_160K).mp3"></audio>
+    </div>
+
+     <!-- Audio Item 33-->
+    <div class="audio-box" data-id="33"  class="image-box">
+      <img  id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
+      <p>Track 33:Coldplay - The Scientist </p>
+      <audio src="Coldplay - The Scientist (Official 4K Video)(MP3_160K).mp3"></audio>
+    </div>
+
+     <!-- Audio Item 34-->
+    <div class="audio-box" data-id="34"  class="image-box">
+      <img  id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
+      <p>Track 34:Coldplay - Yellow </p>
+      <audio src="Coldplay - Yellow (Official Video)(MP3_160K).mp3"></audio>
+    </div>
+
+    
+
+  </div>
+    </div>
+</td>
+
+<td>
+        <div id="Vpartysongs">
+        <label id="Vpartysongsheading">Party Songs</label>
+    <div id="control-panel">
+    <label id="enterid">Enter Audio ID: </label>
+    <input type="number" id="audioIdInput2" min="1" />
+    <button onclick="playById2()">Play</button>
+    <button onclick="pauseCurrent2()">Pause</button>
+    <button onclick="playAll2()">Auto Play All</button>
+  </div>
+   <div class="search-container2">
+    <input type="text" id="searchBar2" placeholder="Search for a song..." autocomplete="off">
+    <div id="suggestions2"></div>
+  </div>
+
+  <div class="audio-list2" id="audioList2 ">
+    <!-- Matching audio players will appear here -->
+  </div>
+  <div class="audio-container" id="audioContainer" class="image-wrapper">
+    <!-- Audio Item 1 -->
+    <div class="audio-box2" data-id="1" class="image-box">
+      <img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" /><p>
+Track 1:Sweet Love 🤍 _ N.John </p>
+      <audio src="6.6.25 Sweet Love 🤍 _ N.John (Sovath Monineak) _losangeles _explorepage  _newmusic  _njohn(MP3_160K).mp3"></audio>
+    </div>
+
+    <!-- Audio Item 2 -->
+    <div class="audio-box2" data-id="2" class="image-box">
+      <img  id="songimage"src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
+      <p>Track 2:Clean Bandit and Mabel - Tick Tock</p>
+      <audio src="Clean Bandit and Mabel - Tick Tock (feat. 24kGoldn) [Official Video](MP3_160K).mp3"></audio>
+    </div>
+
+    <!-- Audio Item 3 -->
+    <div class="audio-box2" data-id="3" class="image-box">
+      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
+      <p>Track 3:_Unsaid Emily Julie and the Phantoms</p>
+      <audio src="_Unsaid Emily_ Lyric Video _ Julie and the Phantoms _ Netflix After School(MP3_160K).mp3"></audio>
+    </div>
+
+     <!-- Audio Item 4 -->
+    <div class="audio-box2" data-id="4" class="image-box">
+      <img id="songimage" src="images/beamedsmoke.png"onclick="toggleAudio(this)" onclick="playAudio(this)" />
+      <p>Track 4:be like that</p>
+      <audio src="be like that.mp3"></audio>
+    </div>
+ <!-- Audio Item 5 -->
+    <div class="audio-box2" data-id="5" class="image-box">
+      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
+      <p>Track 5:Bust Your Windows</p>
+      <audio src="Bust Your Windows (Cover of Jazmine Sullivan)(MP3_160K).mp3"></audio>
+    </div>
+    
+    <!-- Audio Item 6 -->
+    <div class="audio-box2" data-id="6" class="image-box">
+      <img id="songimage" src="images/beamedsmoke.png"onclick="toggleAudio(this)" onclick="playAudio(this)" />
+      <p>Track 6:Don_t Stop Believin_ (Glee Cast Version)</p>
+      <audio src="Don_t Stop Believin_ (Glee Cast Version) (Cover of Journey)(MP3_160K).mp3"></audio>
+    </div>
+
+     <!-- Audio Item 7 -->
+    <div class="audio-box2" data-id="7" class="image-box">
+      <img id="songimage" src="images/beamedsmoke.png"onclick="toggleAudio(this)" onclick="playAudio(this)" />
+      <p>Track 7:Ed Sheeran - Beautiful People </p>
+      <audio src="Ed Sheeran - Beautiful People (feat. Khalid) [Official Music Video](MP3_160K).mp3"></audio>
+    </div>
+
+     <!-- Audio Item 8-->
+    <div class="audio-box2" data-id="8" class="image-box">
+      <img id="songimage" src="images/beamedsmoke.png"onclick="toggleAudio(this)" onclick="playAudio(this)" />
+      <p>Track 8:hold on</p>
+      <audio src="hold on.mp3"></audio>
+    </div>
+ <!-- Audio Item 9-->
+    <div class="audio-box2" data-id="9 " class="image-box">
+      <img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
+      <p>Track 9:It_s My Life _ Confessions</p>
+      <audio src="It_s My Life _ Confessions Part II(MP3_160K).mp3"></audio>
+    </div>
+
+    <!-- Audio Item 10-->
+    <div class="audio-box2" data-id="10" class="image-box">
+      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)"  onclick="playAudio(this)" />
+      <p>Track 10:j-hope _Killin_ It Girl (feat. GloRilla)</p>
+      <audio src="j-hope _Killin_ It Girl (feat. GloRilla)_ Official MV(MP3_160K).mp3"></audio>
+    </div>
+    <!-- Audio Item 11-->
+    <div class="audio-box2" data-id="11" class="image-box">
+      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
+      <p>Track 11:lean on</p>
+      <audio src="lean on.mp3"></audio>
+    </div>
+  
+     <!-- Audio Item 12-->
+    <div class="audio-box2" data-id="12" class="image-box">
+      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)"  onclick="playAudio(this)" />
+      <p>Track 12:Martin Garrix & Dua Lipa - Scared To Be Lonely</p>
+      <audio src="Martin Garrix _ Dua Lipa - Scared To Be Lonely (Official Video)(MP3_160K).mp3"></audio>
+    </div>
+  
+      <!-- Audio Item 13-->
+    <div class="audio-box2" data-id="13" class="image-box">
+      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
+      <p>Track 13:mrs hollywood</p>
+      <audio src="mrs hollywood.mp3"></audio>
+    </div>
+      <!-- Audio Item 14-->
+    <div class="audio-box2" data-id="14"  class="image-box">
+      <img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
+      <p>Track 14:MØ - Final Song</p>
+      <audio src="MØ - Final Song (Official Video)(MP3_160K).mp3"></audio>
+    </div>
+    <!-- Audio Item 15-->
+    <div class="audio-box2" data-id="15" class="image-box">
+      <img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
+      <p>Track 15:one last time </p>
+      <audio src="one last time.mp3"></audio>
+    </div>
+     <!-- Audio Item 16-->
+    <div class="audio-box2" data-id="16" class="image-box">
+      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
+      <p>Track 16:Selena Gomez - Good For You</p>
+      <audio src="Selena Gomez - Good For You(MP3_160K).mp3"></audio>
+    </div>
+     <!-- Audio Item 17-->
+    <div class="audio-box2" data-id="17" class="image-box">
+      <img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"  onclick="playAudio(this)" />
+      <p>Track 17:Sevyn Streeter - It Won_t Stop ft. Chris Brown</p>
+      <audio src="Sevyn Streeter - It Won_t Stop ft. Chris Brown [Official Video](MP3_160K).mp3"></audio>
+    </div>
+    <!-- Audio Item 18-->
+    <div class="audio-box2" data-id="18"  class="image-box">
+      <img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
+      <p>Track 18:Sia - The Greatest</p>
+      <audio src="Sia - The Greatest (Lyrics)(MP3_160K).mp3"></audio>
+    </div>
+    <!-- Audio Item 19-->
+    <div class="audio-box2" data-id="19"  class="image-box">
+      <img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
+      <p>Track 19:Surf Mesa _ Madison Beer - Carried Away</p>
+      <audio src="Surf Mesa _ Madison Beer - Carried Away (Lyrics)(MP3_160K).mp3"></audio>
+    </div>
+     <!-- Audio Item 20-->
+    <div class="audio-box2" data-id="20" class="image-box">
+      <img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
+      <p>Track 20:sweat melody </p>
+      <audio src="sweat melody.mp3"></audio>
+    </div>
+     <!-- Audio Item 21-->
+    <div class="audio-box2" data-id="21" class="image-box">
+      <img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
+      <p>Track 21:Tate McRae - greedy</p>
+      <audio src="Tate McRae - greedy (Official Video)(MP3_160K).mp3"></audio>
+    </div>
+     <!-- Audio Item 22-->
+    <div class="audio-box2" data-id="22" class="image-box">
+      <img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
+      <p>Track 22:Taylor Swift - Delicate</p>
+      <audio src="Taylor Swift - Delicate(MP3_160K).mp3"></audio>
+    </div>
+      <!-- Audio Item 23-->
+    <div class="audio-box2" data-id="23" class="image-box">
+      <img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
+      <p>Track 23:The Weeknd - Blinding Lights</p>
+      <audio src="The Weeknd - Blinding Lights (Official Audio)(MP3_160K).mp3"></audio>
+    </div>
+     <!-- Audio Item 24-->
+    <div class="audio-box2" data-id="24" class="image-box">
+      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
+      <p>Track 24:The Weeknd - Starboy</p>
+      <audio src="The Weeknd - Starboy (Lyrics) ft. Daft Punk(MP3_160K).mp3"></audio>
+    </div>
+     <!-- Audio Item 25-->
+    <div class="audio-box" data-id="25" class="image-box">
+      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
+      <p>Track 25:thunderclouds</p>
+      <audio src="thunderclouds.mp3"></audio>
+    </div>
+     <!-- Audio Item 26-->
+    <div class="audio-box2" data-id="26"  class="image-box">
+      <img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
+      <p>Track 26:Jonas Blue _ Rita Ora - Ritual</p>
+      <audio src="Tiësto_ Jonas Blue _ Rita Ora - Ritual (Official Video)(MP3_160K).mp3"></audio>
+    </div>
+     <!-- Audio Item 27-->
+    <div class="audio-box2" data-id="27" class="image-box">
+      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
+      <p>Track 27:twenty one pilots - Ride</p>
+      <audio src="twenty one pilots - Ride (Official Video)(MP3_160K).mp3"></audio>
+    </div>
+
+     <!-- Audio Item 29-->
+    <div class="audio-box2" data-id="29" class="image-box">
+      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
+      <p>Track 29:Austin (Boots Stop Workin_)</p>
+      <audio src="Austin (Boots Stop Workin_)(MP3_160K).mp3"></audio>
+    </div>
+
+    <!-- Audio Item 30-->
+    <div class="audio-box2" data-id="30" class="image-box">
+      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
+      <p>Track 30:BigXthaPlug - All The Way</p>
+      <audio src="BigXthaPlug - All The Way feat. Bailey Zimmerman (Official Music Video)(MP3_160K).mp3"></audio>
+    </div>
+
+    <!-- Audio Item 31-->
+    <div class="audio-box2" data-id="31" class="image-box">
+      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
+      <p>Track 31:BigXthaPlug_ Shaboozey - Home</p>
+      <audio src="BigXthaPlug_ Shaboozey - Home (Lyrics)(MP3_160K).mp3"></audio>
+    </div>
+
+     <!-- Audio Item 32-->
+    <div class="audio-box2" data-id="32" class="image-box">
+      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
+      <p>Track 32:Blake Shelton - God_s Country</p>
+      <audio src="Blake Shelton - God_s Country (Official Music Video)(MP3_160K).mp3"></audio>
+    </div>
+   
+ <!-- Audio Item 33-->
+    <div class="audio-box2" data-id="33" class="image-box">
+      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
+      <p>Track 33:Don Williams - We Got Love</p>
+      <audio src="Don Williams - We Got Love (Legendado)(MP3_160K).mp3"></audio>
+    </div>
+
+    <!-- Audio Item 34-->
+    <div class="audio-box2" data-id="34" class="image-box">
+      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
+      <p>Track 34:Drew Green - Lotta Bit Of You</p>
+      <audio src="Drew Green - Lotta Bit Of You (Lyric Video)(MP3_160K).mp3"></audio>
+    </div>
+
+     <!-- Audio Item 35-->
+    <div class="audio-box2" data-id="35" class="image-box">
+      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
+      <p>Track 35:Lee Brice - One of Them Girls</p>
+      <audio src="Lee Brice - One of Them Girls (Official Music Video)(MP3_160K).mp3"></audio>
+    </div>
+
+    <!-- Audio Item 36-->
+    <div class="audio-box2" data-id="36" class="image-box">
+      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
+      <p>Track 36:Morgan Wallen - Ain_t That Some</p>
+      <audio src="Morgan Wallen - Ain_t That Some (Lyric Video)(MP3_160K).mp3"></audio>
+    </div>
+
+    <!-- Audio Item 37-->
+    <div class="audio-box2" data-id="37" class="image-box">
+      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
+      <p>Track 37:Shaboozey - Chrome</p>
+      <audio src="Shaboozey - Chrome (Bonus) (Official Visualizer)(MP3_160K).mp3"></audio>
+    </div>
+
+    <!-- Audio Item 38-->
+    <div class="audio-box2" data-id="38" class="image-box">
+      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
+      <p>Track 38:Tucker Wetmore - Brunette</p>
+      <audio src="Tucker Wetmore - Brunette (Live Performance Video)(MP3_160K).mp3"></audio>
+    </div>
+
+     <!-- Audio Item 39-->
+    <div class="audio-box2" data-id="39" class="image-box">
+      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
+      <p>Years And Years - Breathe</p>
+      <audio src="Years And Years - Breathe (Lyrics)(Olly Alexander)(MP3_160K).mp3"></audio>
+    </div>
+
+     <!-- Audio Item 40-->
+    <div class="audio-box2" data-id="40" class="image-box">
+      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
+      <p>Track 40:Artemas - i like the way you kiss me</p>
+      <audio src="Artemas - i like the way you kiss me (official music video)(MP3_160K).mp3"></audio>
+    </div>
+
+     <!-- Audio Item 41-->
+    <div class="audio-box2" data-id="41" class="image-box">
+      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
+      <p>Track 41:Ciara - Level Up</p>
+      <audio src="Ciara - Level Up(MP3_160K).mp3"></audio>
+    </div>
+
+     <!-- Audio Item 42-->
+    <div class="audio-box2" data-id="42" class="image-box">
+      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
+      <p>Track 42:Coldplay - A Sky Full Of Stars</p>
+      <audio src="Coldplay - A Sky Full Of Stars (Official Video)(MP3_160K).mp3"></audio>
+    </div>
+
+    <!-- Audio Item 43-->
+    <div class="audio-box2" data-id="43" class="image-box">
+      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
+      <p>Track 43:Crash Adams - New Heart</p>
+      <audio src="Crash Adams - New Heart (Official Lyric Video)(MP3_160K).mp3"></audio>
+    </div>
+   
+
+    <!-- Audio Item 28-->
+    <div class="audio-box2" data-id="28" class="image-box">
+      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
+      <p>Track 28:X (EQUIS)-Nicky Jam x J. Balvin</p>
+      <audio src="X (EQUIS) - Nicky Jam x J. Balvin _ Video Oficial  (Prod. Afro Bros _ Jeon)(MP3_160K).mp3"></audio>
+    </div>
+
+  
+  </div>
+    </div>
+</td>    
+</tr>
+    </table>
+    <script>
+
+ const audioBoxes2 = document.querySelectorAll('.audio-box2');
+    let currentAudio2 = null;
+
+    function stopAllAudio2() {
+      audioBoxes2.forEach(box => {
+        const audio = box.querySelector('audio');
+        audio.pause();
+        audio.currentTime = 0;
+      });
+      currentAudio2 = null;
+    }
+
+    function playAudio2(imgElement) {
+      stopAllAudio2();
+      const audio = imgElement.parentElement.querySelector('audio');
+      audio.play();
+      currentAudio2 = audio;
+    }
+
+    function playById2() {
+      const id = document.getElementById('audioIdInput2').value.trim();
+      const box = [...audioBoxes2].find(b => b.getAttribute('data-id') === id);
+      if (box) {
+        stopAllAudio2();
+        const audio = box.querySelector('audio');
+        audio.play();
+        currentAudio2 = audio;
+      } else {
+        alert('Audio with that ID not found.');
+      }
+    }
+
+    function pauseCurrent2() {
+      if (currentAudio2 && !currentAudio2.paused) {
+        currentAudio2.pause();
+      }
+    }
+
+    function playAll2(index = 0) {
+      if (index >= audioBoxes2.length) return;
+      stopAllAudio2();
+      const audio = audioBoxes2[index].querySelector('audio');
+      audio.play();
+      currentAudio2 = audio;
+      audio.onended = () => playAll2(index + 1);
+    }
+
+
+
+
+    const audioBoxes = document.querySelectorAll('.audio-box');
+    let currentAudio = null;
+
+    function stopAllAudio() {
+      audioBoxes.forEach(box => {
+        const audio = box.querySelector('audio');
+        audio.pause();
+        audio.currentTime = 0;
+      });
+      currentAudio = null;
+    }
+
+    function playAudio(imgElement) {
+      stopAllAudio();
+      const audio = imgElement.parentElement.querySelector('audio');
+      audio.play();
+      currentAudio = audio;
+    }
+
+    function playById() {
+      const id = document.getElementById('audioIdInput').value.trim();
+      const box = [...audioBoxes].find(b => b.getAttribute('data-id') === id);
+      if (box) {
+        stopAllAudio();
+        const audio = box.querySelector('audio');
+        audio.play();
+        currentAudio = audio;
+      } else {
+        alert('Audio with that ID not found.');
+      }
+    }
+
+    function pauseCurrent() {
+      if (currentAudio && !currentAudio.paused) {
+        currentAudio.pause();
+      }
+    }
+
+    function playAll(index = 0) {
+      if (index >= audioBoxes.length) return;
+      stopAllAudio();
+      const audio = audioBoxes[index].querySelector('audio');
+      audio.play();
+      currentAudio = audio;
+      audio.onended = () => playAll(index + 1);
+    }
+      const audioFiles = [
+      "David Kushner - Daylight (Official Music Video)(MP3_160K).mp3",
+      "DJ Khaled - Just Us (Official Video) ft. SZA(MP3_160K).mp3",
+      "Elley Duhé - MIDDLE OF THE NIGHT (Official Video)(MP3_160K).mp3",
+      "Enya - Only Time (Official 4K Music Video)(MP3_160K).mp3",
+      "Glass Animals - Heat Waves (Official Video)(MP3_160K).mp3",
+      "James Blunt - You_re Beautiful (Official Music Video) [4K](MP3_160K).mp3",
+       "julie and the phantoms - Wake Up.mp3",
+        "justin bieber - Hold On.mp3",
+         "livingston - Last Man Standing.mp3",
+          "Lord Huron - The Night We Met (Lyrics)(MP3_160K).mp3",
+           "Selena Gomez - Lose You To Love Me (Official Music Video)(MP3_160K).mp3",
+            "Shaboozey - Highway (Official Video)(MP3_160K).mp3",
+              "Shaboozey - Vegas _ A COLORS SHOW(MP3_160K).mp3",
+              "the 1975 - somebody else __ lyrics(MP3_160K).mp3",
+              "The Climb - Miley Cyrus (Lyrics) 🎵(MP3_160K).mp3",
+              "Until you come back home - Selena ft Justin(MP3_160K).mp3"
+      
+    ];
+    const audioFiles2 = [
+      "6.6.25 Sweet Love 🤍 _ N.John (Sovath Monineak) _losangeles _explorepage  _newmusic  _njohn(MP3_160K).mp3",
+      "Clean Bandit and Mabel - Tick Tock (feat. 24kGoldn) [Official Video](MP3_160K).mp3",
+      "_Unsaid Emily_ Lyric Video _ Julie and the Phantoms _ Netflix After School(MP3_160K).mp3",
+      "Alison Wonderland - Be Like That.mp3",
+      "Bust Your Windows (Cover of Jazmine Sullivan)(MP3_160K).mp3",
+      "Don_t Stop Believin_ (Glee Cast Version) (Cover of Journey)(MP3_160K).mp3",
+      "Ed Sheeran - Beautiful People (feat. Khalid) [Official Music Video](MP3_160K).mp3",
+      "hold on.mp3",
+        "It_s My Life _ Confessions Part II(MP3_160K).mp3",
+        "j-hope _Killin_ It Girl (feat. GloRilla)_ Official MV(MP3_160K).mp3",
+      "lean on.mp3",
+        "Martin Garrix _ Dua Lipa - Scared To Be Lonely (Official Video)(MP3_160K).mp3",
+        "mrs hollywood.mp3",
+        "MØ - Final Song (Official Video)(MP3_160K).mp3",
+        "one last time.mp3",
+        "Selena Gomez - Good For You(MP3_160K).mp3",
+        "Sevyn Streeter - It Won_t Stop ft. Chris Brown [Official Video](MP3_160K).mp3",
+        "Sia - The Greatest (Lyrics)(MP3_160K).mp3",
+        "Surf Mesa _ Madison Beer - Carried Away (Lyrics)(MP3_160K).mp3",
+        "sweat melody.mp3",
+        "Tate McRae - greedy (Official Video)(MP3_160K).mp3",
+        "Taylor Swift - Delicate(MP3_160K).mp3",
+        "The Weeknd - Blinding Lights (Official Audio)(MP3_160K).mp3",
+        "The Weeknd - Starboy (Lyrics) ft. Daft Punk(MP3_160K).mp3",
+        "thunderclouds.mp3",
+        "Tiësto_ Jonas Blue _ Rita Ora - Ritual (Official Video)(MP3_160K).mp3",
+        "twenty one pilots - Ride (Official Video)(MP3_160K).mp3",
+        "X (EQUIS) - Nicky Jam x J. Balvin _ Video Oficial  (Prod. Afro Bros _ Jeon)(MP3_160K).mp3",
+        "Jonas Blue _ Rita Ora - Ritual(MP3_160K).mp3",
+        "twenty one pilots - Ride (Official Video)(MP3_160K).mp3"
+    ];
+
+    const audioFolder = "Vvynas Vane playlist/vane sad rnb songs/";
+    const searchBar = document.getElementById("searchBar");
+    const suggestions = document.getElementById("suggestions");
+    const audioList = document.getElementById("audioList");
+
+    const searchBar2 = document.getElementById("searchBar2");
+    const suggestions2 = document.getElementById("suggestions2");
+    const audioList2 = document.getElementById("audioList2");
+    const audioFolder2 = "Vvynas Vane playlist/Vane rnb/";
+
+
+    searchBar.addEventListener("input", () => {
+      const query = searchBar.value.toLowerCase();
+      suggestions.innerHTML = "";
+      if (query) {
+        const matches = audioFiles.filter(file => file.toLowerCase().includes(query));
+        matches.forEach(file => {
+          const item = document.createElement("div");
+          item.textContent = file;
+          item.addEventListener("click", () => {
+            searchBar.value = file;
+            suggestions.style.display = "none";
+            showAudio(file);
+          });
+          suggestions.appendChild(item);
+        });
+        suggestions.style.display = matches.length ? "block" : "none";
+      } else {
+        suggestions.style.display = "none";
+        audioList.innerHTML = "";
+      }
+    });
+
+     searchBar2.addEventListener("input", () => {
+      const query = searchBar2.value.toLowerCase();
+      suggestions2.innerHTML = "";
+      if (query) {
+        const matches = audioFiles2.filter(file => file.toLowerCase().includes(query));
+        matches.forEach(file => {
+          const item = document.createElement("div");
+          item.textContent = file;
+          item.addEventListener("click", () => {
+            searchBar2.value = file;
+            suggestions2.style.display = "none";
+            showAudio2(file);
+          });
+          suggestions2.appendChild(item);
+        });
+        suggestions2.style.display = matches.length ? "block" : "none";
+      } else {
+        suggestions2.style.display = "none";
+        audioList2.innerHTML = "";
+      }
+    });
+
+    function showAudio(file) {
+      audioList.innerHTML = `
+        <audio controls>
+          <source src="${audioFolder + file}" type="audio/mp3">
+          Your browser does not support the audio element.
+        </audio>
+      `;
+    }
+     function showAudio2(file) {
+      audioList2.innerHTML = `
+        <audio controls>
+          <source src="${audioFolder2 + file}" type="audio/mp3">
+          Your browser does not support the audio element.
+        </audio>
+      `;
+    }
+
+    // Close suggestions when clicking outside
+    document.addEventListener("click", (e) => {
+      if (!document.querySelector(".search-container").contains(e.target)) {
+        suggestions.style.display = "none";
+      }
+    });
+     document.addEventListener("click", (e) => {
+      if (!document.querySelector(".search-container2").contains(e.target)) {
+        suggestions2.style.display = "none";
+      }
+    });
+    // Remove blur and animation when user clicks anywhere
+  document.addEventListener('click', function () {
+    const overlay = document.getElementById('blur-overlay');
+    overlay.style.animation = 'slideUp 1s ease forwards';
+    setTimeout(() => {
+      overlay.remove();
+    }, 1000); // match animation duration
+  });
+
+
+let currentAudioa = null;
+let currentImageBoxa = null;
+
+function toggleAudio(imgElement) {
+  const box = imgElement.parentElement;
+  const audio = box.querySelector('audio');
+
+  // If clicked again on same image
+  if (currentAudioa === audio) {
+    if (audio.paused) {
+      audio.play();
+      addAnimation(box);
+    } else {
+      audio.pause();
+      removeAnimation();
+    }
+    return;
+  }
+
+  // Stop previous
+  if (currentAudioa) {
+    currentAudioa.pause();
+    currentAudioa.currentTime = 0;
+    removeAnimation();
+  }
+
+  // Play new
+  audio.play();
+  currentAudioa = audio;
+  currentImageBoxa = box;
+  addAnimation(box);
+}
+
+function addAnimation(box) {
+  removeAnimation();
+
+  const animation = document.createElement('div');
+  animation.className = 'container audio-animation';
+  for (let i = 0; i < 4; i++) {
+    const dot = document.createElement('div');
+    dot.className = 'dot';
+    animation.appendChild(dot);
+  }
+  box.appendChild(animation);
+}
+
+function removeAnimation() {
+  document.querySelectorAll('.audio-animation').forEach(el => el.remove());
+}
+
+
+ // Wait 2 minutes (120000 ms) before showing the ad
+    setTimeout(() => {
+      const overlay = document.getElementById('adOverlay');
+      const ad = document.getElementById('adContainer');
+      const skip = document.getElementById('skipBtn');
+
+      overlay.style.display = 'flex';
+
+      // Show skip button after 10 seconds
+      setTimeout(() => {
+        skip.style.display = 'block';
+      }, 10000);
+
+      // End ad automatically after 2 minutes total
+      setTimeout(() => {
+        endAd();
+      }, 120000 + 120000); // total 4 mins after page load
+
+      // Skip button click
+      skip.addEventListener('click', () => {
+        endAd();
+      });
+
+      function endAd() {
+        ad.classList.add('shatter');
+        overlay.style.pointerEvents = 'none'; // block clicks temporarily
+        setTimeout(() => {
+          overlay.style.display = 'none';
+          ad.classList.remove('shatter');
+          overlay.style.pointerEvents = 'auto';
+          skip.style.display = 'none';
+        }, 1000); // match shatter animation duration
+      }
+    }, 120000); // 2 mins after load
+
+  </script>
+</body>
+</html>
