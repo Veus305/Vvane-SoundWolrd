@@ -2,1822 +2,528 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Music Downloads</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DOWNLOADS — VVANE SOUND WORLD</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 20px;
-      background: hwb(0 25% 73%)5% 73%;
+    /* ALIEN TECH ENHANCEMENTS */
+    body { cursor: crosshair !important; }
+    body::after { animation: starField 12s ease-in-out infinite alternate; }
+    @keyframes starField { from{opacity:0.5;transform:scale(1)} to{opacity:1;transform:scale(1.02)} }
+
+    /* Animated hex grid overlay */
+    .hex-overlay {
+      position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: 0.02;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100'%3E%3Cpath d='M28 66L0 50 0 16 28 0 56 16 56 50 28 66 28 100' fill='none' stroke='%2300f5d4' stroke-width='0.5'/%3E%3Cpath d='M28 0L28 34M0 16L28 34M56 16L28 34' fill='none' stroke='%2300f5d4' stroke-width='0.5'/%3E%3C/svg%3E");
+      animation: hexDrift 30s linear infinite;
     }
-    #downloads {
-      color: aliceblue;
-      display: block;
-      margin-top: 20px;
-      padding: 15px;
-       background-image:URL(bluredperson.png) ;
-background-repeat: no-repeat;
-background-position:center;
-background-attachment: fixed;
-background-size: cover;
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    @keyframes hexDrift { from{background-position:0 0} to{background-position:56px 100px} }
+
+    /* Scanlines */
+    .scanlines {
+      position: fixed; inset: 0; pointer-events: none; z-index: 998;
+      background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.04) 2px, rgba(0,0,0,0.04) 4px);
     }
-   
-   
-     li{
-        list-style: none;
-        margin: 10px 0;
-    }
-    #downloadsongs {
-        display: flex;
-        align-items: center;
-        width: auto;
-        height:auto;
-        margin: 0px ;
-        padding: 5px;
-    }
-    img {
-        width: 50px;
-        height: 50px;
-        margin-right: 10px;
-        border-radius: 5px;
-    }
-    label {
-        font-weight: bold;
-        font-size: 18px;
-        color: hwb(60 3% 2%);
-        margin: 10px;
-    }
-    #ddseperate {
-        display: flex;
-        flex-wrap: wrap;
-        height: 100%;
-        width: 100%;
-    }
-    #listdownloads{
-      background-color: aliceblue;
-      border-radius: 15px;
-        overflow-y: scroll;
-        width: 300px;
-        height: 500px;
-        margin-right: 20px;
-        box-shadow: 0 20px 20px hsla(0, 4%, 11%, 0.979);
-         scrollbar-width: none;      /* Firefox */
-  -ms-overflow-style: none;   /* IE and Edge */
-}
-#listdownloads::-webkit-scrollbar {
-  display: none;              /* Chrome, Safari and Opera */
-}
-    
-    a{
-      text-decoration: none;
-    }
-    h3{
-      color: #b00ffa;
-    }
+
+    /* Corner brackets */
+    .corner { position: fixed; width: 45px; height: 45px; border-color: rgba(0,245,212,0.25); border-style: solid; z-index: 997; pointer-events: none; }
+    .c-tl { top: 10px; left: 10px; border-width: 2px 0 0 2px; }
+    .c-tr { top: 10px; right: 10px; border-width: 2px 2px 0 0; }
+    .c-bl { bottom: 10px; left: 10px; border-width: 0 0 2px 2px; }
+    .c-br { bottom: 10px; right: 10px; border-width: 0 2px 2px 0; }
+
     h1 {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Orbitron', monospace !important;
+      font-size: clamp(1rem, 3vw, 1.8rem) !important;
+      font-weight: 900 !important;
+      color: var(--plasma) !important;
+      text-shadow: var(--glow-md) !important;
+      letter-spacing: 0.3em !important;
+      text-transform: uppercase !important;
+      margin-bottom: 30px !important;
+      padding: 20px 20px 16px !important;
     }
+    h1::before { content: '◈ '; color: var(--bio); }
+    h1::after { content: ' ◈'; color: var(--bio); }
+
+    h3 {
+      font-family: 'Orbitron', monospace !important;
+      font-size: 0.75rem !important;
+      font-weight: 700 !important;
+      letter-spacing: 0.4em !important;
+      color: var(--plasma) !important;
+      text-shadow: var(--glow-sm) !important;
+      text-transform: uppercase !important;
+      margin: 24px 0 14px 0 !important;
+      padding: 8px 0 10px !important;
+      border-bottom: 1px solid rgba(0,245,212,0.15) !important;
+    }
+    h3::before { content: '⬡ '; color: var(--bio); }
+
+    .dl-item a {
+      font-family: 'Share Tech Mono', monospace !important;
+      font-size: 0.72rem !important;
+      letter-spacing: 0.06em !important;
+      color: rgba(200,238,255,0.65) !important;
+      transition: all 0.2s !important;
+    }
+    .dl-item:hover a { color: var(--plasma) !important; text-shadow: 0 0 6px rgba(0,245,212,0.4) !important; }
+    .dl-item:hover::before { opacity: 1 !important; }
+    .dl-item:hover { background: rgba(0,245,212,0.06) !important; }
+
+    .dl-icon { width: 14px; height: 14px; opacity: 0.4; filter: hue-rotate(120deg) brightness(1.5); }
+
+    #downloads { position: relative; z-index: 1; }
+    #ddseperate { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 10px; }
+
+    /* Particle trail cursor script support */
+  
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;600;700&family=Share+Tech+Mono&display=swap');
+
+    :root {
+      --void: #000508;
+      --plasma: #00f5d4;
+      --bio: #00e5ff;
+      --acid: #39ff14;
+      --pulse: #7b2fff;
+      --star: #e8f4ff;
+      --glow-sm: 0 0 8px #00f5d4, 0 0 20px rgba(0,245,212,0.3);
+      --glow-md: 0 0 15px #00f5d4, 0 0 40px rgba(0,245,212,0.35);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Rajdhani', sans-serif;
+      background: var(--void);
+      color: var(--star);
+      min-height: 100vh;
+      cursor: crosshair;
+      position: relative;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 20% 30%, rgba(0,245,212,0.04) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 60% at 80% 70%, rgba(123,47,255,0.05) 0%, transparent 60%),
+        linear-gradient(180deg, #000508, #010d14 60%, #021520);
+      pointer-events: none;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        radial-gradient(1px 1px at 15% 10%, rgba(255,255,255,0.4) 0%, transparent 100%),
+        radial-gradient(1px 1px at 40% 25%, rgba(0,245,212,0.5) 0%, transparent 100%),
+        radial-gradient(1px 1px at 65% 15%, rgba(255,255,255,0.4) 0%, transparent 100%),
+        radial-gradient(1px 1px at 80% 50%, rgba(123,47,255,0.5) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 25% 75%, rgba(0,229,255,0.5) 0%, transparent 100%),
+        radial-gradient(1px 1px at 55% 85%, rgba(255,255,255,0.3) 0%, transparent 100%);
+      pointer-events: none;
+      animation: starsBreath 7s ease-in-out infinite alternate;
+    }
+
+    @keyframes starsBreath { from{opacity:0.6} to{opacity:1} }
+
+    /* ── HEADER ── */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 30px;
+      background: rgba(0,5,8,0.94);
+      border-bottom: 1px solid rgba(0,245,212,0.2);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      overflow: hidden;
+    }
+
+    header::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 100%; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--plasma), var(--bio), var(--plasma), transparent);
+      background-size: 200% 100%;
+      animation: navScan 4s linear infinite;
+    }
+
+    @keyframes navScan { from{background-position:200% 0} to{background-position:-200% 0} }
+
+    .site-title {
+      font-family: 'Orbitron', monospace;
+      font-size: clamp(12px, 1.8vw, 17px);
+      font-weight: 900;
+      color: var(--plasma);
+      text-shadow: var(--glow-sm);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    .page-label {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 10px;
+      color: rgba(0,245,212,0.45);
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      border: 1px solid rgba(0,245,212,0.2);
+      padding: 5px 12px;
+      border-radius: 2px;
+    }
+
+    /* ── MAIN ── */
+    main {
+      position: relative;
+      z-index: 1;
+      padding: 30px 20px 60px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    /* ── DOWNLOAD SECTION ── */
+    .download-section {
+      margin-bottom: 36px;
+    }
+
+    .section-header {
+      font-family: 'Orbitron', monospace;
+      font-size: clamp(11px, 1.5vw, 14px);
+      font-weight: 700;
+      color: var(--plasma);
+      text-shadow: var(--glow-sm);
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(0,245,212,0.2);
+      position: relative;
+    }
+
+    .section-header::before {
+      content: '⬡ ';
+      color: var(--bio);
+    }
+
+    /* ── TRACK GRID ── */
+    .track-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    /* ── LIST PANEL ── */
+    .list-panel {
+      width: 280px;
+      max-height: 480px;
+      background: rgba(4,31,50,0.5);
+      border: 1px solid rgba(0,245,212,0.2);
+      border-radius: 8px;
+      overflow-y: auto;
+      padding: 10px 0;
+      flex-shrink: 0;
+      clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+      scrollbar-width: thin;
+      scrollbar-color: rgba(0,245,212,0.3) transparent;
+    }
+
+    .list-panel::-webkit-scrollbar { width: 3px; }
+    .list-panel::-webkit-scrollbar-thumb { background: rgba(0,245,212,0.3); border-radius: 2px; }
+
+    /* ── DOWNLOAD ITEM ── */
+    .dl-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 14px;
+      border-bottom: 1px solid rgba(0,245,212,0.06);
+      transition: all 0.2s ease;
+      position: relative;
+    }
+
+    .dl-item::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 2px;
+      background: var(--plasma);
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .dl-item:hover {
+      background: rgba(0,245,212,0.05);
+    }
+
+    .dl-item:hover::before { opacity: 1; }
+
+    .dl-icon {
+      width: 28px; height: 28px;
+      border-radius: 4px;
+      border: 1px solid rgba(0,245,212,0.2);
+      object-fit: cover;
+      flex-shrink: 0;
+      filter: sepia(0.3) hue-rotate(150deg);
+    }
+
+    .dl-item a {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 10.5px;
+      color: rgba(0,245,212,0.65);
+      text-decoration: none;
+      line-height: 1.4;
+      transition: all 0.2s ease;
+      word-break: break-word;
+    }
+
+    .dl-item a:hover {
+      color: var(--plasma);
+      text-shadow: 0 0 6px rgba(0,245,212,0.5);
+    }
+
+    #downloads {
+      position: relative;
+      z-index: 1;
+    }
+
+    h1 {
+      font-family: 'Orbitron', monospace;
+      font-size: clamp(18px, 3vw, 26px);
+      font-weight: 900;
+      color: var(--plasma);
+      text-shadow: var(--glow-md);
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      text-align: center;
+      padding: 30px 20px 20px;
+    }
+
+    h3 {
+      font-family: 'Orbitron', monospace;
+      font-size: clamp(11px, 1.5vw, 14px);
+      font-weight: 700;
+      color: var(--bio);
+      text-shadow: 0 0 10px var(--bio);
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin: 24px 0 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(0,229,255,0.2);
+    }
+
+    h3::before { content: '⬡ '; }
+
+    #ddseperate {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    li { list-style: none; }
+
+    a { text-decoration: none; }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: #000508; }
+    ::-webkit-scrollbar-thumb { background: rgba(0,245,212,0.3); border-radius: 2px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--plasma); }
   </style>
 </head>
 <body>
+<div class="hex-overlay"></div>
+<div class="scanlines"></div>
+<div class="corner c-tl"></div>
+<div class="corner c-tr"></div>
+<div class="corner c-bl"></div>
+<div class="corner c-br"></div>
+<header>
+  <div class="site-title">Vvane Sound World</div>
+  <div class="page-label">▸ AUDIO ARCHIVE ◂</div>
+</header>
 
-  <div id="downloads">
-   <h1>Click To Download</h1>
-    <h3 >REGGEATON VYBZ</h3>
-    <div id="ddseperate" >
-   
-         <ul id="listdownloads">
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="22. Hasta el Amanecer - Nicky Jam _ Video Oficial(MP3_160K).mp3" download> Hasta el Amanecer - Nicky Jam </a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="6ix9ine - BEBE ft. Anuel AA(MP3_160K).mp3" download>6ix9ine - BEBE ft. Anuel AA</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="6ix9ine - Pa Ti (feat. Yailin La Más Viral) (Official Music Video)(MP3_160K).mp3" download>6ix9ine - Pa Ti</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Alex Sensation_ Ozuna - Que Va(MP3_160K).mp3" download>Alex Sensation_ Ozuna - Que Va</a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Anuel AA_ KAROL G - Secreto(MP3_160K).mp3" download>Anuel AA_ KAROL G - Secreto</a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Cris MJ_ Dei V - Diabólica (Visualizer) _ Partyson(MP3_160K).mp3" download>
-             Cris MJ_ Dei V - Diabólica</a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Bad Bunny (ft. Rauw Alejandro) - Party (360° Visualizer) _ Un Verano Sin Ti(MP3_160K).mp3" download>Bad Bunny (ft. Rauw Alejandro) - Party</a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Chulo pt.2(MP3_160K).mp3" download>Chulo pt.2</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="CNCO_ Little Mix - Reggaetón Lento (Remix) [Official Video](MP3_160K).mp3" download>CNCO_ Little Mix - Reggaetón Lento </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="CNCO_ Meghan Trainor_ Sean Paul - Hey DJ (Remix) [Official Video](MP3_160K).mp3" download>CNCO_ Meghan Trainor_ Sean Paul - Hey DJ</a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Cris MJ - Partyson (Video Oficial)(MP3_160K).mp3" download>Cris MJ - Partyson</a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Tyler Braden - Devil You Know (Official Music Video)(MP3_160K).mp3" download>
-          Punto G - Quevedo </a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Vista Al Mar - Quevedo(MP3_160K).mp3" download>
-          Vista Al Mar - Quevedo </a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="BAD BUNNY - VETE _ YHLQMDLG (Video Oficial)(MP3_160K).mp3" download>
-        BAD BUNNY - VETE _ YHLQMDLG </a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Yandel_ Feid  - Yandel 150 (Video Oficial)(MP3_160K).mp3" download>
-          Yandel_ Feid  - Yandel 150</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Anuel AA _ Haze - Amanece [Official Video](MP3_160K).mp3" download>
-Anuel AA _ Haze - Amanece </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Bad Bunny - Efecto (360° Visualizer) _ Un Verano Sin Ti(MP3_160K).mp3" download>
-        Bad Bunny - Efecto </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Bad Bunny - Un Ratito (360° Visualizer) _ Un Verano Sin Ti(MP3_160K).mp3" download>
-        Bad Bunny - Un Ratito </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="BLESSD  ❌ Ovy On The Drums - BILLBOARD (Official Video)(MP3_160K).mp3" download>
-        BLESSD  ❌ Ovy On The Drums - BILLBOARD</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="DÁKITI(MP3_160K).mp3" download>
-        DÁKITI </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Feid - Ferxxo 100 (Official Video)(MP3_160K).mp3" download>
-        Feid - Ferxxo 100</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Feid - Normal (Official Video)(MP3_160K).mp3" download>
-  Feid - Normal </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Feid - Si Te La Encuentras Por Ahí (Official Video)(MP3_160K).mp3" download>
-      Feid - Si Te La Encuentras Por Ahí</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="eamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Feid - SI TÚ SUPIERAS (Official Video)(MP3_160K).mp3" download>
-        Feid - SI TÚ SUPIERAS</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Feid - VACAXIONES (Official Video)(MP3_160K).mp3" download>
-        Feid - VACAXIONES </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="J Balvin_ Dua Lipa_ Bad Bunny_ Tainy - UN DIA (ONE DAY)(MP3_160K).mp3" download>
-        UN DIA (ONE DAY)</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="ME ARREPENTÍ - AK4_20 FT PAILITA _CRIS MJ(MP3_160K).mp3" download>
-        ME ARREPENTÍ - AK4_20 FT PAILITA _CRIS MJ</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Myke Towers - ESENCIA (Visualizer)(MP3_160K).mp3" download>
-        Myke Towers - ESENCIA</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Ozuna FT Anuel AA - Bebe (Lyric Video) _ Odisea(MP3_160K).mp3" download>
-        Ozuna FT Anuel AA - Bebe</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Pedro Capó_ Farruko - Calma (Remix - Official Video)(MP3_160K).mp3" download>
-        Pedro Capó_ Farruko - Calma</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="QUEVEDO __ BZRP Music Sessions _52(MP3_160K).mp3" download>
-        QUEVEDO __ BZRP Music Sessions _52</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="SHAKIRA __ BZRP Music Sessions _53(MP3_160K).mp3" download>
-        SHAKIRA __ BZRP Music Sessions _53</a></li>
-        </div>
-         
-        </ul>
-        
-         <ul id="listdownloads">
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Cristal(MP3_160K).mp3" download>Cristal
-          </a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Enrique Iglesias - DUELE EL CORAZON ft. Wisin(MP3_160K).mp3" download>Enrique Iglesias - DUELE EL CORAZON ft. Wisin</a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Enrique Iglesias - EL BAÑO ft. Bad Bunny(MP3_160K).mp3" download>Enrique Iglesias - EL BAÑO ft. Bad Bunny</a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Enrique Iglesias_ Yotuel - Fría (Official Video)(MP3_160K).mp3" download>Enrique Iglesias_ Yotuel - Fría</a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Era Istrefi - Bonbon (Official Video) [Ultra Records](MP3_160K).mp3" download>Era Istrefi - Bonbon</a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Feid - VACAXIONES (Official Video)(MP3_160K).mp3" download>Feid - VACAXIONES</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="I don_t even speak spanish lol(MP3_160K).mp3" download>I don_t even speak spanish lol</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="J Balvin - Azul (Official Animated Video)(MP3_160K).mp3" download>J Balvin - Azul </a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="La Nota - MTZ Manuel Turizo x Rauw Alejandro x Myke Towers _ Video Oficial(MP3_160K).mp3" download>La Nota - MTZ Manuel Turizo x Rauw Alejandro</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Maluma - 11 P.M. (Letra)(MP3_160K).mp3" download>Maluma - 11 P.M.</a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="KAROL G_ Ovy On The Drums - Cairo (Official Video)(MP3_160K).mp3" download>KAROL G_ Ovy On The Drums - Cairo</a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Cris MJ - Vamo a Bailotear (Visualizer) _ Apocalipsis(MP3_160K).mp3" download>
-            Cris MJ - Vamo a Bailotear</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Diane Warren_ Rita Ora_ Sofía Reyes_ Reik - Seaside (Official Music Video)(MP3_160K).mp3" download>
-            Diane Warren_ Rita Ora_ Sofía Reyes_ Reik - Seaside</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Farruko - Pepas (Letra_Lyrics)(MP3_160K).mp3" download>
-            Farruko - Pepas </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Feid - Normal (Official Video)(MP3_160K).mp3" download>
-            Feid - Normal</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="KAROL G - Si Antes Te Hubiera Conocido _ Coke Studio(MP3_160K).mp3" download>
-            KAROL G - Si Antes Te Hubiera Conocido</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="MULHER ROLEIRA (SOLINHO ENVOLVENTE) - Caribbean Hits e Marcynho Sensação (Clipe Oficial)(MP3_160K).mp3" download>
-            Caribbean Hits e Marcynho Sensação</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Myke Towers - 100 COPAS (Visualizer)(MP3_160K).mp3" download>
-            Myke Towers - 100 COPAS</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Myke Towers - BUCHANANS 18 (Visualizer)(MP3_160K).mp3" download>
-            Myke Towers - BUCHANANS 18 </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Myke Towers - EL GISTRO (Visualizer)(MP3_160K).mp3" download>
-            Myke Towers - EL GISTRO </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Myke Towers - EXPECTATIVAS (Visualizer)(MP3_160K).mp3" download>
-            Myke Towers - EXPECTATIVAS </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Myke Towers - MONÓTONO (Visualizer)(MP3_160K).mp3" download>
-            Myke Towers - MONÓTONO  </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Myke Towers _ De La Ghetto - RICA BEBE (Visualizer)(MP3_160K).mp3" download>
-            Myke Towers _ De La Ghetto - RICA BEBE  </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Myke Towers _ Gabito Ballesteros - NO QUIERE FLORES (Visualizer)(MP3_160K).mp3" download>
-            Myke Towers  - NO QUIERE FLORES </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Myke Towers _ iZaak - SURFERITA (Visualizer)(MP3_160K).mp3" download>
-            Myke Towers _ iZaak - SURFERITA</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Nio Garcia x Brray x Juanka x Anuel AA x Myke Towers - La Jeepeta Remix (Video Oficial)(MP3_160K).mp3" download>
-           La Jeepeta Remix  </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Punto G - Quevedo(MP3_160K).mp3" download>
-          Punto G - Quevedo </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Sebastián Yatra_ Myke Towers - Pareja del Año (Official Performance Video)(MP3_160K).mp3" download>
-         Myke Towers - Pareja del Año </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="TUCHAT - Quevedo (Official Video)(MP3_160K).mp3" download>
-            TUCHAT - Quevedo</a></li>
-        </div>
-        </ul>
+<div id="downloads">
+  <h1>Select Download</h1>
 
-        <ul id="listdownloads">
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="8Uno - Pelotero A La Bola Feat. Airam Páez (Video Oficial) _warnermusicmexico(MP3_160K).mp3" download>
-            8Uno - Pelotero A La Bola </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Maluma - Hawái (Letra_Lyrics)(MP3_160K).mp3" download>
-            Maluma - Hawái</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="MARISOLA (Video Oficial) - CRIS MJ x STANDLY x STARS MUSIC CHILE(MP3_160K).mp3" download>
-            MARISOLA - CRIS MJ x STANDLY x STARS MUSIC CHILE</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Myke Towers - COSMETICOS (Visualizer)(MP3_160K).mp3" download>
-            Myke Towers - COSMETICOS</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Myke Towers - LA FALDA (Video Oficial)(MP3_160K).mp3" download>
-            Myke Towers - LA FALDA</a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Myke Towers - Lala (Video Oficial)(MP3_160K).mp3" download>
-            Myke Towers - Lala</a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Natti Natasha ❌ Ozuna - Criminal [Official Video](MP3_160K).mp3" download>
-          Natti Natasha ❌ Ozuna - Criminal</a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="OA -  Anuel AA_ Quevedo_ Maluma Feat. DJ Luian_ Mambo Kingz (Video Oficial)(MP3_160K).mp3" download>
-          OA -  Anuel AA_ Quevedo_ Maluma</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Ozuna x Karol G x Myke Towers - Caramelo Remix  (Video Oficial)(MP3_160K).mp3" download>
-          Ozuna x Karol G x Myke Towers - Caramelo Remix </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Ozuna_ Feid - Hey Mor (Video Oficial) _ Ozutochi(MP3_160K).mp3" download>
-          Ozuna_ Feid - Hey Mor</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Playa Del Inglés - Quevedo_ Myke Towers (Video Oficial)(MP3_160K).mp3" download>
-          Playa Del Inglés - Quevedo_ Myke Towers</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="QUEVEDO __ BZRP Music Sessions _52(MP3_160K).mp3" download>
-          QUEVEDO __ BZRP Music Sessions _52</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Ram Dance Style(MP3_160K).mp3" download>
-          Ram Dance Style</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="REGGAETON CHAMPAGNE - Bellakath ft Dani Flow (Video Oficial)(MP3_160K).mp3" download>
-          REGGAETON CHAMPAGNE - Bellakath ft Dani Flow</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="REGGAETON NUEVO 2023 MIX 🔥 _ LO MAS SONADO _ DJ NINO G 🔥 feid_ karol g_ bad bunny_ Peso Pluma(MP3_160K).mp3" download>
-          REGGAETON NUEVO 2023 MIX 🔥</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Rvssian - IDKW (Lyrics) Feat. Young Thug w_ Swae Lee _ Shenseea(MP3_160K).mp3" download>
-          Rvssian - IDKW</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="SOG_ Big Metra - Al Natural (Video Oficial)(MP3_160K).mp3" download>
-          SOG_ Big Metra - Al Natural</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Standly - Pégate (Prod. By Big Cvyu)(MP3_160K).mp3" download>
-          Standly - Pégate</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Tainy_ Anuel AA_ Ozuna - Adicto (Official Video)(MP3_160K).mp3" download>
-          Tainy_ Anuel AA_ Ozuna - Adicto</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Te Robaré - Nicky Jam x Ozuna  _ Video Oficial(MP3_160K).mp3" download>
-          Te Robaré - Nicky Jam x Ozuna</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Wisin - Escápate Conmigo (Official Video) ft. Ozuna(MP3_160K).mp3" download>
-          Wisin - Escápate Conmigo</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="X (EQUIS) - Nicky Jam x J. Balvin _ Video Oficial  (Prod. Afro Bros _ Jeon)(MP3_160K).mp3" download>
-          X (EQUIS) - Nicky Jam x J. Balvin</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="COMPREI UM PAREDÃO - Marcynho Sensação (Sensação no Batidão)(MP3_160K).mp3" download>
-          COMPREI UM PAREDÃO - Marcynho Sensação</a></li>
-        </div>
-    </ul>
+  <main>
+    <h3>REGGEATON VYBZ</h3>
+    <div id="ddseperate">
+
+      <ul id="listdownloads" class="list-panel">
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="22. Hasta el Amanecer - Nicky Jam _ Video Oficial(MP3_160K).mp3" download>Hasta el Amanecer - Nicky Jam</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="6ix9ine - BEBE ft. Anuel AA(MP3_160K).mp3" download>6ix9ine - BEBE ft. Anuel AA</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="6ix9ine - Pa Ti (feat. Yailin La Más Viral) (Official Music Video)(MP3_160K).mp3" download>6ix9ine - Pa Ti</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="Alex Sensation_ Ozuna - Que Va(MP3_160K).mp3" download>Alex Sensation - Que Va</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="Anuel AA_ KAROL G - Secreto(MP3_160K).mp3" download>Anuel AA x KAROL G - Secreto</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="Cris MJ_ Dei V - Diabólica (Visualizer) _ Partyson(MP3_160K).mp3" download>Cris MJ - Diabólica</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="Bad Bunny (ft. Rauw Alejandro) - Party (360° Visualizer) _ Un Verano Sin Ti(MP3_160K).mp3" download>Bad Bunny - Party</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="Chulo pt.2(MP3_160K).mp3" download>Chulo pt.2</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="CNCO_ Little Mix - Reggaetón Lento (Remix) [Official Video](MP3_160K).mp3" download>CNCO - Reggaetón Lento</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="CNCO_ Meghan Trainor_ Sean Paul - Hey DJ (Remix) [Official Video](MP3_160K).mp3" download>CNCO - Hey DJ</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="Cris MJ - Partyson (Video Oficial)(MP3_160K).mp3" download>Cris MJ - Partyson</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="Vista Al Mar - Quevedo(MP3_160K).mp3" download>Vista Al Mar - Quevedo</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="BAD BUNNY - VETE _ YHLQMDLG (Video Oficial)(MP3_160K).mp3" download>Bad Bunny - VETE</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="Yandel_ Feid  - Yandel 150 (Video Oficial)(MP3_160K).mp3" download>Yandel x Feid - Yandel 150</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="Anuel AA _ Haze - Amanece [Official Video](MP3_160K).mp3" download>Anuel AA - Amanece</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="Bad Bunny - Efecto (360° Visualizer) _ Un Verano Sin Ti(MP3_160K).mp3" download>Bad Bunny - Efecto</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="Bad Bunny - Un Ratito (360° Visualizer) _ Un Verano Sin Ti(MP3_160K).mp3" download>Bad Bunny - Un Ratito</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="BLESSD  ❌ Ovy On The Drums - BILLBOARD (Official Video)(MP3_160K).mp3" download>BLESSD - BILLBOARD</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="DÁKITI(MP3_160K).mp3" download>DÁKITI</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="Feid - Ferxxo 100 (Official Video)(MP3_160K).mp3" download>Feid - Ferxxo 100</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="Feid - Normal (Official Video)(MP3_160K).mp3" download>Feid - Normal</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="Feid - SI TÚ SUPIERAS (Official Video)(MP3_160K).mp3" download>Feid - SI TÚ SUPIERAS</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="Feid - VACAXIONES (Official Video)(MP3_160K).mp3" download>Feid - VACAXIONES</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="J Balvin_ Dua Lipa_ Bad Bunny_ Tainy - UN DIA (ONE DAY)(MP3_160K).mp3" download>UN DIA (ONE DAY)</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="ME ARREPENTÍ - AK4_20 FT PAILITA _CRIS MJ(MP3_160K).mp3" download>ME ARREPENTÍ</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="Myke Towers - ESENCIA (Visualizer)(MP3_160K).mp3" download>Myke Towers - ESENCIA</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="SHAKIRA __ BZRP Music Sessions _53(MP3_160K).mp3" download>SHAKIRA - BZRP #53</a></li></div>
+      </ul>
+
+      <ul id="listdownloads" class="list-panel">
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="Cristal(MP3_160K).mp3" download>Cristal</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="Enrique Iglesias - DUELE EL CORAZON ft. Wisin(MP3_160K).mp3" download>Enrique - DUELE EL CORAZON</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="Enrique Iglesias - EL BAÑO ft. Bad Bunny(MP3_160K).mp3" download>Enrique - EL BAÑO</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="Era Istrefi - Bonbon (Official Video) [Ultra Records](MP3_160K).mp3" download>Era Istrefi - Bonbon</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="KAROL G_ Ovy On The Drums - Cairo (Official Video)(MP3_160K).mp3" download>KAROL G - Cairo</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="Maluma - Hawái (Letra_Lyrics)(MP3_160K).mp3" download>Maluma - Hawái</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="MARISOLA (Video Oficial) - CRIS MJ x STANDLY x STARS MUSIC CHILE(MP3_160K).mp3" download>MARISOLA - CRIS MJ</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="Myke Towers - COSMETICOS (Visualizer)(MP3_160K).mp3" download>Myke Towers - COSMETICOS</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="Myke Towers - LA FALDA (Video Oficial)(MP3_160K).mp3" download>Myke Towers - LA FALDA</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="Natti Natasha ❌ Ozuna - Criminal [Official Video](MP3_160K).mp3" download>Natti Natasha - Criminal</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="Ozuna x Karol G x Myke Towers - Caramelo Remix  (Video Oficial)(MP3_160K).mp3" download>Caramelo Remix</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="Pedro Capó_ Farruko - Calma (Remix - Official Video)(MP3_160K).mp3" download>Pedro Capó - Calma</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="QUEVEDO __ BZRP Music Sessions _52(MP3_160K).mp3" download>QUEVEDO - BZRP #52</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="REGGAETON CHAMPAGNE - Bellakath ft Dani Flow (Video Oficial)(MP3_160K).mp3" download>REGGAETON CHAMPAGNE</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="Te Robaré - Nicky Jam x Ozuna  _ Video Oficial(MP3_160K).mp3" download>Te Robaré - Nicky Jam x Ozuna</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="X (EQUIS) - Nicky Jam x J. Balvin _ Video Oficial  (Prod. Afro Bros _ Jeon)(MP3_160K).mp3" download>X (EQUIS) - Nicky Jam x J. Balvin</a></li></div>
+      </ul>
+
+      <ul id="listdownloads" class="list-panel">
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="8Uno - Pelotero A La Bola Feat. Airam Páez (Video Oficial) _warnermusicmexico(MP3_160K).mp3" download>8Uno - Pelotero A La Bola</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="Farruko - Pepas (Letra_Lyrics)(MP3_160K).mp3" download>Farruko - Pepas</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="KAROL G - Si Antes Te Hubiera Conocido _ Coke Studio(MP3_160K).mp3" download>KAROL G - Si Antes...</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="Myke Towers _ De La Ghetto - RICA BEBE (Visualizer)(MP3_160K).mp3" download>Myke Towers - RICA BEBE</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="Myke Towers _ Gabito Ballesteros - NO QUIERE FLORES (Visualizer)(MP3_160K).mp3" download>Myke Towers - NO QUIERE FLORES</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="Myke Towers _ iZaak - SURFERITA (Visualizer)(MP3_160K).mp3" download>Myke Towers - SURFERITA</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="Nio Garcia x Brray x Juanka x Anuel AA x Myke Towers - La Jeepeta Remix (Video Oficial)(MP3_160K).mp3" download>La Jeepeta Remix</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="OA -  Anuel AA_ Quevedo_ Maluma Feat. DJ Luian_ Mambo Kingz (Video Oficial)(MP3_160K).mp3" download>OA - Anuel AA x Quevedo x Maluma</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="Standly - Pégate (Prod. By Big Cvyu)(MP3_160K).mp3" download>Standly - Pégate</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="Tainy_ Anuel AA_ Ozuna - Adicto (Official Video)(MP3_160K).mp3" download>Tainy - Adicto</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="Wisin - Escápate Conmigo (Official Video) ft. Ozuna(MP3_160K).mp3" download>Wisin - Escápate Conmigo</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="COMPREI UM PAREDÃO - Marcynho Sensação (Sensação no Batidão)(MP3_160K).mp3" download>COMPREI UM PAREDÃO</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="Ram Dance Style(MP3_160K).mp3" download>Ram Dance Style</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="Rvssian - IDKW (Lyrics) Feat. Young Thug w_ Swae Lee _ Shenseea(MP3_160K).mp3" download>Rvssian - IDKW</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="REGGAETON NUEVO 2023 MIX 🔥 _ LO MAS SONADO _ DJ NINO G 🔥 feid_ karol g_ bad bunny_ Peso Pluma(MP3_160K).mp3" download>REGGAETON MIX 2023 🔥</a></li></div>
+      </ul>
     </div>
 
+    <h3>HIPOP VYBZ</h3>
+    <div id="ddseperate">
+      <ul id="listdownloads" class="list-panel">
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="21 Savage - Secret ft Summer Walker (Official Audio)(MP3_160K).mp3" download>21 Savage - Secret</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="444(MP3_160K).mp3" download>444</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="5. Nasty_C - I Miss You (From Lost Files)(MP3_160K).mp3" download>Nasty C - I Miss You</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="A Boogie Wit Da Hoodie - Swervin [Official Music Video](MP3_160K).mp3" download>A Boogie - Swervin</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="BigXthaPlug - 2AM (Official Music Video)(MP3_160K).mp3" download>BigXthaPlug - 2AM</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="Bruno Mars - Liquor Store Blues (feat. Damian Marley) (Official Music Video)(MP3_160K).mp3" download>Bruno Mars - Liquor Store Blues</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="Drake - Knife Talk (Official Video) ft. 21 Savage_ Project Pat(MP3_160K).mp3" download>Drake - Knife Talk</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="Internet Money - His _ Hers (Lyrics) ft. Don Toliver_ Lil Uzi Vert _ Gunna(MP3_160K).mp3" download>Internet Money - His & Hers</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="Juice WRLD - Lucid Dreams (Official Music Video)(MP3_160K).mp3" download>Juice WRLD - Lucid Dreams</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="Juice WRLD - Stay High (Official Audio)(MP3_160K).mp3" download>Juice WRLD - Stay High</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="Juice WRLD _ The Weeknd - Smile (Official Video)(MP3_160K).mp3" download>Juice WRLD x The Weeknd - Smile</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="Post Malone - Circles (Official Music Video)(MP3_160K).mp3" download>Post Malone - Circles</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="Post Malone_ The Weeknd - One Right Now (Official Music Video)(MP3_160K).mp3" download>Post Malone x The Weeknd</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="The Weeknd - Reminder (Official Video)(MP3_160K).mp3" download>The Weeknd - Reminder</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="Tommy Richman - MILLION DOLLAR BABY (Official Music Video)(MP3_160K).mp3" download>Tommy Richman - MILLION DOLLAR BABY</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="XXXTENTACION - Hope (Lyrics)(MP3_160K).mp3" download>XXXTENTACION - Hope</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="XXXTENTACION - SAD_(MP3_160K).mp3" download>XXXTENTACION - SAD</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="xxxtentacion - Changes(Lyrics)(MP3_160K).mp3" download>XXXTENTACION - Changes</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="YNW Melly - Murder On My Mind (Lyrics)(MP3_160K).mp3" download>YNW Melly - Murder On My Mind</a></li></div>
+      </ul>
 
-     <h3  >HIPOP VYBZ</h3>
-    <div id="ddseperate" >
-
-    <ul id="listdownloads">
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="21 Savage - Secret ft Summer Walker (Official Audio)(MP3_160K).mp3" download>
-            21 Savage - Secret ft Summer Walker</a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="24kGoldn - More Than Friends (Official Lyric Video)(MP3_160K).mp3" download>
-            24kGoldn - More Than Friends </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="_AMV HD_ Purple Sky - OminousyL X Mahaji X Monty Datta Ft.Eiksings(MP3_160K).mp3" download>
-            Purple Sky - OminousyL </a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="444(MP3_160K).mp3" download>
-            444(MP3_160K)</a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="5. Nasty_C - I Miss You (From Lost Files)(MP3_160K).mp3" download>
-            Nasty_C - I Miss You </a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="A Boogie Wit Da Hoodie - Swervin [Official Music Video](MP3_160K).mp3" download>
-            A Boogie Wit Da Hoodie - Swervin</a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Akon - Right Now (Na Na Na) (Official Video)(MP3_160K).mp3" download>
-            Akon - Right Now</a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Attachments.mp3" download>
-            Attachments</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Big Sean - Wolves ft. Post Malone(MP3_160K).mp3" download>
-            Big Sean - Wolves ft. Post Malone</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="BigXthaPlug - 2AM (Official Music Video)(MP3_160K).mp3" download>
-            BigXthaPlug - 2AM</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Chris Brown - New Flame (Official Video) ft. Usher_ Rick Ross(MP3_160K).mp3" download>
-            Chris Brown - New Flame</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Fifth Harmony - Worth It (Official Video) ft. Kid Ink(MP3_160K).mp3" download>
-            Fifth Harmony - Worth It </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Gucci Mane_ Bruno Mars_ Kodak Black - Wake Up in The Sky [Official Music Video](MP3_160K).mp3" download>
-            Kodak Black - Wake Up in The Sky</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Internet Money - His _ Hers (Lyrics) ft. Don Toliver_ Lil Uzi Vert _ Gunna(MP3_160K).mp3" download>
-            Internet Money - His _ Hers</a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Internet Money – Blast Off Feat. Juice Wrld _ Trippie Redd (Official Music Video)(MP3_160K).mp3" download>
-            Internet Money – Blast Off Feat. Juice Wrld _ Trippie Redd</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Internet Money – JETSKI ft. Lil Mosey _ Lil Tecca (Official Video)(MP3_160K).mp3" download>
-            Internet Money – JETSKI ft. Lil Mosey</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Jhay Cortez_ J. Balvin_ Bad Bunny - No Me Conoce (Remix)(MP3_160K).mp3" download>
-            Jhay Cortez_ J. Balvin_ Bad Bunny - No Me Conoce</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Juice WRLD - Stay High (Official Audio)(MP3_160K).mp3" download>
-            Juice WRLD - Stay High</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Lil Baby - My Dawg (Lyrics)(MP3_160K).mp3" download>
-          Lil Baby - My Dawg</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Lil Durk - Pelle Coat (Lyrics)(MP3_160K).mp3" download>
-            Lil Durk - Pelle Coat</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Lil Uzi Vert - P2 [Official Audio](MP3_160K).mp3" download>
-            Lil Uzi Vert - P2</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Marshmello x Roddy Ricch - Project Dreams (Official Music Video)(MP3_160K).mp3" download>
-            Marshmello x Roddy Ricch - Project Dreams</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="MINUTEMEN(MP3_160K).mp3" download>
-            MINUTEMEN</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Nasty C _ Runtown - Said (Official Music Video)(MP3_160K).mp3" download>
-            Nasty C _ Runtown - Said</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="NLE Choppa - Famous Hoes [Official Music Video](MP3_160K).mp3" download>
-            NLE Choppa - Famous Hoes</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Post Malone - Go Flex (Official Music Video)(MP3_160K).mp3" download>
-          Post Malone - Go Flex</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Post Malone - Saint-Tropez (Official Music Video)(MP3_160K).mp3" download>
-            Post Malone - Saint-Tropez </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Post Malone_ The Weeknd - One Right Now (Official Music Video)(MP3_160K).mp3" download>
-            Post Malone_ The Weeknd - One Right Now </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Rae Sremmurd - No Flex Zone (Explicit) [Official Video](MP3_160K).mp3" download>
-            Rae Sremmurd - No Flex Zone</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Rae Sremmurd - Swang (Official Video)(MP3_160K).mp3" download>
-          Rae Sremmurd - Swang </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Rae Sremmurd_ Swae Lee_ Slim Jxmmi - Powerglide ft. Juicy J(MP3_160K).mp3" download>
-          Rae Sremmurd_ Swae Lee_ Slim Jxmmi - Powerglide </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Rich Homie Quan - Flex (Ooh_ Ooh_ Ooh)(MP3_160K).mp3" download>
-            Rich Homie Quan - Flex</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Shaboozey - Snake (Official Video)(MP3_160K).mp3" download>
-          Shaboozey - Snake</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Shaboozey - Tall Boy (Official Video)(MP3_160K).mp3" download>
-            Shaboozey - Tall Boy</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Swae Lee_ Slim Jxmmi_ Rae Sremmurd - Guatemala (Audio)(MP3_160K).mp3" download>
-      Rae Sremmurd - Guatemala</a></li>
-        </div>
-
-        </ul>
-
-        <ul id="listdownloads">
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Swervin (feat. 6ix9ine).mp3" download>
-            Swervin</a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Tommy Richman - ACTIN UP (Official Music Video)(MP3_160K).mp3" download>
-            Tommy Richman - ACTIN UP</a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Tommy Richman - MILLION DOLLAR BABY (Official Music Video)(MP3_160K).mp3" download>
-            Tommy Richman - MILLION DOLLAR BABY</a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Travis Scott - YOSEMITE (Audio)(MP3_160K).mp3" download>
-            Travis Scott - YOSEMITE </a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Wiz Khalifa - Black And Yellow [Official Music Video](MP3_160K).mp3" download>
-            Wiz Khalifa - Black And Yellow </a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="2055(MP3_160K).mp3" download>
-            2055(MP3_160K)</a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="5ive - _Me And My Brother_ (Official Audio)(MP3_160K).mp3" download>
-            5ive - _Me And My Brother</a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="A Boogie Wit Da Hoodie - Drowning (Lyrics) Pick up the ladder put it in the gun(MP3_160K).mp3" download>
-            A Boogie Wit Da Hoodie - Drowning</a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Bruno Mars - Liquor Store Blues (feat. Damian Marley) (Official Music Video)(MP3_160K).mp3" download>
-            Bruno Mars - Liquor Store Blues</a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="French Montana_ Post Malone_ Cardi B - Writing On The Wall (Lyrics)(MP3_160K).mp3" download>
-            French Montana_ Post Malone_ Cardi B - Writing On The Wall </a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Herman - Vibe (Official Music Video)(MP3_160K).mp3" download>
-            Herman - Vibe</a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Josh Levi - BIRTHDAY DANCE [Official Music Video](MP3_160K).mp3" download>
-            Josh Levi - BIRTHDAY DANCE</a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Juice WRLD - Never Understand Me ft. XXXTENTACION (Remix) Prod By Xvny x SpaceCore(MP3_160K).mp3" download>
-            Juice WRLD - Never Understand</a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Juice WRLD - Righteous (Official Video)(MP3_160K).mp3" download>
-            Juice WRLD - Righteous</a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Juice WRLD _My Fault_ (Official Audio)(MP3_160K).mp3" download>
-            Juice WRLD _My Fault</a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="hipop song" />
-          <li ><a href="KNG EGO _Whiskey _ You_ _ On The Radar Performance (COUNTRY EDITION)(MP3_160K).mp3" download>
-           KNG EGO _Whiskey _ You_ _ On The Radar </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="hipop song" />
-          <li ><a href="Lil Durk - All My Life ft. J. Cole(MP3_160K).mp3" download>
-           Lil Durk - All My Life ft. J. Cole </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="hipop song" />
-          <li ><a href="Lil Man J - _ Me Now (Official Music Video)(MP3_160K).mp3" download>
-           Lil Man J - _ Me Now </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="hipop song" />
-          <li ><a href="Lil Man J - Cap Freestyle (Official Music Video)(MP3_160K).mp3" download>
-           Lil Man J - Cap Freestyle </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="hipop song" />
-          <li ><a href="Lil Man J - Dominoes (Official Music Video)(MP3_160K).mp3" download>
-           Lil Man J - Dominoes </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="hipop song" />
-          <li ><a href="Lil Man J - John F. Kennedy (Official Music Video)(MP3_160K).mp3" download>
-            Lil Man J - John F. Kennedy</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="hipop song" />
-          <li ><a href="Lil Man J - So Real (Official Music Video)(MP3_160K).mp3" download>
-            Lil Man J - So Real</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="hipop song" />
-          <li ><a href="Logic - 1-800-273-8255 ft. Alessia Cara_ Khalid (Official Video)(MP3_160K).mp3" download>
-          Logic  </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="hipop song" />
-          <li ><a href="Marshmello ft. Khalid - Silence (Official Lyric Video)(MP3_160K).mp3" download>
-           Marshmello ft. Khalid - Silence </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="hipop song" />
-          <li ><a href="Migos - Walk It Talk It ft. Drake (Audio)(MP3_160K).mp3" download>
-           Migos - Walk It Talk It ft. Drake </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="hipop song" />
-          <li ><a href="Muni Long - Made For Me (Official Music Video)(MP3_160K).mp3" download>
-           Muni Long - Made For Me </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="hipop song" />
-          <li ><a href="Nasty C_ T.I. - All In (Visualizer)(MP3_160K).mp3" download>
-           Nasty C_ T.I. - All In </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="hipop song" />
-          <li ><a href="NF - Let You Down(MP3_160K).mp3" download>
-           NF - Let You Down </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="hipop song" />
-          <li ><a href="Polo G - Barely Holdin_ On (Official Video)(MP3_160K).mp3" download>
-           Polo G - Barely Holdin_ On </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="hipop song" />
-          <li ><a href="Post Malone - Circles (Official Music Video)(MP3_160K).mp3" download>
-           Post Malone - Circles </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="hipop song" />
-          <li ><a href="Post Malone - White Iverson(MP3_160K).mp3" download>
-            Post Malone - White Iverson</a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="hipop song" />
-          <li ><a href="PROVE ME WRON6(MP3_160K).mp3" download>
-            PROVE ME WRON6</a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="hipop song" />
-          <li ><a href="Rae Sremmurd - Black Beatles ft. Gucci Mane (Official Video)(MP3_160K).mp3" download>
-            Rae Sremmurd - Black Beatles ft. Gucci Mane</a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="hipop song" />
-          <li ><a href="Rich The Kid - Plug Walk(MP3_160K).mp3" download>
-            Rich The Kid - Plug Walk</a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="hipop song" />
-          <li ><a href="Shaboozey - Beverly Hills (Official Video)(MP3_160K).mp3" download>
-            Shaboozey - Beverly Hills</a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="hipop song" />
-          <li ><a href="That Mexican OT - Twisting Fingers feat. Moneybagg Yo (Official Music Video)(MP3_160K).mp3" download>
-           That Mexican OT - Twisting Fingers  </a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="hipop song" />
-          <li ><a href="The Kahoot Rap (Kahoot Star)(MP3_160K).mp3" download>
-           The Kahoot Rap </a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="hipop song" />
-          <li ><a href="The Weeknd - Reminder (Official Video)(MP3_160K).mp3" download>
-            The Weeknd - Reminder</a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="hipop song" />
-          <li ><a href="Trevor Daniel - Falling (Official Music Video)(MP3_160K).mp3" download>
-           Trevor Daniel - Falling </a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="hipop song" />
-          <li ><a href="Ty Dolla _ign - Spicy (feat. Post Malone) [Lyric Video](MP3_160K).mp3" download>
-           Ty Dolla _ign - Spicy </a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="hipop song" />
-          <li ><a href="Woody Walk (UnOfficial Music Video)(MP3_160K).mp3" download>
-           Woody Walk  </a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="hipop song" />
-          <li ><a href="XXXTENTACION - SAD_(MP3_160K).mp3" download>
-            XXXTENTACION - SAD</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Juice WRLD ft. Marshmello - Come _ Go (Official Audio)(MP3_160K).mp3" download>
-            Juice WRLD ft. Marshmello - Come _ Go</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Post Malone - Speedometer (Official Lyric Video)(MP3_160K).mp3" download>
-            Post Malone - Speedometer</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="xxxtentacion - Changes(Lyrics)(MP3_160K).mp3" download>
-            xxxtentacion - Changes</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="XXXTENTACION - Hope (Lyrics)(MP3_160K).mp3" download>
-            XXXTENTACION - Hope</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="XXXTENTACION - SAD_(MP3_160K).mp3" download>
-            XXXTENTACION - SAD</a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="XXXTENTACION _ Lil Pump - Arms Around You feat. Maluma _ Swae Lee [Official Music Video](MP3_160K).mp3" download>
-            XXXTENTACION _ Lil Pump - Arms Around You</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="YNW Melly - Murder On My Mind (Lyrics)(MP3_160K).mp3" download>
-            YNW Melly - Murder On My Mind</a></li>
-        </div>
-    </ul>
-
-
-<ul id="listdownloads">
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="benny blanco _ Juice WRLD - Roses feat. Brendon Urie(MP3_160K).mp3" download>
-        benny blanco _ Juice WRLD - Roses </a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Big Fella Zil - Them Jiggas [ LIVE PERFORMANCE ](MP3_160K).mp3" download>
-            Big Fella Zil - Them Jiggas</a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="BigXthaPlug - Mmhmm (Official Music Video)(MP3_160K).mp3" download>
-            BigXthaPlug - Mmhmm</a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="BigXthaPlug - Texas (Official Music Video)(MP3_160K).mp3" download>
-            BigXthaPlug - Texas</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="BigXthaPlug - The Largest (Official Music Video)(MP3_160K).mp3" download>
-            BigXthaPlug - The Largest</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Calling (Spider-Man_ Across the Spider-Verse)(MP3_160K).mp3" download>
-            Calling (Spider-Man_ Across the Spider-Verse)</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="DJ SNAKE - PARADISE (FT. BIPOLAR SUNSHINE) [LIVE EDIT](MP3_160K).mp3" download>
-      DJ SNAKE - PARADISE</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Drake - Knife Talk (Official Video) ft. 21 Savage_ Project Pat(MP3_160K).mp3" download>
-            Drake - Knife Talk</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Flipp Dinero - Leave Me Alone (Official Video)(MP3_160K).mp3" download>
-            Flipp Dinero - Leave Me Alone </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="hipop song" />
-          <li ><a href="Gunna - Won_t Stop [Official Video](MP3_160K).mp3" download>
-          Gunna - Won_t Stop  </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="hipop song" />
-          <li ><a href="Heartless(MP3_160K).mp3" download>
-           Heartless </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="hipop song" />
-          <li ><a href="Herman x Young Marcell - So Mad (Official Lyrics)(MP3_160K).mp3" download>
-           Herman x Young Marcell - So Mad </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="hipop song" />
-          <li ><a href="Icewear vezzo - Pop my Sh_t (Official Video(MP3_160K).mp3" download>
-           Icewear vezzo - Pop my Sh_t </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="hipop song" />
-          <li ><a href="J.P. - Bad Bitty _ From The Block Performance 🎙(MP3_160K).mp3" download>
-           J.P. - Bad Bitty </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="hipop song" />
-          <li ><a href="Janelle Monáe_ Jidenna - Yoga(MP3_160K).mp3" download>
-           Janelle Monáe_ Jidenna - Yoga </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="hipop song" />
-          <li ><a href="Juice Wrld (Dj Mix)(MP3_160K).mp3" download>
-           Juice Wrld (Dj Mix) </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="hipop song" />
-          <li ><a href="Juice WRLD - Conversations (Official Audio)(MP3_160K).mp3" download>
-           Juice WRLD - Conversations  </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="hipop song" />
-          <li ><a href="Juice WRLD - Gotta Say Goodbye (Remix) Prod By Xvny x JammyBeatz(MP3_160K).mp3" download>
-           Juice WRLD - Gotta Say Goodbye </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="hipop song" />
-          <li ><a href="Juice WRLD - Lucid Dreams (Official Music Video)(MP3_160K).mp3" download>
-            Juice WRLD - Lucid Dreams</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="hipop song" />
-          <li ><a href="Juice WRLD - Mistakes ft. NF (Music Video)(MP3_160K).mp3" download>
-          Juice WRLD - Mistakes ft. NF  </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="hipop song" />
-          <li ><a href="Juice WRLD - She Broke My Heart (Music Video)(MP3_160K).mp3" download>
-           Juice WRLD - She Broke My Heart </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="hipop song" />
-          <li ><a href="Juice WRLD _ The Weeknd - Smile (Official Video)(MP3_160K).mp3" download>
-           Juice WRLD _ The Weeknd - Smile </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="hipop song" />
-          <li ><a href="Juice WRLD_ Eminem _ benny blanco - Lace It (Official Audio)(MP3_160K).mp3" download>
-            benny blanco - Lace It </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="hipop song" />
-          <li ><a href="King Von - No Flaws (Official Music Video)(MP3_160K).mp3" download>
-           King Von - No Flaws </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="hipop song" />
-          <li ><a href="King Von - What It_s Like (Official Music Video)(MP3_160K).mp3" download>
-           King Von - What It_s Like </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="hipop song" />
-          <li ><a href="King Von - Why He Told (Official Video)(MP3_160K).mp3" download>
-           King Von - Why He Told </a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="hipop song" />
-          <li ><a href="Ynw Melly - Blue Balenciagas (Music Video)(MP3_160K).mp3" download>
-           Ynw Melly - Blue Balenciagas </a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="hipop song" />
-          <li ><a href="YoungBloodZ - Damn_ (Video) ft. Lil_ Jon(MP3_160K).mp3" download>
-           YoungBloodZ - Damn_ </a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="hipop song" />
-          <li ><a href="破圈合作_王鹤棣 x 王齐铭WatchMe x  朴鲨 -《海边探戈》Seaside Tango  [ OFFICIAL MUSIC VIDEO ](MP3_160K).mp3" download>
-            王齐铭WatchMe </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="hipop song" />
-          <li ><a href="XXXTENTACION - MOONLIGHT (OFFICIAL MUSIC VIDEO)(MP3_160K).mp3" download>
-           XXXTENTACION - MOONLIGHT</a></li>
-        </div>
-        
-    </ul>
-
-
+      <ul id="listdownloads" class="list-panel">
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="Shaboozey - Snake (Official Video)(MP3_160K).mp3" download>Shaboozey - Snake</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="Shaboozey - Tall Boy (Official Video)(MP3_160K).mp3" download>Shaboozey - Tall Boy</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="Travis Scott - YOSEMITE (Audio)(MP3_160K).mp3" download>Travis Scott - YOSEMITE</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="Wiz Khalifa - Black And Yellow [Official Music Video](MP3_160K).mp3" download>Wiz Khalifa - Black And Yellow</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="Calling (Spider-Man_ Across the Spider-Verse)(MP3_160K).mp3" download>Calling - Spider-Verse</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="Gunna - Won_t Stop [Official Video](MP3_160K).mp3" download>Gunna - Won't Stop</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="King Von - No Flaws (Official Music Video)(MP3_160K).mp3" download>King Von - No Flaws</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="Lil Baby - My Dawg (Lyrics)(MP3_160K).mp3" download>Lil Baby - My Dawg</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="Lil Durk - All My Life ft. J. Cole(MP3_160K).mp3" download>Lil Durk - All My Life</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="Marshmello x Roddy Ricch - Project Dreams (Official Music Video)(MP3_160K).mp3" download>Marshmello - Project Dreams</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="NF - Let You Down(MP3_160K).mp3" download>NF - Let You Down</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="Polo G - Barely Holdin_ On (Official Video)(MP3_160K).mp3" download>Polo G - Barely Holdin' On</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="Rae Sremmurd - Swang (Official Video)(MP3_160K).mp3" download>Rae Sremmurd - Swang</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="benny blanco _ Juice WRLD - Roses feat. Brendon Urie(MP3_160K).mp3" download>benny blanco x Juice WRLD - Roses</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="BigXthaPlug - Texas (Official Music Video)(MP3_160K).mp3" download>BigXthaPlug - Texas</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="Juice WRLD - Conversations (Official Audio)(MP3_160K).mp3" download>Juice WRLD - Conversations</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="Juice WRLD - Mistakes ft. NF (Music Video)(MP3_160K).mp3" download>Juice WRLD - Mistakes ft. NF</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="Juice WRLD ft. Marshmello - Come _ Go (Official Audio)(MP3_160K).mp3" download>Juice WRLD - Come & Go</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="XXXTENTACION - MOONLIGHT (OFFICIAL MUSIC VIDEO)(MP3_160K).mp3" download>XXXTENTACION - MOONLIGHT</a></li></div>
+      </ul>
     </div>
-    
 
-     <h3  >RNB VYBZ</h3>
-    <div id="ddseperate" >
-
-    <ul id="listdownloads">
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="6.6.25 Sweet Love 🤍 _ N.John (Sovath Monineak) _losangeles _explorepage  _newmusic  _njohn(MP3_160K).mp3" download>
-           Sweet Love 🤍 _ N.John </a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="_Unsaid Emily_ Lyric Video _ Julie and the Phantoms _ Netflix After School(MP3_160K).mp3" download>
-            Unsaid Emily</a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="be like that.mp3" download>
-           be like that </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Bust Your Windows (Cover of Jazmine Sullivan)(MP3_160K).mp3" download>
-            Bust Your Windows</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="cant stop dancing.mp3" download>
-            cant stop dancing</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Clean Bandit and Mabel - Tick Tock (feat. 24kGoldn) [Official Video](MP3_160K).mp3" download>
-           Clean Bandit and Mabel - Tick Tock </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Don_t Stop Believin_ (Glee Cast Version) (Cover of Journey)(MP3_160K).mp3" download>
-           Don_t Stop Believin </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Ed Sheeran - Beautiful People (feat. Khalid) [Official Music Video](MP3_160K).mp3" download>
-           Ed Sheeran - Beautiful People </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="hold on.mp3" download>
-           hold on </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="It_s My Life _ Confessions Part II(MP3_160K).mp3" download>
-           It_s My Life _ Confessions </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="j-hope _Killin_ It Girl (feat. GloRilla)_ Official MV(MP3_160K).mp3" download>
-            j-hope _Killin_ It Girl (feat. GloRilla)</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="lean on.mp3" download>
-           lean on </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Martin Garrix _ Dua Lipa - Scared To Be Lonely (Official Video)(MP3_160K).mp3" download>
-          Martin Garrix _ Dua Lipa - Scared To Be Lonely  </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="mrs hollywood.mp3" download>
-           mrs hollywood </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="MØ - Final Song (Official Video)(MP3_160K).mp3" download>
-           MØ - Final Song </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="one last time.mp3" download>
-           one last time </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Selena Gomez - Good For You(MP3_160K).mp3" download>
-            Selena Gomez - Good For You</a></li>
-        </div>
-       
-        </ul>
-
-        <ul id="listdownloads">
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Artemas - i like the way you kiss me (YDG Remix)(MP3_160K).mp3" download>
-          Artemas - i like the way you kiss me</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="David Kushner - Daylight (Official Music Video)(MP3_160K).mp3" download>
-          David Kushner - Daylight</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="DJ Khaled - Just Us (Official Video) ft. SZA(MP3_160K).mp3" download>
-          DJ Khaled - Just Us</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Elley Duhé - MIDDLE OF THE NIGHT (Official Video)(MP3_160K).mp3" download>
-          Elley Duhé - MIDDLE OF THE NIGHT</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Enya - Only Time (Official 4K Music Video)(MP3_160K).mp3" download>
-         Enya - Only Time </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Glass Animals - Heat Waves (Official Video)(MP3_160K).mp3" download>
-         Glass Animals - Heat Waves </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="James Blunt - You_re Beautiful (Official Music Video) [4K](MP3_160K).mp3" download>
-          James Blunt - You_re Beautiful </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Julie Sings _Wake Up_ Clip _ Julie and the Phantoms _ Netflix After School(MP3_160K).mp3" download>
-         Julie Sings _Wake Up </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Justin Bieber - Hold On (Lyrics)(MP3_160K).mp3" download>
-          Justin Bieber - Hold On</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Livingston - Last Man Standing (Official Visualizer)(MP3_160K).mp3" download>
-          Livingston - Last Man Standing</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Lord Huron - The Night We Met (Lyrics)(MP3_160K).mp3" download>
-          Lord Huron - The Night We Met</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Selena Gomez - Lose You To Love Me (Official Music Video)(MP3_160K).mp3" download>
-         Selena Gomez - Lose You To Love Me </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Shaboozey - Highway (Official Video)(MP3_160K).mp3" download>
-          Shaboozey - Highway</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Shaboozey - Vegas _ A COLORS SHOW(MP3_160K).mp3" download>
-          Shaboozey - Vegas</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="the 1975 - somebody else __ lyrics(MP3_160K).mp3" download>
-         the 1975 - somebody else </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="The Climb - Miley Cyrus (Lyrics) 🎵(MP3_160K).mp3" download>
-          The Climb - Miley Cyrus</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Until you come back home - Selena ft Justin(MP3_160K).mp3" download>
-         Until you come back home - Selena ft Justin </a></li>
-        </div>
-        
-    </ul>
-
-<ul id="listdownloads">
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="j-hope _Killin_ It Girl (feat. GloRilla)_ Official MV(MP3_160K).mp3" download>
-            step at a time by jordansparks</a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Sevyn Streeter - It Won_t Stop ft. Chris Brown [Official Video](MP3_160K).mp3" download>
-           Sevyn Streeter - It Won_t Stop ft. Chris Brown </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Sia - The Greatest (Lyrics)(MP3_160K).mp3" download>
-           Sia - The Greatest </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Surf Mesa _ Madison Beer - Carried Away (Lyrics)(MP3_160K).mp3" download>
-           Surf Mesa _ Madison Beer - Carried Away  </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="sweat melody.mp3" download>
-            sweat melody</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Tate McRae - greedy (Official Video)(MP3_160K).mp3" download>
-           Tate McRae - greedy </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Taylor Swift - Delicate(MP3_160K).mp3" download>
-           Taylor Swift - Delicate </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="The Weeknd - Blinding Lights (Official Audio)(MP3_160K).mp3" download>
-           The Weeknd - Blinding Lights </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="The Weeknd - Starboy (Lyrics) ft. Daft Punk(MP3_160K).mp3" download>
-            The Weeknd - Starboy</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="thunderclouds.mp3" download>
-           thunderclouds </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Tiësto_ Jonas Blue _ Rita Ora - Ritual (Official Video)(MP3_160K).mp3" download>
-           Tiësto_ Jonas Blue _ Rita Ora - Ritual </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="twenty one pilots - Ride (Official Video)(MP3_160K).mp3" download>
-            twenty one pilots - Ride</a></li>
-        </div>
-        
-    </ul>
-
-
+    <h3>RNB VYBZ</h3>
+    <div id="ddseperate">
+      <ul id="listdownloads" class="list-panel">
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="Artemas - i like the way you kiss me (YDG Remix)(MP3_160K).mp3" download>Artemas - i like the way you kiss me</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="David Kushner - Daylight (Official Music Video)(MP3_160K).mp3" download>David Kushner - Daylight</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="Elley Duhé - MIDDLE OF THE NIGHT (Official Video)(MP3_160K).mp3" download>Elley Duhé - MIDDLE OF THE NIGHT</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="Glass Animals - Heat Waves (Official Video)(MP3_160K).mp3" download>Glass Animals - Heat Waves</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="James Blunt - You_re Beautiful (Official Music Video) [4K](MP3_160K).mp3" download>James Blunt - You're Beautiful</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="Lord Huron - The Night We Met (Lyrics)(MP3_160K).mp3" download>Lord Huron - The Night We Met</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="Selena Gomez - Lose You To Love Me (Official Music Video)(MP3_160K).mp3" download>Selena Gomez - Lose You To Love Me</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="Tate McRae - greedy (Official Video)(MP3_160K).mp3" download>Tate McRae - greedy</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="The Weeknd - Blinding Lights (Official Audio)(MP3_160K).mp3" download>The Weeknd - Blinding Lights</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="The Weeknd - Starboy (Lyrics) ft. Daft Punk(MP3_160K).mp3" download>The Weeknd - Starboy</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="Ed Sheeran - Beautiful People (feat. Khalid) [Official Music Video](MP3_160K).mp3" download>Ed Sheeran - Beautiful People</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="Martin Garrix _ Dua Lipa - Scared To Be Lonely (Official Video)(MP3_160K).mp3" download>Martin Garrix x Dua Lipa</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="Tate McRae - greedy (Official Video)(MP3_160K).mp3" download>Tate McRae - greedy</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="Tiësto_ Jonas Blue _ Rita Ora - Ritual (Official Video)(MP3_160K).mp3" download>Tiësto - Ritual</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="twenty one pilots - Ride (Official Video)(MP3_160K).mp3" download>twenty one pilots - Ride</a></li></div>
+      </ul>
     </div>
-    
 
-     <h3  >COUNTRY VYBZ</h3>
-    <div id="ddseperate" >
-
-    <ul id="listdownloads">
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Austin (Boots Stop Workin_)(MP3_160K).mp3" download>
-            Austin </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Bayker Blankenship - Maxed Out (Official Music Video)(MP3_160K).mp3" download>
-           Bayker Blankenship - Maxed Out </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="BigXthaPlug - All The Way feat. Bailey Zimmerman (Official Music Video)(MP3_160K).mp3" download>
-           BigXthaPlug - All The Way feat. Bailey Zimmerman </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="BigXthaPlug_ Shaboozey - Home (Lyrics)(MP3_160K).mp3" download>
-           BigXthaPlug_ Shaboozey - Home </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Blake Shelton - God_s Country (Official Music Video)(MP3_160K).mp3" download>
-            Blake Shelton - God_s Country</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Dasha - Austin (Official Music Video)(MP3_160K).mp3" download>
-            Dasha - Austin </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Dax - _Lonely Dirt Road_ (Official Music Video)(MP3_160K).mp3" download>
-           Dax - _Lonely Dirt Road </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Don Williams - We Got Love (Legendado)(MP3_160K).mp3" download>
-            Don Williams - We Got Love</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Drew Green - Lotta Bit Of You (Lyric Video)(MP3_160K).mp3" download>
-           Drew Green - Lotta Bit Of You </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Lee Brice - One of Them Girls (Official Music Video)(MP3_160K).mp3" download>
-           Lee Brice - One of Them Girls </a></li>
-        </div>
-
-        </ul>
-
-        <ul id="listdownloads">
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Lil Man J - Stuck In The Middle (Official Visualizer)(MP3_160K).mp3" download>
-          Lil Man J - Stuck In The Middle</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Morgan Wallen - Ain_t That Some (Lyric Video)(MP3_160K).mp3" download>
-          Morgan Wallen - Ain_t That Some</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Morgan Wallen - Last Night (One Record At A Time Sessions)(MP3_160K).mp3" download>
-          Morgan Wallen - Last Night</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Morgan Wallen - Whiskey Glasses (Official Video)(MP3_160K).mp3" download>
-          Morgan Wallen - Whiskey Glasses</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Shaboozey - Anabelle (Official Video)(MP3_160K).mp3" download>
-          Shaboozey - Anabelle</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Shaboozey - Chrome (Bonus) (Official Visualizer)(MP3_160K).mp3" download>
-          Shaboozey - Chrome </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Shaboozey - Good News(MP3_160K).mp3" download>
-          Shaboozey - Good News</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Shaboozey - Let It Burn (Official Video)(MP3_160K).mp3" download>
-          Shaboozey - Let It Burn</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Shaboozey_ Jelly Roll - Amen (Visualizer)(MP3_160K).mp3" download>
-          Shaboozey_ Jelly Roll - Amen</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Shaboozey_ Myles Smith - Blink Twice (Official Video)(MP3_160K).mp3" download>
-          Shaboozey_ Myles Smith - Blink Twice</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="The Band Perry - If I Die Young (Official Music Video)(MP3_160K).mp3" download>
-          The Band Perry - If I Die Young</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Tucker Wetmore - Brunette (Live Performance Video)(MP3_160K).mp3" download>
-          Tucker Wetmore - Brunette</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="twenty one pilots - Chlorine (Official Video)(MP3_160K).mp3" download>
-          twenty one pilots - Chlorine</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Years And Years - Breathe (Lyrics)(Olly Alexander)(MP3_160K).mp3" download>
-         Years And Years - Breathe </a></li>
-        </div>
-         
-    </ul>
+    <h3>AFRO VYBZ</h3>
+    <div id="ddseperate">
+      <ul id="listdownloads" class="list-panel">
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="Aya Nakamura - Copines (Clip officiel)(MP3_160K).mp3" download>Aya Nakamura - Copines</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="Diamond Platnumz - Yatapita (Official Lyric Audio)(MP3_160K).mp3" download>Diamond Platnumz - Yatapita</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="Fave - Mr Man (Visualizer)(MP3_160K).mp3" download>Fave - Mr Man</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="Omah Lay - Understand (Official Music Video)(MP3_160K).mp3" download>Omah Lay - Understand</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="Pheelz x Davido - _Electricity_ (Official Music Video)(MP3_160K).mp3" download>Pheelz x Davido - Electricity</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="Timaya - Cold Outside ft Buju ( official lyrics video)(MP3_160K).mp3" download>Timaya - Cold Outside</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="Tiwa savage All over lyrics(MP3_160K).mp3" download>Tiwa Savage - All Over</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="Victoria Kimani - China Love (Official Video) ft. R.City(MP3_160K).mp3" download>Victoria Kimani - China Love</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="Bora Uhai - Ochungulo Family (Official Video) [ SMS SKIZA 8544825 TO 811 ](MP3_160K).mp3" download>Bora Uhai - Ochungulo Family</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="RanzScooby - DENDA (Official Video)(MP3_160K).mp3" download>RanzScooby - DENDA</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="Goon Flavour_ Master KG _ Eemoh - Ngishutheni (Official Music Video)(MP3_160K).mp3" download>Master KG - Ngishutheni</a></li></div>
+        <div class="dl-item"><img src="beamed1.png" class="dl-icon" alt=""/><li><a href="Shallipopi - Laho (Official Video)(MP3_160K).mp3" download>Shallipopi - Laho</a></li></div>
+      </ul>
     </div>
-    
-<h3  >90s VYBZ</h3>
-    <div id="ddseperate" >
 
-    <ul id="listdownloads">
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="1985(MP3_160K).mp3" download>
-           1985(MP3_160K) </a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="ALEMBA - HIDE _ SEEK OFFICIAL HD VIDEO - feat. HOPEKID (DANCEHALL)(MP3_160K).mp3" download>
-         ALEMBA - HIDE _ SEEK </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Alice Deejay - Better Off Alone (Official Video)(MP3_160K).mp3" download>
-          Alice Deejay - Better Off Alone</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="All Around Me(MP3_160K).mp3" download>
-          All Around Me</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Bag Raiders - Shooting Stars (Official Video)(MP3_160K).mp3" download>
-          Bag Raiders - Shooting Stars</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Beanie (Slowed)(MP3_160K).mp3" download>
-          Beanie (Slowed)</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Billy Ocean - Caribbean Queen (No More Love on the Run) (Official HD Video)(MP3_160K).mp3" download>
-         Billy Ocean - Caribbean Queen </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Bob Marley - Is This Love (Official Music Video)(MP3_160K).mp3" download>
-          Bob Marley - Is This Love</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Captain Jack Sparrow theme music(MP3_160K).mp3" download>
-         Captain Jack Sparrow theme music </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Careless People(MP3_160K).mp3" download>
-          Careless People</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Cheri Cheri Lady(MP3_160K).mp3" download>
-          Cheri Cheri Lady</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Chris De Burgh - Lady In Red (Official Video)(MP3_160K).mp3" download>
-          Chris De Burgh - Lady In Red</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Céline Dion - I_m Alive (Official HD Video)(MP3_160K).mp3" download>
-         Céline Dion - I_m Alive </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Djo - End Of Beginning (Lyrics)(MP3_160K).mp3" download>
-          Djo - End Of Beginning</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Twista ft Faith Evans - Hope (HQ)(MP3_160K).mp3" download>
-          Twista ft Faith Evans - Hope</a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Whitney Houston - I Wanna Dance With Somebody (Lyrics)(MP3_160K).mp3" download>
-         Whitney Houston - I Wanna Dance With Somebody  </a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Wizkid - Fever (Official Video)(MP3_160K).mp3" download>
-          Wizkid - Fever</a></li>
-        </div>
-        
-        </ul>
+  </main>
+</div>
 
-        <ul id="listdownloads">
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Elton John - Sacrifice(MP3_160K).mp3" download>
-          Elton John - Sacrifice</a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Fleetwood Mac - Everywhere (Official Music Video)(MP3_160K).mp3" download>
-          Fleetwood Mac - Everywhere</a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Fun._ We Are Young ft. Janelle Monáe [OFFICIAL VIDEO](MP3_160K).mp3" download>
-          Fun._ We Are Young ft. Janelle Monáe</a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Girl(MP3_160K).mp3" download>
-          Girl(MP3_160K)</a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="HOPEKID HK - SHINE (OFFICIAL VIDEO) [SKIZA 9045061](MP3_160K).mp3" download>
-         HOPEKID HK - SHINE  </a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Hula Hoop - Omi (Lyrics)(MP3_160K).mp3" download>
-          Hula Hoop - Omi </a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Iyaz - Solo __ Lyrics(MP3_160K).mp3" download>
-         Iyaz - Solo __ </a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="John Legend - Tonight (Best You Ever Had) (Official Video) ft. Ludacris(MP3_160K).mp3" download>
-          John Legend - Tonight</a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Josh Turner - Your Man (Official Music Video)(MP3_160K).mp3" download>
-          Josh Turner - Your Man</a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Kaoma - Lambada (Official Video) 1989 HD(MP3_160K).mp3" download>
-         Kaoma - Lambada </a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Lana Del Rey - Summertime Sadness (Lyrics)(MP3_160K).mp3" download>
-          Lana Del Rey - Summertime Sadness</a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Lionel Richie - Say you_ say me   (Lyrics)(MP3_160K).mp3" download>
-          Lionel Richie - Say you_ say me</a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Loreen - Tattoo (Official Lyric Video)(MP3_160K).mp3" download>
-          Loreen - Tattoo</a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Madonna - La Isla Bonita (Official Video)(MP3_160K).mp3" download>
-          Madonna - La Isla Bonita</a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Omarion - Distance (Official Music Video)(MP3_160K).mp3" download>
-         Omarion - Distance </a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="OMI - Standing On All Threes (Official Video)(MP3_160K).mp3" download>
-         OMI - Standing On All Threes </a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Priya Ragu - Hit The Bucket (Official Audio)(MP3_160K).mp3" download>
-         Priya Ragu - Hit The Bucket </a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Puff Daddy - I_ll Be Missing You (Lyrics) feat. Faith Evans_ 112(MP3_160K).mp3" download>
-          Puff Daddy - I_ll Be Missing You</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Rehab(MP3_160K).mp3" download>
-         Rehab(MP3_160K) </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Said I Love You But I Lied By Michael Bolton (Lyrics Video)(MP3_160K).mp3" download>
-          Said I Love You But I Lied By Michael Bolton</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Sean Paul - How Deep Is Your Love (feat. Kelly Rowland) [Official Video](MP3_160K).mp3" download>
-          Sean Paul - How Deep Is Your Love </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Silvy Kumalasari - APT Thailand X Culik Aku Dong (Official Music Video)(MP3_160K).mp3" download>
-         Silvy Kumalasari - APT Thailand X Culik Aku Dong </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Stephen Sanchez_ Em Beihold - Until I Found You (Lyrics)(MP3_160K).mp3" download>
-          Stephen Sanchez_ Em Beihold - Until I Found You</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Sugarcane - Shaggy (Official Lyric Video)(MP3_160K).mp3" download>
-          Sugarcane - Shaggy</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Tevin Campbell - Can We Talk (Official Video)(MP3_160K).mp3" download>
-          Tevin Campbell - Can We Talk</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Tom Odell - Another Love (Official Video)(MP3_160K).mp3" download>
-          Tom Odell - Another Love</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="step at a time by jordansparks" />
-          <li ><a href="Twista ft Faith Evans - Hope (HQ)(MP3_160K).mp3" download>
-          Twista ft Faith Evans - Hope</a></li>
-        </div>
-    </ul>
-    </div>
-    
-
-
-
-   <h3  >AFRO VYBZ</h3>
-    <div id="ddseperate" >
-
-    <ul id="listdownloads">
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="afro vybz" />
-          <li ><a href="Aya Nakamura - Copines (Clip officiel)(MP3_160K).mp3" download>
-          Aya Nakamura - Copines</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="afro vybz" />
-          <li ><a href="Aya Nakamura - Djadja (Clip officiel)(MP3_160K).mp3" download>
-          Aya Nakamura - Djadja</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="afro vybz" />
-          <li ><a href="Chella - My Darling (Official Visualiser)(MP3_160K).mp3" download>
-          Chella - My Darling</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="afro vybz" />
-          <li ><a href="Diamond Platnumz - Yatapita (Official Lyric Audio)(MP3_160K).mp3" download>
-          Diamond Platnumz - Yatapita</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="afro vybz" />
-          <li ><a href="Fave - Mr Man (Visualizer)(MP3_160K).mp3" download>
-          Fave - Mr Man</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="afro vybz" />
-          <li ><a href="Goon Flavour_ Master KG _ Eemoh - Ngishutheni (Official Music Video)(MP3_160K).mp3" download>
-         Goon Flavour_ Master KG  </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="afro vybz" />
-          <li ><a href="Mr Pilato_ Ego Slimflow _ Tebogo G Mashego - Biri Marung ft DJ Maphorisa_Focalistic _ Scotts Maphuma(MP3_160K).mp3" download>
-          Mr Pilato</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="afro vybz" />
-          <li ><a href="Omah Lay - i_m a mess (Official Music Video)(MP3_160K).mp3" download>
-          Omah Lay - i_m a mess</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="afro vybz" />
-          <li ><a href="Omah Lay - Understand (Official Music Video)(MP3_160K).mp3" download>
-          Omah Lay - Understand</a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="afro vybz" />
-          <li ><a href="Pheelz x Davido - _Electricity_ (Official Music Video)(MP3_160K).mp3" download>
-         Pheelz x Davido - _Electricity </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="afro vybz" />
-          <li ><a href="Shallipopi - Laho (Official Video)(MP3_160K).mp3" download>
-         Shallipopi - Laho </a></li>
-        </div>
-        <div id="downloadsongs">
-            <img src="beamed1.png" alt="afro vybz" />
-          <li ><a href="Timaya - Cold Outside ft Buju ( official lyrics video)(MP3_160K).mp3" download>
-          Timaya - Cold Outside ft Buju</a></li>
-        </div>
-       
-        </ul>
-
-        <ul id="listdownloads">
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="afro vybz" />
-          <li ><a href="Tiwa savage All over lyrics(MP3_160K).mp3" download>
-          Tiwa savage All over</a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="afro vybz" />
-          <li ><a href="Victoria Kimani - China Love (Official Video) ft. R.City(MP3_160K).mp3" download>
-          Victoria Kimani - China Love</a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="afro vybz" />
-          <li ><a href="Bora Uhai - Ochungulo Family (Official Video) [ SMS SKIZA 8544825 TO 811 ](MP3_160K).mp3" download>
-         Bora Uhai - Ochungulo Family  </a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="afro vybz" />
-          <li ><a href="Busy Signal - Nightshift _ One More Night _ Official Music Video(MP3_160K).mp3" download>
-         Busy Signal - Nightshift  </a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="afro vybz" />
-          <li ><a href="Medication (Remix)(MP3_160K).mp3" download>
-          Medication</a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="afro vybz" />
-          <li ><a href="PUNGULU - ANGRY PANDA CLAN x PAPA NYOSTO _Hoodboyzke (OFFICIAL MUSIC VIDEO)(MP3_160K).mp3" download>
-         PUNGULU - ANGRY PANDA  </a></li>
-        </div>
-         <div id="downloadsongs">
-            <img src="beamed1.png" alt="afro vybz" />
-          <li ><a href="RanzScooby - DENDA (Official Video)(MP3_160K).mp3" download>
-          RanzScooby - DENDA</a></li>
-        </div>
-    </ul>
-    </div>
-    
-
-  
-  
-
-  </div>
-
-  <script>
-    
-  </script>
-
+<script>
+  document.addEventListener('mousemove', (e) => {
+    if (Math.random() > 0.72) {
+      const dot = document.createElement('div');
+      dot.style.cssText = `position:fixed;width:2px;height:2px;border-radius:50%;background:#00f5d4;
+        box-shadow:0 0 5px #00f5d4;left:${e.clientX}px;top:${e.clientY}px;
+        pointer-events:none;z-index:9997;transition:all 0.7s;opacity:0.7;`;
+      document.body.appendChild(dot);
+      setTimeout(() => { dot.style.opacity='0'; dot.style.transform='scale(0)'; }, 50);
+      setTimeout(() => dot.remove(), 750);
+    }
+  });
+</script>
 </body>
 </html>
