@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CREATE ACCOUNT — Vvane Sound World</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Share+Tech+Mono&family=Exo+2:wght@300;400;600&display=swap');
+
+    :root {
+      --void: #00030a;
+      --plasma: #00f5c4;
+      --bio: #00d4ff;
+      --pulse: #8a2be2;
+      --star: #c8eeff;
+      --glow: 0 0 10px #00f5c4, 0 0 30px rgba(0,245,196,0.35);
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Exo 2', sans-serif;
+      background: var(--void);
+      color: var(--star);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: crosshair;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Deep space BG */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 20% 30%, rgba(0,245,196,0.04) 0%, transparent 55%),
+        radial-gradient(ellipse 60% 80% at 80% 70%, rgba(138,43,226,0.05) 0%, transparent 55%),
+        linear-gradient(160deg, #00030a 0%, #000c18 50%, #010820 100%);
+      pointer-events: none;
+    }
+
+    /* Grid */
+    body::after {
+      content: '';
+      position: fixed; inset: 0;
+      background-image:
+        linear-gradient(rgba(0,245,196,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,245,196,0.025) 1px, transparent 1px);
+      background-size: 50px 50px;
+      pointer-events: none;
+      animation: gridDrift 20s linear infinite;
+    }
+    @keyframes gridDrift { from{background-position:0 0} to{background-position:50px 50px} }
+
+    /* Stars */
+    .stars {
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background-image:
+        radial-gradient(1px 1px at 12% 8%, rgba(0,245,196,0.7) 0%, transparent 100%),
+        radial-gradient(1px 1px at 35% 20%, rgba(255,255,255,0.5) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 58% 35%, rgba(0,212,255,0.6) 0%, transparent 100%),
+        radial-gradient(1px 1px at 78% 12%, rgba(138,43,226,0.6) 0%, transparent 100%),
+        radial-gradient(1px 1px at 22% 65%, rgba(255,255,255,0.4) 0%, transparent 100%),
+        radial-gradient(1px 1px at 90% 55%, rgba(0,245,196,0.5) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 45% 80%, rgba(255,255,255,0.4) 0%, transparent 100%),
+        radial-gradient(1px 1px at 68% 90%, rgba(138,43,226,0.5) 0%, transparent 100%);
+      animation: starField 10s ease-in-out infinite alternate;
+    }
+    @keyframes starField { from{opacity:0.5} to{opacity:1} }
+
+    /* Scanlines */
+    .scanlines {
+      position: fixed; inset: 0; pointer-events: none; z-index: 999;
+      background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.04) 2px, rgba(0,0,0,0.04) 4px);
+    }
+
+    /* Corner decorations */
+    .corner { position: fixed; width: 50px; height: 50px; border-color: rgba(0,245,196,0.3); border-style: solid; z-index: 998; pointer-events: none; }
+    .c-tl { top: 12px; left: 12px; border-width: 2px 0 0 2px; }
+    .c-tr { top: 12px; right: 12px; border-width: 2px 2px 0 0; }
+    .c-bl { bottom: 12px; left: 12px; border-width: 0 0 2px 2px; }
+    .c-br { bottom: 12px; right: 12px; border-width: 0 2px 2px 0; }
+
+    /* Main panel */
+    .panel {
+      position: relative; z-index: 1;
+      width: min(440px, 92vw);
+      background: rgba(0,10,22,0.92);
+      border: 1px solid rgba(0,245,196,0.2);
+      padding: 40px 36px;
+      box-shadow: 0 0 40px rgba(0,245,196,0.06), inset 0 0 40px rgba(0,245,196,0.02);
+      overflow: hidden;
+      animation: panelIn 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+    }
+
+    @keyframes panelIn {
+      from { opacity: 0; transform: translateY(30px) scale(0.97); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    /* Top scanning line */
+    .panel::before {
+      content: '';
+      position: absolute; top: 0; left: 0;
+      width: 100%; height: 2px;
+      background: linear-gradient(90deg, transparent, var(--plasma), var(--bio), transparent);
+      background-size: 200% 100%;
+      animation: topScan 3s linear infinite;
+    }
+    @keyframes topScan { from{background-position:200% 0} to{background-position:-200% 0} }
+
+    /* Hex decoration */
+    .panel::after {
+      content: '⬡';
+      position: absolute; top: 14px; right: 16px;
+      font-size: 1.2rem;
+      color: rgba(0,245,196,0.15);
+      animation: hexSpin 8s linear infinite;
+    }
+    @keyframes hexSpin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+
+    .panel-title {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.5em;
+      text-transform: uppercase;
+      color: rgba(0,245,196,0.5);
+      margin-bottom: 6px;
+    }
+
+    .panel-heading {
+      font-family: 'Orbitron', monospace;
+      font-size: clamp(1.1rem, 3vw, 1.6rem);
+      font-weight: 900;
+      color: var(--plasma);
+      text-shadow: var(--glow);
+      letter-spacing: 0.1em;
+      margin-bottom: 30px;
+      line-height: 1.2;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+      position: relative;
+    }
+
+    .form-label {
+      display: block;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(0,245,196,0.5);
+      margin-bottom: 6px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
+      padding: 11px 16px;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      background: rgba(0,245,196,0.04);
+      border: 1px solid rgba(0,245,196,0.15);
+      color: var(--plasma);
+      outline: none;
+      transition: all 0.3s;
+    }
+    input:focus {
+      border-color: var(--plasma);
+      box-shadow: 0 0 12px rgba(0,245,196,0.2);
+      background: rgba(0,245,196,0.07);
+    }
+    input::placeholder { color: rgba(0,245,196,0.2); }
+
+    .remember-row {
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 22px;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      color: rgba(0,245,196,0.5);
+      cursor: pointer;
+    }
+    input[type="checkbox"] {
+      appearance: none;
+      width: 16px; height: 16px;
+      border: 1px solid rgba(0,245,196,0.3);
+      background: transparent;
+      cursor: pointer;
+      position: relative;
+      flex-shrink: 0;
+    }
+    input[type="checkbox"]:checked {
+      background: rgba(0,245,196,0.15);
+      border-color: var(--plasma);
+    }
+    input[type="checkbox"]:checked::after {
+      content: '✓';
+      position: absolute; top: -2px; left: 2px;
+      color: var(--plasma);
+      font-size: 12px;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 13px;
+      font-family: 'Orbitron', monospace;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--void);
+      background: var(--plasma);
+      border: none;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s;
+      clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+    }
+    .submit-btn::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      transform: translateX(-100%);
+      transition: transform 0.5s;
+    }
+    .submit-btn:hover { box-shadow: var(--glow); transform: scale(1.02); }
+    .submit-btn:hover::before { transform: translateX(100%); }
+
+    /* Loader */
+    #loaderOverlay {
+      display: none;
+      position: fixed; inset: 0;
+      background: rgba(0,3,10,0.92);
+      justify-content: center; align-items: center;
+      z-index: 9999;
+      backdrop-filter: blur(8px);
+      flex-direction: column; gap: 20px;
+    }
+    .loader-text {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.4em;
+      color: rgba(0,245,196,0.6);
+      animation: loaderBlink 1s step-end infinite;
+    }
+    @keyframes loaderBlink { 50%{opacity:0} }
+
+    /* Original loader spinner adapted */
+    .spin-container {
+      --uib-size: 50px; --uib-color: #00f5c4; --uib-speed: 1.75s; --uib-bg-opacity: .08;
+      position: relative; display: flex; flex-direction: column;
+      height: var(--uib-size); width: var(--uib-size);
+      transform: rotate(45deg);
+      animation: spinRotate calc(var(--uib-speed) * 2) ease-in-out infinite;
+      filter: drop-shadow(0 0 8px var(--uib-color));
+    }
+    .spin-half {
+      --uib-half-size: calc(var(--uib-size) * 0.435);
+      position: absolute; display: flex; align-items: center; justify-content: center;
+      width: var(--uib-half-size); height: var(--uib-half-size); overflow: hidden; isolation: isolate;
+    }
+    .spin-half:first-child { top: 8.25%; left: 8.25%; border-radius: 50% 50% calc(var(--uib-size)/15); }
+    .spin-half:last-child  { bottom: 8.25%; right: 8.25%; transform: rotate(180deg); align-self: flex-end; border-radius: 50% 50% calc(var(--uib-size)/15); }
+    .spin-half::before { content:''; height:100%; width:100%; position:absolute; top:0; left:0; background-color:var(--uib-color); opacity:var(--uib-bg-opacity); }
+    .spin-half::after { content:''; position:relative; z-index:1; display:block; background-color:var(--uib-color); height:100%; transform:rotate(45deg) translate(-3%,50%) scaleX(1.2); width:100%; transform-origin:bottom right; border-radius:0 0 calc(var(--uib-size)/20) 0; animation:spinFlow calc(var(--uib-speed)*2) linear infinite both; }
+    @keyframes spinFlow { 0%{transform:rotate(45deg) translate(-3%,50%) scaleX(1.2)} 30%{transform:rotate(45deg) translate(115%,50%) scaleX(1.2)} 30.001%,50%{transform:rotate(0deg) translate(-85%,-85%) scaleX(1)} 80%,100%{transform:rotate(0deg) translate(0%,0%) scaleX(1)} }
+    @keyframes spinRotate { 0%,30%{transform:rotate(45deg)} 50%,80%{transform:rotate(225deg)} 100%{transform:rotate(405deg)} }
+
+    /* Success */
+    #successMessage {
+      display: none;
+      position: fixed; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: 'Orbitron', monospace;
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      color: var(--plasma);
+      background: rgba(0,10,22,0.98);
+      border: 1px solid var(--plasma);
+      padding: 28px 36px;
+      text-shadow: var(--glow);
+      box-shadow: 0 0 30px rgba(0,245,196,0.15);
+      text-align: center; z-index: 10000;
+      animation: successPulse 0.5s ease;
+    }
+    @keyframes successPulse { from{transform:translate(-50%,-50%) scale(0.8);opacity:0} to{transform:translate(-50%,-50%) scale(1);opacity:1} }
+
+    /* Welcome back section */
+    #welcomeBack {
+      display: none; position: relative; z-index: 1;
+      text-align: center;
+    }
+    .welcome-msg {
+      font-family: 'Orbitron', monospace;
+      font-size: clamp(0.85rem, 2.5vw, 1.1rem);
+      font-weight: 700;
+      color: var(--plasma);
+      text-shadow: var(--glow);
+      letter-spacing: 0.15em;
+      margin-bottom: 30px;
+      line-height: 1.6;
+    }
+
+    a { text-decoration: none; }
+
+    #clickS {
+      display: inline-block;
+      font-family: 'Orbitron', monospace;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--plasma);
+      background: transparent;
+      border: 1px solid rgba(0,245,196,0.35);
+      padding: 14px 28px;
+      cursor: pointer;
+      transition: all 0.3s;
+      clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+      text-align: center;
+    }
+    #clickS:hover {
+      background: rgba(0,245,196,0.1);
+      border-color: var(--plasma);
+      box-shadow: var(--glow);
+      color: var(--plasma);
+    }
+
+    #audioDownloadPage { display: none; text-align: center; }
+  </style>
+</head>
+<body>
+
+<div class="stars"></div>
+<div class="scanlines"></div>
+<div class="corner c-tl"></div>
+<div class="corner c-tr"></div>
+<div class="corner c-bl"></div>
+<div class="corner c-br"></div>
+
+<div id="loaderOverlay">
+  <div class="spin-container">
+    <div class="spin-half"></div>
+    <div class="spin-half"></div>
+  </div>
+  <div class="loader-text">INITIALIZING NEURAL LINK...</div>
+</div>
+
+<div id="successMessage">
+  ◈ ACCESS GRANTED ◈<br>
+  <span style="font-size:0.6rem;color:rgba(0,245,196,0.6);letter-spacing:0.3em;">ACCOUNT CREATED SUCCESSFULLY</span>
+</div>
+
+<div class="panel" id="signupPanel">
+  <div class="panel-title">// VVANE SOUND WORLD</div>
+  <div class="panel-heading">CREATE<br>ACCOUNT</div>
+
+  <form id="signupForm">
+    <div class="form-group">
+      <label class="form-label">EMAIL ADDRESS</label>
+      <input type="email" id="email" placeholder="user@domain.com" required />
+    </div>
+    <div class="form-group">
+      <label class="form-label">USERNAME</label>
+      <input type="text" id="username" placeholder="callsign" required />
+    </div>
+    <div class="form-group">
+      <label class="form-label">ACCESS CODE</label>
+      <input type="password" id="password" placeholder="••••••••••" required />
+    </div>
+    <label class="remember-row">
+      <input type="checkbox" id="rememberMe" />
+      REMEMBER THIS UNIT
+    </label>
+    <button type="submit" class="submit-btn">◈ INITIALIZE ACCESS ◈</button>
+  </form>
+</div>
+
+<div id="welcomeBack">
+  <div class="panel">
+    <div class="panel-title">// VVANE SOUND WORLD</div>
+    <div class="welcome-msg">"Let It Be Done With Music."</div>
+    <a href="downloads.html">
+      <div id="clickS">⬡ DOWNLOADS ⬡</div>
+    </a>
+  </div>
+</div>
+
+<div id="audioDownloadPage">
+  <div class="panel">
+    <div class="panel-title">// TRANSMISSION UNLOCKED</div>
+    <div class="welcome-msg">Welcome to the Audio Download Section</div>
+    <a href="downloads.html">
+      <div id="clickS">⬡ ENTER DOWNLOADS ⬡</div>
+    </a>
+  </div>
+</div>
+
+<script>
+  const form = document.getElementById('signupForm');
+  const loader = document.getElementById('loaderOverlay');
+  const successMessage = document.getElementById('successMessage');
+  const welcomeBack = document.getElementById('welcomeBack');
+  const signupPanel = document.getElementById('signupPanel');
+
+  if (localStorage.getItem('remembered') === 'true') {
+    signupPanel.style.display = 'none';
+    welcomeBack.style.display = 'block';
+  }
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    loader.style.display = 'flex';
+
+    const email = document.getElementById('email').value;
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    const remember = document.getElementById('rememberMe').checked;
+
+    if (remember) localStorage.setItem('remembered', 'true');
+
+    fetch('https://script.google.com/macros/s/AKfycbz_phHRKqdl3EIjD7DBP2kLrziy1FYaWQ18jwNj4XK4UWEQ1mvHgTsVllrBucU5ZPgkLg/exec', {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, username, password })
+    }).then(() => {
+      loader.style.display = 'none';
+      successMessage.style.display = 'block';
+      signupPanel.style.display = 'none';
+      setTimeout(() => {
+        successMessage.style.display = 'none';
+        document.getElementById('audioDownloadPage').style.display = 'block';
+      }, 2000);
+    }).catch(() => {
+      loader.style.display = 'none';
+      alert('NEURAL LINK ERROR. RETRY SEQUENCE.');
+    });
+  });
+
+  /* Cursor particle trail */
+  document.addEventListener('mousemove', (e) => {
+    if (Math.random() > 0.75) {
+      const dot = document.createElement('div');
+      dot.style.cssText = `position:fixed;width:2px;height:2px;border-radius:50%;background:#00f5c4;
+        box-shadow:0 0 4px #00f5c4;left:${e.clientX}px;top:${e.clientY}px;
+        pointer-events:none;z-index:9997;transition:all 0.7s;opacity:0.7;`;
+      document.body.appendChild(dot);
+      setTimeout(() => { dot.style.opacity='0'; dot.style.transform='scale(0)'; }, 50);
+      setTimeout(() => dot.remove(), 750);
+    }
+  });
+</script>
+</body>
+</html>
