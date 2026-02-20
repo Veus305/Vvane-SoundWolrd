@@ -1,530 +1,319 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AFRO vybz</title>
-    <link href="style2.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AFRO VYBZ — Vvane Sound World</title>
+  <link href="style2.css" rel="stylesheet">
+  <style>
+    /* Page-specific accent: acid green for Afro */
+    :root { --accent: #b4ff39; --accent-glow: 0 0 8px #b4ff39, 0 0 25px rgba(180,255,57,0.35); }
+    #Vsadsongsheading { color: var(--accent) !important; text-shadow: var(--accent-glow) !important; }
+    .audio-box { border-left-color: var(--accent) !important; }
+    .audio-box:hover { box-shadow: 0 0 10px rgba(180,255,57,0.12) !important; }
+    #playlistheading { color: var(--acid); text-shadow: var(--glow-acid); }
+    #playlistimage { border-color: var(--acid); box-shadow: 0 0 8px #b4ff39, 0 0 25px rgba(180,255,57,0.3) !important; }
+  </style>
 </head>
 <body>
-    <nav id="navbar">
-        <div id="logo">
-            <p id="tittle">Vvane Sound World</p>
-            <button id="homebutton" onclick="location.href='index.html'">Home</button>
-        </div>
-    </nav> 
-    
-    <div class="ad-overlay" id="adOverlay">
+
+  <nav id="navbar">
+    <div id="logo">
+      <p id="tittle">Vvane Sound World</p>
+      <button id="homebutton" onclick="location.href='index.html'">⬡ Home</button>
+    </div>
+  </nav>
+
+  <div class="ad-overlay" id="adOverlay">
     <div class="ad-container" id="adContainer">
-      <button class="skip-btn" id="skipBtn">Skip Ad</button>
+      <button class="skip-btn" id="skipBtn">[ SKIP TRANSMISSION ]</button>
     </div>
   </div>
 
+  <table id="playlisttable">
+    <tr id="playlistalbum">
+      <td class="blur-content">
+        <img id="playlistimage" src="theboy.jpeg" alt="Afro Playlist">
+        <p id="playlistheading">AFRO VYBZ</p>
+        <label id="notrack">// 63 TRACKS LOADED</label>
+      </td>
+    </tr>
+    <tr id="Vsongs">
+      <td>
+        <div id="Vsadsongs">
+          <label id="Vsadsongsheading">◈ SAD FREQUENCY</label>
 
-<table id="playlisttable" >
-   <tr id="playlistalbum" ><td class="blur-content">
-<img id="playlistimage" src="theboy.jpeg" alt="Latin Playlist Image">
-        <p id="playlistheading">AFRO Vybz</p>
-        <label id="notrack"> 63 Tracks</label>
-    </td>
-  </tr> 
-<tr id="Vsongs">
-<td>
-    <div id="Vsadsongs">
-        <label id="Vsadsongsheading">Sad Songs</label>
-    <div id="control-panel">
-    <label id="enterid">Enter Audio ID: </label>
-    <input type="number" id="audioIdInput" min="1" />
-    <button onclick="playById()">Play</button>
-    <button onclick="pauseCurrent()">Pause</button>
-    <button onclick="playAll()">Auto Play All</button>
-  </div>
-   <div class="search-container">
-    <input type="text" id="searchBar" placeholder="Search for a song..." autocomplete="off">
-    <div id="suggestions"></div>
-  </div>
+          <div id="control-panel">
+            <label id="enterid">TRACK ID:</label>
+            <input type="number" id="audioIdInput" min="1" />
+            <button onclick="playById()">▶ PLAY</button>
+            <button onclick="pauseCurrent()">⏸ PAUSE</button>
+            <button onclick="playAll()">⟳ AUTO PLAY</button>
+          </div>
 
-  <div class="audio-list" id="audioList">
-    <!-- Matching audio players will appear here -->
-  </div>
-  <div class="audio-container" id="audioContainer">
-    <!-- Audio Item 1 -->
-    <div class="audio-box" data-id="1" class="image-box">
-      <img  id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 1: Fave - Mr Man</p>
-      <audio src="Fave - Mr Man (Visualizer)(MP3_160K).mp3"></audio>
-    </div>
+          <div class="search-container">
+            <input type="text" id="searchBar" placeholder="Search signal..." autocomplete="off">
+            <div id="suggestions"></div>
+          </div>
 
-    <!-- Audio Item 2 -->
-    <div class="audio-box" data-id="2" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 2: Chella - My Darling</p>
-      <audio src="Chella - My Darling (Official Visualiser)(MP3_160K).mp3"></audio>
-    </div>
+          <div class="audio-list" id="audioList"></div>
 
-    <!-- Audio Item 3 -->
-    <div class="audio-box" data-id="3" class="image-box">
-      <img  id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 3:Omah Lay - i_m a mess</p>
-      <audio src="Omah Lay - i_m a mess (Official Music Video)(MP3_160K).mp3"></audio>
-    </div>
+          <div class="audio-container" id="audioContainer">
+            <div class="audio-box" data-id="1">
+              <img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" />
+              <p>01 · Fave — Mr Man</p>
+              <audio src="Fave - Mr Man (Visualizer)(MP3_160K).mp3"></audio>
+            </div>
+            <div class="audio-box" data-id="2">
+              <img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" />
+              <p>02 · Chella — My Darling</p>
+              <audio src="Chella - My Darling (Official Visualiser)(MP3_160K).mp3"></audio>
+            </div>
+            <div class="audio-box" data-id="3">
+              <img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" />
+              <p>03 · Omah Lay — I'm A Mess</p>
+              <audio src="Omah Lay - i_m a mess (Official Music Video)(MP3_160K).mp3"></audio>
+            </div>
+            <div class="audio-box" data-id="4">
+              <img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" />
+              <p>04 · Omah Lay — Understand</p>
+              <audio src="Omah Lay - Understand (Official Music Video)(MP3_160K).mp3"></audio>
+            </div>
+            <div class="audio-box" data-id="5">
+              <img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" />
+              <p>05 · Pheelz x Davido — Electricity</p>
+              <audio src="Pheelz x Davido - _Electricity_ (Official Music Video)(MP3_160K).mp3"></audio>
+            </div>
+            <div class="audio-box" data-id="6">
+              <img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" />
+              <p>06 · Timaya — Cold Outside ft Buju</p>
+              <audio src="Timaya - Cold Outside ft Buju ( official lyrics video)(MP3_160K).mp3"></audio>
+            </div>
+            <div class="audio-box" data-id="7">
+              <img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" />
+              <p>07 · Diamond Platnumz — Yatapita</p>
+              <audio src="Diamond Platnumz - Yatapita (Official Lyric Audio)(MP3_160K).mp3"></audio>
+            </div>
+            <div class="audio-box" data-id="8">
+              <img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" />
+              <p>08 · Feid — Normal</p>
+              <audio src="Feid - Normal (Official Video)(MP3_160K).mp3"></audio>
+            </div>
+            <div class="audio-box" data-id="9">
+              <img id="songimage" src="images/fire.jpg" onclick="toggleAudio(this)" />
+              <p>09 · Busy Signal — Nightshift</p>
+              <audio src="Busy Signal - Nightshift _ One More Night _ Official Music Video(MP3_160K).mp3"></audio>
+            </div>
+            <div class="audio-box" data-id="10">
+              <img id="songimage" src="images/fire.jpg" onclick="toggleAudio(this)" />
+              <p>10 · Bob Marley — No Woman No Cry</p>
+              <audio src="Bob Marley - No Women No Cry (Original)(MP3_160K).mp3"></audio>
+            </div>
+          </div>
+        </div>
+      </td>
 
-     <!-- Audio Item 4 -->
-    <div class="audio-box" data-id="4" class="image-box">
-      <img  id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 4:Omah Lay - Understand</p>
-      <audio src="Omah Lay - Understand (Official Music Video)(MP3_160K).mp3"></audio>
-    </div>
-
-     <!-- Audio Item 5 -->
-    <div class="audio-box" data-id="5" class="image-box">
-      <img  id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 5:Pheelz x Davido - _Electricity</p>
-      <audio src="Pheelz x Davido - _Electricity_ (Official Music Video)(MP3_160K).mp3"></audio>
-    </div>
-
-     <!-- Audio Item 6 -->
-    <div class="audio-box" data-id="6" class="image-box">
-      <img  id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 6:Timaya - Cold Outside ft Buju</p>
-      <audio src="Timaya - Cold Outside ft Buju ( official lyrics video)(MP3_160K).mp3"></audio>
-    </div>
-
-    <!-- Audio Item 7 -->
-    <div class="audio-box" data-id="7" class="image-box">
-      <img  id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 7:Diamond Platnumz - Yatapita</p>
-      <audio src="Diamond Platnumz - Yatapita (Official Lyric Audio)(MP3_160K).mp3"></audio>
-    </div>
-
-    <!-- Audio Item 8 -->
-    <div class="audio-box" data-id="8" class="image-box">
-      <img  id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 8:Feid - Normal</p>
-      <audio src="Feid - Normal (Official Video)(MP3_160K).mp3"></audio>
-    </div>
-
-     <!-- Audio Item 9 -->
-    <div class="audio-box" data-id="9"  class="image-box">
-      <img  id="songimage" src="images/fire.jpg" onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 9:Busy Signal - Nightshift</p>
-      <audio src="Busy Signal - Nightshift _ One More Night _ Official Music Video(MP3_160K).mp3"></audio>
-    </div>
-
-     <!-- Audio Item 10-->
-    <div class="audio-box" data-id="10"  class="image-box">
-      <img  id="songimage" src="images/fire.jpg" onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 10:Bob Marley - No Women No Cry</p>
-      <audio src="Bob Marley - No Women No Cry (Original)(MP3_160K).mp3"></audio>
-    </div>
-
-
-  </div>
-    </div>
-</td>
-
-<td>
+      <td>
         <div id="Vpartysongs">
-        <label id="Vpartysongsheading">Party Songs</label>
-    <div id="control-panel">
-    <label id="enterid">Enter Audio ID: </label>
-    <input type="number" id="audioIdInput2" min="1" />
-    <button onclick="playById2()">Play</button>
-    <button onclick="pauseCurrent2()">Pause</button>
-    <button onclick="playAll2()">Auto Play All</button>
-  </div>
-   <div class="search-container2">
-    <input type="text" id="searchBar2" placeholder="Search for a song..." autocomplete="off">
-    <div id="suggestions2"></div>
-  </div>
+          <label id="Vpartysongsheading">◈ PARTY MATRIX</label>
 
-  <div class="audio-list2" id="audioList2 ">
-    <!-- Matching audio players will appear here -->
-  </div>
-  <div class="audio-container" id="audioContainer" class="image-wrapper">
-    <!-- Audio Item 1 -->
-    <div class="audio-box2" data-id="1" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" /><p>
-Track 1: Aya Nakamura - Copines </p>
-      <audio src="Aya Nakamura - Copines (Clip officiel)(MP3_160K).mp3"></audio>
-    </div>
+          <div id="control-panel">
+            <label id="enterid">TRACK ID:</label>
+            <input type="number" id="audioIdInput2" min="1" />
+            <button onclick="playById2()">▶ PLAY</button>
+            <button onclick="pauseCurrent2()">⏸ PAUSE</button>
+            <button onclick="playAll2()">⟳ AUTO PLAY</button>
+          </div>
 
-    <!-- Audio Item 2 -->
-    <div class="audio-box2" data-id="2" class="image-box">
-      <img  id="songimage"src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 2:Aya Nakamura - Djadja</p>
-      <audio src="Aya Nakamura - Djadja (Clip officiel)(MP3_160K).mp3"></audio>
-    </div>
+          <div class="search-container2">
+            <input type="text" id="searchBar2" placeholder="Search signal..." autocomplete="off">
+            <div id="suggestions2"></div>
+          </div>
 
-    <!-- Audio Item 3 -->
-    <div class="audio-box2" data-id="3" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 3: Ngishutheni</p>
-      <audio src="Goon Flavour_ Master KG _ Eemoh - Ngishutheni (Official Music Video)(MP3_160K).mp3"></audio>
-    </div>
+          <div class="audio-list2" id="audioList2"></div>
 
-     <!-- Audio Item 4 -->
-    <div class="audio-box2" data-id="4" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png"onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 4:  Biri Marung ft DJ Maphorisa_Focalistic</p>
-      <audio src="Mr Pilato_ Ego Slimflow _ Tebogo G Mashego - Biri Marung ft DJ Maphorisa_Focalistic _ Scotts Maphuma(MP3_160K).mp3"></audio>
-    </div>
- <!-- Audio Item 5 -->
-    <div class="audio-box2" data-id="5" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 5:Shallipopi - Laho</p>
-      <audio src="Shallipopi - Laho (Official Video)(MP3_160K).mp3"></audio>
-    </div>
-    
-    <!-- Audio Item 6 -->
-    <div class="audio-box2" data-id="6" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png"onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 6:Tiwa savage All over lyrics</p>
-      <audio src="Tiwa savage All over lyrics(MP3_160K).mp3 "></audio>
-    </div>
+          <div class="audio-container" id="audioContainer2">
+            <div class="audio-box2" data-id="1">
+              <img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" />
+              <p>01 · Aya Nakamura — Copines</p>
+              <audio src="Aya Nakamura - Copines (Clip officiel)(MP3_160K).mp3"></audio>
+            </div>
+            <div class="audio-box2" data-id="2">
+              <img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" />
+              <p>02 · Aya Nakamura — Djadja</p>
+              <audio src="Aya Nakamura - Djadja (Clip officiel)(MP3_160K).mp3"></audio>
+            </div>
+            <div class="audio-box2" data-id="3">
+              <img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" />
+              <p>03 · Ngishutheni — Master KG</p>
+              <audio src="Goon Flavour_ Master KG _ Eemoh - Ngishutheni (Official Music Video)(MP3_160K).mp3"></audio>
+            </div>
+            <div class="audio-box2" data-id="4">
+              <img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" />
+              <p>04 · Biri Marung ft DJ Maphorisa</p>
+              <audio src="Mr Pilato_ Ego Slimflow _ Tebogo G Mashego - Biri Marung ft DJ Maphorisa_Focalistic _ Scotts Maphuma(MP3_160K).mp3"></audio>
+            </div>
+            <div class="audio-box2" data-id="5">
+              <img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" />
+              <p>05 · Shallipopi — Laho</p>
+              <audio src="Shallipopi - Laho (Official Video)(MP3_160K).mp3"></audio>
+            </div>
+            <div class="audio-box2" data-id="6">
+              <img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" />
+              <p>06 · Tiwa Savage — All Over</p>
+              <audio src="Tiwa savage All over lyrics(MP3_160K).mp3"></audio>
+            </div>
+            <div class="audio-box2" data-id="7">
+              <img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" />
+              <p>07 · Victoria Kimani — China Love</p>
+              <audio src="Victoria Kimani - China Love (Official Video) ft. R.City(MP3_160K).mp3"></audio>
+            </div>
+            <div class="audio-box2" data-id="8">
+              <img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" />
+              <p>08 · Timaya — Cold Outside ft Buju</p>
+              <audio src="Timaya - Cold Outside ft Buju ( official lyrics video)(MP3_160K).mp3"></audio>
+            </div>
+            <div class="audio-box2" data-id="9">
+              <img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" />
+              <p>09 · Bora Uhai — Ochungulo Family</p>
+              <audio src="Bora Uhai - Ochungulo Family (Official Video) [ SMS SKIZA 8544825 TO 811 ](MP3_160K).mp3"></audio>
+            </div>
+            <div class="audio-box2" data-id="10">
+              <img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" />
+              <p>10 · Medication Remix</p>
+              <audio src="Medication (Remix)(MP3_160K).mp3"></audio>
+            </div>
+            <div class="audio-box2" data-id="11">
+              <img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" />
+              <p>11 · RanzScooby — DENDA</p>
+              <audio src="RanzScooby - DENDA (Official Video)(MP3_160K).mp3"></audio>
+            </div>
+            <div class="audio-box2" data-id="12">
+              <img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" />
+              <p>12 · PUNGULU — ANGRY PANDA CLAN</p>
+              <audio src="PUNGULU - ANGRY PANDA CLAN x PAPA NYOSTO _Hoodboyzke (OFFICIAL MUSIC VIDEO)(MP3_160K).mp3"></audio>
+            </div>
+          </div>
+        </div>
+      </td>
+    </tr>
+  </table>
 
-     <!-- Audio Item 7 -->
-    <div class="audio-box2" data-id="7" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png"onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 7:Victoria Kimani - China Love</p>
-      <audio src="Victoria Kimani - China Love (Official Video) ft. R.City(MP3_160K).mp3"></audio>
-    </div>
+<script>
+  /* ── COLUMN 1 CONTROLS ── */
+  const audioBoxes = document.querySelectorAll('.audio-box');
+  let currentAudio = null;
 
-     <!-- Audio Item 8-->
-    <div class="audio-box2" data-id="8" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png"onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 8:Timaya - Cold Outside ft Buju</p>
-      <audio src="Timaya - Cold Outside ft Buju ( official lyrics video)(MP3_160K).mp3"></audio>
-    </div>
- <!-- Audio Item 9-->
-    <div class="audio-box2" data-id="9 " class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 9:Bora Uhai - Ochungulo Family</p>
-      <audio src="Bora Uhai - Ochungulo Family (Official Video) [ SMS SKIZA 8544825 TO 811 ](MP3_160K).mp3"></audio>
-    </div>
+  function stopAllAudio() {
+    audioBoxes.forEach(b => { b.querySelector('audio').pause(); b.querySelector('audio').currentTime = 0; });
+    currentAudio = null;
+  }
+  function playById() {
+    const id = document.getElementById('audioIdInput').value.trim();
+    const box = [...audioBoxes].find(b => b.getAttribute('data-id') === id);
+    if (box) { stopAllAudio(); const a = box.querySelector('audio'); a.play(); currentAudio = a; }
+    else alert('Track not found in databank.');
+  }
+  function pauseCurrent() { if (currentAudio && !currentAudio.paused) currentAudio.pause(); }
+  function playAll(index = 0) {
+    if (index >= audioBoxes.length) return;
+    stopAllAudio();
+    const audio = audioBoxes[index].querySelector('audio');
+    audio.play(); currentAudio = audio;
+    audio.onended = () => playAll(index + 1);
+  }
 
-    <!-- Audio Item 10-->
-    <div class="audio-box2" data-id="10" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)"  onclick="playAudio(this)" />
-      <p>Track 10:Medication</p>
-      <audio src="Medication (Remix)(MP3_160K).mp3"></audio>
-    </div>
-    <!-- Audio Item 11-->
-    <div class="audio-box2" data-id="11" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 11:RanzScooby - DENDA</p>
-      <audio src="RanzScooby - DENDA (Official Video)(MP3_160K).mp3"></audio>
-    </div>
-  
-     <!-- Audio Item 12-->
-    <div class="audio-box2" data-id="12" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)"  onclick="playAudio(this)" />
-      <p>Track 12:PUNGULU - ANGRY PANDA CLAN</p>
-      <audio src="PUNGULU - ANGRY PANDA CLAN x PAPA NYOSTO _Hoodboyzke (OFFICIAL MUSIC VIDEO)(MP3_160K).mp3"></audio>
-    </div>
+  /* ── COLUMN 2 CONTROLS ── */
+  const audioBoxes2 = document.querySelectorAll('.audio-box2');
+  let currentAudio2 = null;
 
-  </div>
-    </div>
-</td>    
-</tr>
-    </table>
-    <script>
+  function stopAllAudio2() {
+    audioBoxes2.forEach(b => { b.querySelector('audio').pause(); b.querySelector('audio').currentTime = 0; });
+    currentAudio2 = null;
+  }
+  function playById2() {
+    const id = document.getElementById('audioIdInput2').value.trim();
+    const box = [...audioBoxes2].find(b => b.getAttribute('data-id') === id);
+    if (box) { stopAllAudio2(); const a = box.querySelector('audio'); a.play(); currentAudio2 = a; }
+    else alert('Track not found in databank.');
+  }
+  function pauseCurrent2() { if (currentAudio2 && !currentAudio2.paused) currentAudio2.pause(); }
+  function playAll2(index = 0) {
+    if (index >= audioBoxes2.length) return;
+    stopAllAudio2();
+    const audio = audioBoxes2[index].querySelector('audio');
+    audio.play(); currentAudio2 = audio;
+    audio.onended = () => playAll2(index + 1);
+  }
 
- const audioBoxes2 = document.querySelectorAll('.audio-box2');
-    let currentAudio2 = null;
-
-    function stopAllAudio2() {
-      audioBoxes2.forEach(box => {
-        const audio = box.querySelector('audio');
-        audio.pause();
-        audio.currentTime = 0;
-      });
-      currentAudio2 = null;
+  /* ── TOGGLE AUDIO + ANIMATION ── */
+  let currentAudioa = null, currentImageBoxa = null;
+  function toggleAudio(imgElement) {
+    const box = imgElement.parentElement;
+    const audio = box.querySelector('audio');
+    if (currentAudioa === audio) {
+      audio.paused ? (audio.play(), addAnimation(box)) : (audio.pause(), removeAnimation());
+      return;
     }
+    if (currentAudioa) { currentAudioa.pause(); currentAudioa.currentTime = 0; removeAnimation(); }
+    audio.play(); currentAudioa = audio; currentImageBoxa = box; addAnimation(box);
+  }
+  function addAnimation(box) {
+    removeAnimation();
+    const anim = document.createElement('div');
+    anim.className = 'audio-animation';
+    for (let i = 0; i < 4; i++) { const d = document.createElement('div'); d.className = 'dot'; anim.appendChild(d); }
+    box.appendChild(anim);
+  }
+  function removeAnimation() { document.querySelectorAll('.audio-animation').forEach(el => el.remove()); }
 
-    function playAudio2(imgElement) {
-      stopAllAudio2();
-      const audio = imgElement.parentElement.querySelector('audio');
-      audio.play();
-      currentAudio2 = audio;
-    }
+  /* ── SEARCH ── */
+  const audioFiles = ['Fave - Mr Man','Chella - My Darling','Omah Lay - Im a mess','Omah Lay - Understand','Pheelz x Davido - Electricity','Timaya - Cold Outside','Diamond Platnumz - Yatapita','Feid - Normal','Busy Signal - Nightshift','Bob Marley - No Woman No Cry'];
+  const audioFiles2 = ['Aya Nakamura - Copines','Aya Nakamura - Djadja','Ngishutheni','Biri Marung','Shallipopi - Laho','Tiwa Savage - All Over','Victoria Kimani - China Love','Timaya - Cold Outside','Bora Uhai - Ochungulo','Medication Remix','RanzScooby - DENDA','PUNGULU'];
 
-    function playById2() {
-      const id = document.getElementById('audioIdInput2').value.trim();
-      const box = [...audioBoxes2].find(b => b.getAttribute('data-id') === id);
-      if (box) {
-        stopAllAudio2();
-        const audio = box.querySelector('audio');
-        audio.play();
-        currentAudio2 = audio;
-      } else {
-        alert('Audio with that ID not found.');
-      }
-    }
+  const searchBar = document.getElementById('searchBar');
+  const suggestions = document.getElementById('suggestions');
+  const audioList = document.getElementById('audioList');
+  const searchBar2 = document.getElementById('searchBar2');
+  const suggestions2 = document.getElementById('suggestions2');
+  const audioList2 = document.getElementById('audioList2');
 
-    function pauseCurrent2() {
-      if (currentAudio2 && !currentAudio2.paused) {
-        currentAudio2.pause();
-      }
-    }
-
-    function playAll2(index = 0) {
-      if (index >= audioBoxes2.length) return;
-      stopAllAudio2();
-      const audio = audioBoxes2[index].querySelector('audio');
-      audio.play();
-      currentAudio2 = audio;
-      audio.onended = () => playAll2(index + 1);
-    }
-
-
-
-
-    const audioBoxes = document.querySelectorAll('.audio-box');
-    let currentAudio = null;
-
-    function stopAllAudio() {
-      audioBoxes.forEach(box => {
-        const audio = box.querySelector('audio');
-        audio.pause();
-        audio.currentTime = 0;
-      });
-      currentAudio = null;
-    }
-
-    function playAudio(imgElement) {
-      stopAllAudio();
-      const audio = imgElement.parentElement.querySelector('audio');
-      audio.play();
-      currentAudio = audio;
-    }
-
-    function playById() {
-      const id = document.getElementById('audioIdInput').value.trim();
-      const box = [...audioBoxes].find(b => b.getAttribute('data-id') === id);
-      if (box) {
-        stopAllAudio();
-        const audio = box.querySelector('audio');
-        audio.play();
-        currentAudio = audio;
-      } else {
-        alert('Audio with that ID not found.');
-      }
-    }
-
-    function pauseCurrent() {
-      if (currentAudio && !currentAudio.paused) {
-        currentAudio.pause();
-      }
-    }
-
-    function playAll(index = 0) {
-      if (index >= audioBoxes.length) return;
-      stopAllAudio();
-      const audio = audioBoxes[index].querySelector('audio');
-      audio.play();
-      currentAudio = audio;
-      audio.onended = () => playAll(index + 1);
-    }
-      const audioFiles = [
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      ""
-    ];
-    const audioFiles2 = [
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-    ];
-
-    const audioFolder = "Vvynas Vane playlist/Vane afro songs/";
-    const searchBar = document.getElementById("searchBar");
-    const suggestions = document.getElementById("suggestions");
-    const audioList = document.getElementById("audioList");
-
-    const searchBar2 = document.getElementById("searchBar2");
-    const suggestions2 = document.getElementById("suggestions2");
-    const audioList2 = document.getElementById("audioList2");
-    const audioFolder2 = "Vvynas Vane playlist/Vane afro songs/";
-
-
-    searchBar.addEventListener("input", () => {
-      const query = searchBar.value.toLowerCase();
-      suggestions.innerHTML = "";
-      if (query) {
-        const matches = audioFiles.filter(file => file.toLowerCase().includes(query));
-        matches.forEach(file => {
-          const item = document.createElement("div");
-          item.textContent = file;
-          item.addEventListener("click", () => {
-            searchBar.value = file;
-            suggestions.style.display = "none";
-            showAudio(file);
-          });
-          suggestions.appendChild(item);
-        });
-        suggestions.style.display = matches.length ? "block" : "none";
-      } else {
-        suggestions.style.display = "none";
-        audioList.innerHTML = "";
-      }
-    });
-
-     searchBar2.addEventListener("input", () => {
-      const query = searchBar2.value.toLowerCase();
-      suggestions2.innerHTML = "";
-      if (query) {
-        const matches = audioFiles2.filter(file => file.toLowerCase().includes(query));
-        matches.forEach(file => {
-          const item = document.createElement("div");
-          item.textContent = file;
-          item.addEventListener("click", () => {
-            searchBar2.value = file;
-            suggestions2.style.display = "none";
-            showAudio2(file);
-          });
-          suggestions2.appendChild(item);
-        });
-        suggestions2.style.display = matches.length ? "block" : "none";
-      } else {
-        suggestions2.style.display = "none";
-        audioList2.innerHTML = "";
-      }
-    });
-
-    function showAudio(file) {
-      audioList.innerHTML = `
-        <audio controls>
-          <source src="${audioFolder + file}" type="audio/mp3">
-          Your browser does not support the audio element.
-        </audio>
-      `;
-    }
-     function showAudio2(file) {
-      audioList2.innerHTML = `
-        <audio controls>
-          <source src="${audioFolder2 + file}" type="audio/mp3">
-          Your browser does not support the audio element.
-        </audio>
-      `;
-    }
-
-    // Close suggestions when clicking outside
-    document.addEventListener("click", (e) => {
-      if (!document.querySelector(".search-container").contains(e.target)) {
-        suggestions.style.display = "none";
-      }
-    });
-     document.addEventListener("click", (e) => {
-      if (!document.querySelector(".search-container2").contains(e.target)) {
-        suggestions2.style.display = "none";
-      }
-    });
-    // Remove blur and animation when user clicks anywhere
-  document.addEventListener('click', function () {
-    const overlay = document.getElementById('blur-overlay');
-    overlay.style.animation = 'slideUp 1s ease forwards';
-    setTimeout(() => {
-      overlay.remove();
-    }, 1000); // match animation duration
+  searchBar.addEventListener('input', () => {
+    const q = searchBar.value.toLowerCase(); suggestions.innerHTML = '';
+    if (q) {
+      const m = audioFiles.filter(f => f.toLowerCase().includes(q));
+      m.forEach(f => { const i = document.createElement('div'); i.textContent = f; suggestions.appendChild(i); });
+      suggestions.style.display = m.length ? 'block' : 'none';
+    } else { suggestions.style.display = 'none'; audioList.innerHTML = ''; }
+  });
+  searchBar2.addEventListener('input', () => {
+    const q = searchBar2.value.toLowerCase(); suggestions2.innerHTML = '';
+    if (q) {
+      const m = audioFiles2.filter(f => f.toLowerCase().includes(q));
+      m.forEach(f => { const i = document.createElement('div'); i.textContent = f; suggestions2.appendChild(i); });
+      suggestions2.style.display = m.length ? 'block' : 'none';
+    } else { suggestions2.style.display = 'none'; audioList2.innerHTML = ''; }
+  });
+  document.addEventListener('click', e => {
+    if (!document.querySelector('.search-container').contains(e.target)) suggestions.style.display = 'none';
+    if (!document.querySelector('.search-container2').contains(e.target)) suggestions2.style.display = 'none';
   });
 
-
-let currentAudioa = null;
-let currentImageBoxa = null;
-
-function toggleAudio(imgElement) {
-  const box = imgElement.parentElement;
-  const audio = box.querySelector('audio');
-
-  // If clicked again on same image
-  if (currentAudioa === audio) {
-    if (audio.paused) {
-      audio.play();
-      addAnimation(box);
-    } else {
-      audio.pause();
-      removeAnimation();
+  /* ── AD SYSTEM ── */
+  setTimeout(() => {
+    const overlay = document.getElementById('adOverlay');
+    const ad = document.getElementById('adContainer');
+    const skip = document.getElementById('skipBtn');
+    overlay.style.display = 'flex';
+    setTimeout(() => { skip.style.display = 'block'; }, 10000);
+    setTimeout(() => endAd(), 240000);
+    skip.addEventListener('click', () => endAd());
+    function endAd() {
+      ad.classList.add('shatter');
+      overlay.style.pointerEvents = 'none';
+      setTimeout(() => { overlay.style.display = 'none'; ad.classList.remove('shatter'); overlay.style.pointerEvents = 'auto'; skip.style.display = 'none'; }, 800);
     }
-    return;
-  }
-
-  // Stop previous
-  if (currentAudioa) {
-    currentAudioa.pause();
-    currentAudioa.currentTime = 0;
-    removeAnimation();
-  }
-
-  // Play new
-  audio.play();
-  currentAudioa = audio;
-  currentImageBoxa = box;
-  addAnimation(box);
-}
-
-function addAnimation(box) {
-  removeAnimation();
-
-  const animation = document.createElement('div');
-  animation.className = 'container audio-animation';
-  for (let i = 0; i < 4; i++) {
-    const dot = document.createElement('div');
-    dot.className = 'dot';
-    animation.appendChild(dot);
-  }
-  box.appendChild(animation);
-}
-
-function removeAnimation() {
-  document.querySelectorAll('.audio-animation').forEach(el => el.remove());
-}
-
-
- // Wait 2 minutes (120000 ms) before showing the ad
-    setTimeout(() => {
-      const overlay = document.getElementById('adOverlay');
-      const ad = document.getElementById('adContainer');
-      const skip = document.getElementById('skipBtn');
-
-      overlay.style.display = 'flex';
-
-      // Show skip button after 10 seconds
-      setTimeout(() => {
-        skip.style.display = 'block';
-      }, 10000);
-
-      // End ad automatically after 2 minutes total
-      setTimeout(() => {
-        endAd();
-      }, 120000 + 120000); // total 4 mins after page load
-
-      // Skip button click
-      skip.addEventListener('click', () => {
-        endAd();
-      });
-
-      function endAd() {
-        ad.classList.add('shatter');
-        overlay.style.pointerEvents = 'none'; // block clicks temporarily
-        setTimeout(() => {
-          overlay.style.display = 'none';
-          ad.classList.remove('shatter');
-          overlay.style.pointerEvents = 'auto';
-          skip.style.display = 'none';
-        }, 1000); // match shatter animation duration
-      }
-    }, 120000); // 2 mins after load
-
-  </script>
+  }, 120000);
+</script>
 </body>
 </html>
