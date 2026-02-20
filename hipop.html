@@ -1,1272 +1,225 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HIPOP VYBZ</title>
-    <link href="style2.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HIPOP VYBZ — Vvane Sound World</title>
+  <link href="style2.css" rel="stylesheet">
+  <style>
+    :root { --accent: #ff003c; --accent-glow: 0 0 8px #ff003c, 0 0 25px rgba(255,0,60,0.35); }
+    #Vsadsongsheading { color: var(--accent) !important; text-shadow: var(--accent-glow) !important; }
+    .audio-box { border-left-color: var(--accent) !important; }
+    #playlistheading { color: #ff6688; text-shadow: 0 0 10px #ff003c, 0 0 30px rgba(255,0,60,0.4); }
+    #playlistimage { border-color: #ff003c; box-shadow: 0 0 8px #ff003c, 0 0 25px rgba(255,0,60,0.3) !important; }
+    #Vsadsongs::before { background: linear-gradient(90deg, transparent, #ff003c, transparent) !important; }
+  </style>
 </head>
 <body>
-    <nav id="navbar">
-        <div id="logo">
-            <p id="tittle">Vvane Sound World</p>
-            <button id="homebutton" onclick="location.href='index.html'">Home</button>
-        </div>
-    </nav> 
-    
-    <div class="ad-overlay" id="adOverlay">
+
+  <nav id="navbar">
+    <div id="logo">
+      <p id="tittle">Vvane Sound World</p>
+      <button id="homebutton" onclick="location.href='index.html'">⬡ Home</button>
+    </div>
+  </nav>
+
+  <div class="ad-overlay" id="adOverlay">
     <div class="ad-container" id="adContainer">
-      <button class="skip-btn" id="skipBtn">Skip Ad</button>
+      <button class="skip-btn" id="skipBtn">[ SKIP TRANSMISSION ]</button>
     </div>
   </div>
 
-
-<table id="playlisttable" >
-   <tr id="playlistalbum" ><td class="blur-content">
-<img id="playlistimage" src="theboy.jpeg" alt="Latin Playlist Image">
+  <table id="playlisttable">
+    <tr id="playlistalbum">
+      <td class="blur-content">
+        <img id="playlistimage" src="theboy.jpeg" alt="HipHop Playlist">
         <p id="playlistheading">HIPOP VYBZ</p>
-        <label id="notrack"> 54 Tracks</label>
-    </td>
-  </tr> 
-<tr id="Vsongs">
-<td>
-    <div id="Vsadsongs">
-        <label id="Vsadsongsheading">Sad Songs</label>
-    <div id="control-panel">
-    <label id="enterid">Enter Audio ID: </label>
-    <input type="number" id="audioIdInput" min="1" />
-    <button onclick="playById()">Play</button>
-    <button onclick="pauseCurrent()">Pause</button>
-    <button onclick="playAll()">Auto Play All</button>
-  </div>
-   <div class="search-container">
-    <input type="text" id="searchBar" placeholder="Search for a song..." autocomplete="off">
-    <div id="suggestions"></div>
-  </div>
+        <label id="notrack">// 54 TRACKS LOADED</label>
+      </td>
+    </tr>
+    <tr id="Vsongs">
+      <td>
+        <div id="Vsadsongs">
+          <label id="Vsadsongsheading">◈ SAD FREQUENCY</label>
+          <div id="control-panel">
+            <label id="enterid">TRACK ID:</label>
+            <input type="number" id="audioIdInput" min="1" />
+            <button onclick="playById()">▶ PLAY</button>
+            <button onclick="pauseCurrent()">⏸ PAUSE</button>
+            <button onclick="playAll()">⟳ AUTO PLAY</button>
+          </div>
+          <div class="search-container">
+            <input type="text" id="searchBar" placeholder="Search signal..." autocomplete="off">
+            <div id="suggestions"></div>
+          </div>
+          <div class="audio-list" id="audioList"></div>
+          <div class="audio-container" id="audioContainer">
+            <div class="audio-box" data-id="1"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>01 · Bruno Mars — Liquor Store Blues</p><audio src="Bruno Mars - Liquor Store Blues (feat. Damian Marley) (Official Music Video)(MP3_160K).mp3"></audio></div>
+            <div class="audio-box" data-id="2"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>02 · French Montana, Post Malone, Cardi B — Writing On The Wall</p><audio src="French Montana_ Post Malone_ Cardi B - Writing On The Wall (Lyrics)(MP3_160K).mp3"></audio></div>
+            <div class="audio-box" data-id="3"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>03 · Herman — Vibe</p><audio src="Herman - Vibe (Official Music Video)(MP3_160K).mp3"></audio></div>
+            <div class="audio-box" data-id="4"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>04 · Josh Levi — BIRTHDAY DANCE</p><audio src="Josh Levi - BIRTHDAY DANCE [Official Music Video](MP3_160K).mp3"></audio></div>
+            <div class="audio-box" data-id="5"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>05 · Juice WRLD — Never Understand Me ft. XXXTENTACION</p><audio src="Juice WRLD - Never Understand Me ft. XXXTENTACION (Remix) Prod By Xvny x SpaceCore(MP3_160K).mp3"></audio></div>
+            <div class="audio-box" data-id="6"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>06 · Juice WRLD — Righteous</p><audio src="Juice WRLD - Righteous (Official Video)(MP3_160K).mp3"></audio></div>
+            <div class="audio-box" data-id="7"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>07 · Juice WRLD — My Fault</p><audio src="Juice WRLD _My Fault_ (Official Audio)(MP3_160K).mp3"></audio></div>
+            <div class="audio-box" data-id="8"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>08 · Juice WRLD ft. Marshmello — Come & Go</p><audio src="Juice WRLD ft. Marshmello - Come _ Go (Official Audio)(MP3_160K).mp3"></audio></div>
+            <div class="audio-box" data-id="9"><img id="songimage" src="images/fire.jpg" onclick="toggleAudio(this)"/><p>09 · Post Malone — Speedometer</p><audio src="Post Malone - Speedometer (Official Lyric Video)(MP3_160K).mp3"></audio></div>
+            <div class="audio-box" data-id="10"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>10 · XXXTENTACION — Changes</p><audio src="xxxtentacion - Changes(Lyrics)(MP3_160K).mp3"></audio></div>
+            <div class="audio-box" data-id="11"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>11 · XXXTENTACION — Hope</p><audio src="XXXTENTACION - Hope (Lyrics)(MP3_160K).mp3"></audio></div>
+            <div class="audio-box" data-id="12"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>12 · XXXTENTACION — SAD</p><audio src="XXXTENTACION - SAD_(MP3_160K).mp3"></audio></div>
+            <div class="audio-box" data-id="13"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>13 · XXXTENTACION & Lil Pump — Arms Around You</p><audio src="XXXTENTACION _ Lil Pump - Arms Around You feat. Maluma _ Swae Lee [Official Music Video](MP3_160K).mp3"></audio></div>
+            <div class="audio-box" data-id="14"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>14 · YNW Melly — Murder On My Mind</p><audio src="YNW Melly - Murder On My Mind (Lyrics)(MP3_160K).mp3"></audio></div>
+            <div class="audio-box" data-id="15"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>15 · A Boogie Wit Da Hoodie — Drowning</p><audio src="A Boogie Wit Da Hoodie - Drowning (Lyrics) Pick up the ladder put it in the gun(MP3_160K).mp3"></audio></div>
+            <div class="audio-box" data-id="16"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>16 · 5ive — Me And My Brother</p><audio src="5ive - _Me And My Brother_ (Official Audio)(MP3_160K).mp3"></audio></div>
+            <div class="audio-box" data-id="17"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>17 · 2055</p><audio src="2055(MP3_160K).mp3"></audio></div>
+            <div class="audio-box" data-id="18"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>18 · benny blanco & Juice WRLD — Roses</p><audio src="benny blanco _ Juice WRLD - Roses feat. Brendon Urie(MP3_160K).mp3"></audio></div>
+            <div class="audio-box" data-id="19"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>19 · Calling (Spider-Man: Across the Spider-Verse)</p><audio src="Calling (Spider-Man_ Across the Spider-Verse)(MP3_160K).mp3"></audio></div>
+            <div class="audio-box" data-id="20"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>20 · Gunna — Won't Stop</p><audio src="Gunna - Won_t Stop [Official Video](MP3_160K).mp3"></audio></div>
+            <div class="audio-box" data-id="21"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>21 · Heartless</p><audio src="Heartless(MP3_160K).mp3"></audio></div>
+            <div class="audio-box" data-id="22"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>22 · Juice Wrld (Dj Mix)</p><audio src="Juice Wrld (Dj Mix)(MP3_160K).mp3"></audio></div>
+            <div class="audio-box" data-id="23"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>23 · Juice WRLD — Conversations</p><audio src="Juice WRLD - Conversations (Official Audio)(MP3_160K).mp3"></audio></div>
+            <div class="audio-box" data-id="24"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>24 · Juice WRLD — Gotta Say Goodbye</p><audio src="Juice WRLD - Gotta Say Goodbye (Remix) Prod By Xvny x JammyBeatz(MP3_160K).mp3"></audio></div>
+            <div class="audio-box" data-id="25"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>25 · Juice WRLD — Lucid Dreams</p><audio src="Juice WRLD - Lucid Dreams (Official Music Video)(MP3_160K).mp3"></audio></div>
+            <div class="audio-box" data-id="26"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>26 · Juice WRLD — Mistakes ft. NF</p><audio src="Juice WRLD - Mistakes ft. NF (Music Video)(MP3_160K).mp3"></audio></div>
+            <div class="audio-box" data-id="27"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>27 · Juice WRLD — She Broke My Heart</p><audio src="Juice WRLD - She Broke My Heart (Music Video)(MP3_160K).mp3"></audio></div>
+            <div class="audio-box" data-id="28"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>28 · Juice WRLD & The Weeknd — Smile</p><audio src="Juice WRLD _ The Weeknd - Smile (Official Video)(MP3_160K).mp3"></audio></div>
+            <div class="audio-box" data-id="29"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>29 · Juice WRLD, Eminem & benny blanco — Lace It</p><audio src="Juice WRLD_ Eminem _ benny blanco - Lace It (Official Audio)(MP3_160K).mp3"></audio></div>
+            <div class="audio-box" data-id="30"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>30 · King Von — What It's Like</p><audio src="King Von - What It_s Like (Official Music Video)(MP3_160K).mp3"></audio></div>
+            <div class="audio-box" data-id="31"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>31 · Logic — 1-800-273-8255</p><audio src="Logic - 1-800-273-8255 ft. Alessia Cara_ Khalid (Official Video)(MP3_160K).mp3"></audio></div>
+            <div class="audio-box" data-id="32"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>32 · Marshmello ft. Khalid — Silence</p><audio src="Marshmello ft. Khalid - Silence (Official Lyric Video)(MP3_160K).mp3"></audio></div>
+            <div class="audio-box" data-id="33"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>33 · NF — Let You Down</p><audio src="NF - Let You Down(MP3_160K).mp3"></audio></div>
+            <div class="audio-box" data-id="34"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>34 · Polo G — Barely Holdin' On</p><audio src="Polo G - Barely Holdin_ On (Official Video)(MP3_160K).mp3"></audio></div>
+            <div class="audio-box" data-id="35"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>35 · Post Malone — Circles</p><audio src="Post Malone - Circles (Official Music Video)(MP3_160K).mp3"></audio></div>
+            <div class="audio-box" data-id="36"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>36 · PROVE ME WRON6</p><audio src="PROVE ME WRON6(MP3_160K).mp3"></audio></div>
+            <div class="audio-box" data-id="37"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>37 · The Weeknd — Reminder</p><audio src="The Weeknd - Reminder (Official Video)(MP3_160K).mp3"></audio></div>
+            <div class="audio-box" data-id="38"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>38 · Trevor Daniel — Falling</p><audio src="Trevor Daniel - Falling (Official Music Video)(MP3_160K).mp3"></audio></div>
+            <div class="audio-box" data-id="39"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>39 · XXXTENTACION — SAD</p><audio src="XXXTENTACION - SAD_(MP3_160K).mp3"></audio></div>
+            <div class="audio-box" data-id="40"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>40 · YNW Melly — Blue Balenciagas</p><audio src="Ynw Melly - Blue Balenciagas (Music Video)(MP3_160K).mp3"></audio></div>
+            <div class="audio-box" data-id="41"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>41 · Purple Sky — OminousyL X Mahaji</p><audio src="_AMV HD_ Purple Sky - OminousyL X Mahaji X Monty Datta Ft.Eiksings(MP3_160K).mp3"></audio></div>
+            <div class="audio-box" data-id="42"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>42 · Until You Come Back Home — Selena ft Justin</p><audio src="Until you come back home - Selena ft Justin(MP3_160K).mp3"></audio></div>
+            <div class="audio-box" data-id="43"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>43 · BigXthaPlug — About You ft. Tucker Wetmore</p><audio src="BigXthaPlug - About You feat. Tucker Wetmore (Official Visualizer)(MP3_160K).mp3"></audio></div>
+          </div>
+        </div>
+      </td>
 
-  <div class="audio-list" id="audioList">
-    <!-- Matching audio players will appear here -->
-  </div>
-  <div class="audio-container" id="audioContainer">
-    <!-- Audio Item 1 -->
-    <div class="audio-box" data-id="1" class="image-box">
-      <img  id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 1:Bruno Mars - Liquor Store Blues</p>
-      <audio src="Bruno Mars - Liquor Store Blues (feat. Damian Marley) (Official Music Video)(MP3_160K).mp3"></audio>
-    </div>
-
-    <!-- Audio Item 2 -->
-    <div class="audio-box" data-id="2" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 2:French Montana_ Post Malone_ Cardi B - Writing On The Wall</p>
-      <audio src="French Montana_ Post Malone_ Cardi B - Writing On The Wall (Lyrics)(MP3_160K).mp3"></audio>
-    </div>
-
-    <!-- Audio Item 3 -->
-    <div class="audio-box" data-id="3" class="image-box">
-      <img  id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 3:Herman - Vibe</p>
-      <audio src="Herman - Vibe (Official Music Video)(MP3_160K).mp3"></audio>
-    </div>
-
-     <!-- Audio Item 4 -->
-    <div class="audio-box" data-id="4" class="image-box">
-      <img  id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 4:Josh Levi - BIRTHDAY DANCE</p>
-      <audio src="Josh Levi - BIRTHDAY DANCE [Official Music Video](MP3_160K).mp3"></audio>
-    </div>
-
-     <!-- Audio Item 5 -->
-    <div class="audio-box" data-id="5" class="image-box">
-      <img  id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 5:Juice WRLD - Never Understand Me ft. XXXTENTACION</p>
-      <audio src="Juice WRLD - Never Understand Me ft. XXXTENTACION (Remix) Prod By Xvny x SpaceCore(MP3_160K).mp3"></audio>
-    </div>
-
-     <!-- Audio Item 6 -->
-    <div class="audio-box" data-id="6" class="image-box">
-      <img  id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 6:Juice WRLD - Righteous</p>
-      <audio src="Juice WRLD - Righteous (Official Video)(MP3_160K).mp3"></audio>
-    </div>
-
-    <!-- Audio Item 7 -->
-    <div class="audio-box" data-id="7" class="image-box">
-      <img  id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 7:Juice WRLD _My Fault</p>
-      <audio src="Juice WRLD _My Fault_ (Official Audio)(MP3_160K).mp3"></audio>
-    </div>
-
-    <!-- Audio Item 8 -->
-    <div class="audio-box" data-id="8" class="image-box">
-      <img  id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 8:Juice WRLD ft. Marshmello - Come _ Go</p>
-      <audio src="Juice WRLD ft. Marshmello - Come _ Go (Official Audio)(MP3_160K).mp3"></audio>
-    </div>
-
-     <!-- Audio Item 9 -->
-    <div class="audio-box" data-id="9"  class="image-box">
-      <img  id="songimage" src="images/fire.jpg" onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 9:Post Malone - Speedometer</p>
-      <audio src="Post Malone - Speedometer (Official Lyric Video)(MP3_160K).mp3"></audio>
-    </div>
-
-    <!-- Audio Item 10 -->
-    <div class="audio-box" data-id="10" class="image-box">
-      <img  id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 10:xxxtentacion - Changes</p>
-      <audio src="xxxtentacion - Changes(Lyrics)(MP3_160K).mp3"></audio>
-    </div>
-
-    <!-- Audio Item 11-->
-    <div class="audio-box" data-id="11" class="image-box">
-      <img  id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 11:XXXTENTACION - Hope</p>
-      <audio src="XXXTENTACION - Hope (Lyrics)(MP3_160K).mp3"></audio>
-    </div> 
-
-    <!-- Audio Item 12-->
-    <div class="audio-box" data-id="12" class="image-box">
-      <img  id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 12:XXXTENTACION - SAD</p>
-      <audio src="XXXTENTACION - SAD_(MP3_160K).mp3"></audio>
-    </div> 
-
-     <!-- Audio Item 13-->
-    <div class="audio-box" data-id="13" class="image-box">
-      <img  id="songimage" src="images/beamedsmoke.png" onclick="playAudio(this)" />
-      <p>Track 13:XXXTENTACION _ Lil Pump - Arms Around You </p>
-      <audio src="XXXTENTACION _ Lil Pump - Arms Around You feat. Maluma _ Swae Lee [Official Music Video](MP3_160K).mp3"></audio>
-    </div> 
-
-      <!-- Audio Item 14-->
-    <div class="audio-box" data-id="14"  class="image-box" >
-      <img  id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 14:YNW Melly - Murder On My Mind</p>
-      <audio src="YNW Melly - Murder On My Mind (Lyrics)(MP3_160K).mp3"></audio>
-    </div>
-
-    <!-- Audio Item 15-->
-    <div class="audio-box" data-id="15"  class="image-box" >
-      <img  id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 15:A Boogie Wit Da Hoodie - Drowning</p>
-      <audio src="A Boogie Wit Da Hoodie - Drowning (Lyrics) Pick up the ladder put it in the gun(MP3_160K).mp3"></audio>
-    </div>
-
-    <!-- Audio Item 16-->
-    <div class="audio-box" data-id="16"  class="image-box" >
-      <img  id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 16:5ive - _Me And My Brother_ </p>
-      <audio src="5ive - _Me And My Brother_ (Official Audio)(MP3_160K).mp3"></audio>
-    </div>
-
-    <!-- Audio Item 17-->
-    <div class="audio-box" data-id="17"  class="image-box" >
-      <img  id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 17: 2055</p>
-      <audio src="2055(MP3_160K).mp3"></audio>
-    </div>
-
-     <!-- Audio Item 18-->
-    <div class="audio-box" data-id="18"  class="image-box" >
-      <img  id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 18:benny blanco _ Juice WRLD - Roses</p>
-      <audio src="benny blanco _ Juice WRLD - Roses feat. Brendon Urie(MP3_160K).mp3"></audio>
-    </div>
-
-     <!-- Audio Item 19-->
-    <div class="audio-box" data-id="19"  class="image-box" >
-      <img  id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 19:Calling (Spider-Man_ Across the Spider-Verse)</p>
-      <audio src="Calling (Spider-Man_ Across the Spider-Verse)(MP3_160K).mp3"></audio>
-    </div>
-
-     <!-- Audio Item 20-->
-    <div class="audio-box" data-id="20"  class="image-box" >
-      <img  id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 20:Gunna - Won_t Stop </p>
-      <audio src="Gunna - Won_t Stop [Official Video](MP3_160K).mp3"></audio>
-    </div>
-
-     <!-- Audio Item 21-->
-    <div class="audio-box" data-id="21"  class="image-box" >
-      <img  id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 21: Heartless</p>
-      <audio src="Heartless(MP3_160K).mp3"></audio>
-    </div>
-
-    <!-- Audio Item 22-->
-    <div class="audio-box" data-id="22"  class="image-box" >
-      <img  id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 22: Juice Wrld (Dj Mix)</p>
-      <audio src="Juice Wrld (Dj Mix)(MP3_160K).mp3"></audio>
-    </div>
-
-     <!-- Audio Item 23-->
-    <div class="audio-box" data-id="23"  class="image-box" >
-      <img  id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 23: Juice WRLD - Conversations </p>
-      <audio src="Juice WRLD - Conversations (Official Audio)(MP3_160K).mp3"></audio>
-    </div>
-
-    <!-- Audio Item 24-->
-    <div class="audio-box" data-id="24"  class="image-box" >
-      <img  id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 24: Juice WRLD - Gotta Say Goodbye  </p>
-      <audio src="Juice WRLD - Gotta Say Goodbye (Remix) Prod By Xvny x JammyBeatz(MP3_160K).mp3"></audio>
-    </div>
-
-    <!-- Audio Item 25-->
-    <div class="audio-box" data-id="25"  class="image-box" >
-      <img  id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 25: Juice WRLD - Lucid Dreams </p>
-      <audio src="Juice WRLD - Lucid Dreams (Official Music Video)(MP3_160K).mp3"></audio>
-    </div>
-
- <!-- Audio Item 26-->
-    <div class="audio-box" data-id="26"  class="image-box" >
-      <img  id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 26: Juice WRLD - Mistakes ft. NF </p>
-      <audio src="Juice WRLD - Mistakes ft. NF (Music Video)(MP3_160K).mp3"></audio>
-    </div>
-
-     <!-- Audio Item 27-->
-    <div class="audio-box" data-id="27"  class="image-box" >
-      <img  id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 27: Juice WRLD - She Broke My Heart </p>
-      <audio src="Juice WRLD - She Broke My Heart (Music Video)(MP3_160K).mp3"></audio>
-    </div>
-
-     <!-- Audio Item 28-->
-    <div class="audio-box" data-id="28"  class="image-box" >
-      <img  id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 28: Juice WRLD _ The Weeknd - Smile </p>
-      <audio src="Juice WRLD _ The Weeknd - Smile (Official Video)(MP3_160K).mp3"></audio>
-    </div>
-
-    <!-- Audio Item 29-->
-    <div class="audio-box" data-id="29"  class="image-box" >
-      <img  id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 29: Juice WRLD_ Eminem _ benny blanco - Lace It</p>
-      <audio src="Juice WRLD_ Eminem _ benny blanco - Lace It (Official Audio)(MP3_160K).mp3"></audio>
-    </div>
-
-     <!-- Audio Item 30-->
-    <div class="audio-box" data-id="30"  class="image-box" >
-      <img  id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 30: King Von - What It_s Like</p>
-      <audio src="King Von - What It_s Like (Official Music Video)(MP3_160K).mp3"></audio>
-    </div>
-
-     <!-- Audio Item 31-->
-    <div class="audio-box" data-id="31"  class="image-box" >
-      <img  id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 31: Logic</p>
-      <audio src="Logic - 1-800-273-8255 ft. Alessia Cara_ Khalid (Official Video)(MP3_160K).mp3"></audio>
-    </div>
-
-    <!-- Audio Item 32-->
-    <div class="audio-box" data-id="32"  class="image-box" >
-      <img  id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 32: Marshmello ft. Khalid - Silence</p>
-      <audio src="Marshmello ft. Khalid - Silence (Official Lyric Video)(MP3_160K).mp3"></audio>
-    </div>
-
-<!-- Audio Item 33-->
-    <div class="audio-box" data-id="33"  class="image-box" >
-      <img  id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 33: NF - Let You Down</p>
-      <audio src="NF - Let You Down(MP3_160K).mp3"></audio>
-    </div>
-
-<!-- Audio Item 34-->
-    <div class="audio-box" data-id="34"  class="image-box" >
-      <img  id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 34: Polo G - Barely Holdin_ On</p>
-      <audio src="Polo G - Barely Holdin_ On (Official Video)(MP3_160K).mp3"></audio>
-    </div>
-
-    <!-- Audio Item 35-->
-    <div class="audio-box" data-id="35"  class="image-box" >
-      <img  id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 35: Post Malone - Circles</p>
-      <audio src="Post Malone - Circles (Official Music Video)(MP3_160K).mp3"></audio>
-    </div>
-
-    <!-- Audio Item 36-->
-    <div class="audio-box" data-id="36"  class="image-box" >
-      <img  id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 36: PROVE ME WRON6</p>
-      <audio src="PROVE ME WRON6(MP3_160K).mp3"></audio>
-    </div>
-
-    <!-- Audio Item 37-->
-    <div class="audio-box" data-id="37"  class="image-box" >
-      <img  id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 37: The Weeknd - Reminder</p>
-      <audio src="The Weeknd - Reminder (Official Video)(MP3_160K).mp3"></audio>
-    </div>
-
-    <!-- Audio Item 38-->
-    <div class="audio-box" data-id="38"  class="image-box" >
-      <img  id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 38: Trevor Daniel - Falling</p>
-      <audio src="Trevor Daniel - Falling (Official Music Video)(MP3_160K).mp3"></audio>
-    </div>
-
-    <!-- Audio Item 39-->
-    <div class="audio-box" data-id="39"  class="image-box" >
-      <img  id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 39: XXXTENTACION - SAD</p>
-      <audio src="XXXTENTACION - SAD_(MP3_160K).mp3"></audio>
-    </div>
-
-     <!-- Audio Item 40-->
-    <div class="audio-box" data-id="40"  class="image-box" >
-      <img  id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 40:Ynw Melly - Blue Balenciagas</p>
-      <audio src="Ynw Melly - Blue Balenciagas (Music Video)(MP3_160K).mp3"></audio>
-    </div>
-
-     <!-- Audio Item 41-->
-    <div class="audio-box" data-id="41"  class="image-box" >
-      <img  id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 41: Purple Sky - OminousyL X Mahaji X Monty Datta Ft.Eiksings</p>
-      <audio src="_AMV HD_ Purple Sky - OminousyL X Mahaji X Monty Datta Ft.Eiksings(MP3_160K).mp3"></audio>
-    </div>
-
-      <!-- Audio Item 42-->
-    <div class="audio-box" data-id="42"  class="image-box">
-      <img  id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 42:Until you come back home - Selena ft Justin</p>
-      <audio src="Until you come back home - Selena ft Justin(MP3_160K).mp3"></audio>
-    </div>
-
-     <!-- Audio Item 43-->
-    <div class="audio-box" data-id="43"  class="image-box">
-      <img  id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 43:BigXthaPlug - About You feat. Tucker Wetmore </p>
-      <audio src="BigXthaPlug - About You feat. Tucker Wetmore (Official Visualizer)(MP3_160K).mp3"></audio>
-    </div>
-
-  </div>
-    </div>
-</td>
-
-<td>
+      <td>
         <div id="Vpartysongs">
-        <label id="Vpartysongsheading">Party Songs</label>
-    <div id="control-panel">
-    <label id="enterid">Enter Audio ID: </label>
-    <input type="number" id="audioIdInput2" min="1" />
-    <button onclick="playById2()">Play</button>
-    <button onclick="pauseCurrent2()">Pause</button>
-    <button onclick="playAll2()">Auto Play All</button>
-  </div>
-   <div class="search-container2">
-    <input type="text" id="searchBar2" placeholder="Search for a song..." autocomplete="off">
-    <div id="suggestions2"></div>
-  </div>
-
-  <div class="audio-list2" id="audioList2 ">
-    <!-- Matching audio players will appear here -->
-  </div>
-  <div class="audio-container" id="audioContainer" class="image-wrapper">
-    <!-- Audio Item 1 -->
-    <div class="audio-box2" data-id="1" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" /><p>
-Track 1:21 Savage - Secret ft Summer Walker</p>
-      <audio src="21 Savage - Secret ft Summer Walker (Official Audio)(MP3_160K).mp3"></audio>
-    </div>
-
-    <!-- Audio Item 2 -->
-    <div class="audio-box2" data-id="2" class="image-box">
-      <img  id="songimage"src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 2:444</p>
-      <audio src="444(MP3_160K).mp3"></audio>
-    </div>
-
-    <!-- Audio Item 3 -->
-    <div class="audio-box2" data-id="3" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 3:Nasty_C - I Miss You</p>
-      <audio src="5. Nasty_C - I Miss You (From Lost Files)(MP3_160K).mp3"></audio>
-    </div>
-
-     <!-- Audio Item 4 -->
-    <div class="audio-box2" data-id="4" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png"onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 4:A Boogie Wit Da Hoodie - Swervin</p>
-      <audio src="A Boogie Wit Da Hoodie - Swervin [Official Music Video](MP3_160K).mp3"></audio>
-    </div>
- <!-- Audio Item 5 -->
-    <div class="audio-box2" data-id="5" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 5:Akon - Right Now</p>
-      <audio src="Akon - Right Now (Na Na Na) (Official Video)(MP3_160K).mp3"></audio>
-    </div>
-    
-    <!-- Audio Item 6 -->
-    <div class="audio-box2" data-id="6" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png"onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 6:Attachments</p>
-      <audio src="Attachments.mp3"></audio>
-    </div>
-
-     <!-- Audio Item 7 -->
-    <div class="audio-box2" data-id="7" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png"onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 7:Big Sean - Wolves ft. Post Malone</p>
-      <audio src="Big Sean - Wolves ft. Post Malone(MP3_160K).mp3"></audio>
-    </div>
-
-     <!-- Audio Item 8-->
-    <div class="audio-box2" data-id="8" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png"onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 8:BigXthaPlug - 2AM</p>
-      <audio src="BigXthaPlug - 2AM (Official Music Video)(MP3_160K).mp3"></audio>
-    </div>
- <!-- Audio Item 9-->
-    <div class="audio-box2" data-id="9 " class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 9:Chris Brown - New Flame</p>
-      <audio src="Chris Brown - New Flame (Official Video) ft. Usher_ Rick Ross(MP3_160K).mp3"></audio>
-    </div>
-
-    <!-- Audio Item 10-->
-    <div class="audio-box2" data-id="10" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)"  onclick="playAudio(this)" />
-      <p>Track 10:Fifth Harmony - Worth It</p>
-      <audio src="Fifth Harmony - Worth It (Official Video) ft. Kid Ink(MP3_160K).mp3"></audio>
-    </div>
-    <!-- Audio Item 11-->
-    <div class="audio-box2" data-id="11" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 11:Bruno Mars_ Kodak Black - Wake Up in The Sky</p>
-      <audio src="Gucci Mane_ Bruno Mars_ Kodak Black - Wake Up in The Sky [Official Music Video](MP3_160K).mp3"></audio>
-    </div>
-  
-     <!-- Audio Item 12-->
-    <div class="audio-box2" data-id="12" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)"  onclick="playAudio(this)" />
-      <p>Track 12:Internet Money - His _ Hers</p>
-      <audio src="Internet Money - His _ Hers (Lyrics) ft. Don Toliver_ Lil Uzi Vert _ Gunna(MP3_160K).mp3"></audio>
-    </div>
-  
-      <!-- Audio Item 13-->
-    <div class="audio-box2" data-id="13" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 13:Blast Off Feat. Juice Wrld _ Trippie Redd</p>
-      <audio src="Internet Money – Blast Off Feat. Juice Wrld _ Trippie Redd (Official Music Video)(MP3_160K).mp3"></audio>
-    </div>
-      <!-- Audio Item 14-->
-    <div class="audio-box2" data-id="14"  class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 14:JETSKI ft. Lil Mosey _ Lil Tecca </p>
-      <audio src="Internet Money – JETSKI ft. Lil Mosey _ Lil Tecca (Official Video)(MP3_160K).mp3"></audio>
-    </div>
-    <!-- Audio Item 15-->
-    <div class="audio-box2" data-id="15" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 15:J. Balvin_ Bad Bunny - No Me Conoce</p>
-      <audio src="Jhay Cortez_ J. Balvin_ Bad Bunny - No Me Conoce (Remix)(MP3_160K).mp3"></audio>
-    </div>
-     <!-- Audio Item 16-->
-    <div class="audio-box2" data-id="16" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 16:Juice WRLD - Stay High</p>
-      <audio src="Juice WRLD - Stay High (Official Audio)(MP3_160K).mp3"></audio>
-    </div>
-     <!-- Audio Item 17-->
-    <div class="audio-box2" data-id="17" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"  onclick="playAudio(this)" />
-      <p>Track 17:Lil Baby - My Dawg</p>
-      <audio src="Lil Baby - My Dawg (Lyrics)(MP3_160K).mp3"></audio>
-    </div>
-    <!-- Audio Item 18-->
-    <div class="audio-box2" data-id="18"  class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 18:Lil Durk - Pelle Coat</p>
-      <audio src="Lil Durk - Pelle Coat (Lyrics)(MP3_160K).mp3"></audio>
-    </div>
-    <!-- Audio Item 19-->
-    <div class="audio-box2" data-id="19"  class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 19:Lil Uzi Vert - P2</p>
-      <audio src="Lil Uzi Vert - P2 [Official Audio](MP3_160K).mp3"></audio>
-    </div>
-     <!-- Audio Item 20-->
-    <div class="audio-box2" data-id="20" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 20:Marshmello x Roddy Ricch - Project Dreams </p>
-      <audio src="Marshmello x Roddy Ricch - Project Dreams (Official Music Video)(MP3_160K).mp3"></audio>
-    </div>
-     <!-- Audio Item 21-->
-    <div class="audio-box2" data-id="21" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 21:MINUTEMEN</p>
-      <audio src="MINUTEMEN(MP3_160K).mp3"></audio>
-    </div>
-     <!-- Audio Item 22-->
-    <div class="audio-box2" data-id="22" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 22:Nasty C _ Runtown - Said</p>
-      <audio src="Nasty C _ Runtown - Said (Official Music Video)(MP3_160K).mp3"></audio>
-    </div>
-      <!-- Audio Item 23-->
-    <div class="audio-box2" data-id="23" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 23:NLE Choppa - Famous Hoes</p>
-      <audio src="NLE Choppa - Famous Hoes [Official Music Video](MP3_160K).mp3"></audio>
-    </div>
-     <!-- Audio Item 24-->
-    <div class="audio-box2" data-id="24" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 24:Post Malone - Go Flex</p>
-      <audio src="Post Malone - Go Flex (Official Music Video)(MP3_160K).mp3"></audio>
-    </div>
-     <!-- Audio Item 25-->
-    <div class="audio-box" data-id="25" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 25:Post Malone - Saint-Tropez</p>
-      <audio src="Post Malone - Saint-Tropez (Official Music Video)(MP3_160K).mp3"></audio>
-    </div>
-     <!-- Audio Item 26-->
-    <div class="audio-box2" data-id="26"  class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 26:Post Malone_ The Weeknd - One Right Now</p>
-      <audio src="Post Malone_ The Weeknd - One Right Now (Official Music Video)(MP3_160K).mp3"></audio>
-    </div>
-     <!-- Audio Item 27-->
-    <div class="audio-box2" data-id="27" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 27:Pressa - Attachments ft. Coi Leray</p>
-      <audio src="Pressa - Attachments (Official Video) ft. Coi Leray(MP3_160K).mp3"></audio>
-    </div>
-   
-    <!-- Audio Item 28-->
-    <div class="audio-box2" data-id="28" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 28:Rae Sremmurd - No Flex Zone</p>
-      <audio src="Rae Sremmurd - No Flex Zone (Explicit) [Official Video](MP3_160K).mp3"></audio>
-    </div>
-    <!-- Audio Item 29-->
-    <div class="audio-box2" data-id="29" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 29:Rae Sremmurd - Swang</p>
-      <audio src="Rae Sremmurd - Swang (Official Video)(MP3_160K).mp3"></audio>
-    </div>
-    <!-- Audio Item 30-->
-    <div class="audio-box2" data-id="30" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 30:Rae Sremmurd_ Swae Lee_ Slim Jxmmi - Powerglide </p>
-      <audio src="Rae Sremmurd_ Swae Lee_ Slim Jxmmi - Powerglide ft. Juicy J(MP3_160K).mp3"></audio>
-    </div>
-    <!-- Audio Item 31-->
-    <div class="audio-box2" data-id="31" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 31:Rich Homie Quan - Flex</p>
-      <audio src="Rich Homie Quan - Flex (Ooh_ Ooh_ Ooh)(MP3_160K).mp3"></audio>
-    </div>
-    <!-- Audio Item 32-->
-    <div class="audio-box2" data-id="32" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 32:Shaboozey - Snake</p>
-      <audio src="Shaboozey - Snake (Official Video)(MP3_160K).mp3"></audio>
-    </div>
-    <!-- Audio Item 33-->
-    <div class="audio-box2" data-id="33" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 33:Shaboozey - Tall Boy</p>
-      <audio src="Shaboozey - Tall Boy (Official Video)(MP3_160K).mp3"></audio>
-    </div>
-    <!-- Audio Item 34-->
-    <div class="audio-box2" data-id="34" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 34:Swae Lee_ Slim Jxmmi_ Rae Sremmurd - Guatemala</p>
-      <audio src="Swae Lee_ Slim Jxmmi_ Rae Sremmurd - Guatemala (Audio)(MP3_160K).mp3"></audio>
-    </div>
-    <!-- Audio Item 35-->
-    <div class="audio-box2" data-id="35" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 35:Swervin (feat. 6ix9ine)</p>
-      <audio src="Swervin (feat. 6ix9ine).mp3"></audio>
-    </div>
-     <!-- Audio Item 36-->
-    <div class="audio-box2" data-id="36" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 36:Tommy Richman - ACTIN UP</p>
-      <audio src="Tommy Richman - ACTIN UP (Official Music Video)(MP3_160K).mp3"></audio>
-    </div>
-     <!-- Audio Item 37-->
-    <div class="audio-box2" data-id="37" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 37:Tommy Richman - MILLION DOLLAR BABY</p>
-      <audio src="Tommy Richman - MILLION DOLLAR BABY (Official Music Video)(MP3_160K).mp3"></audio>
-    </div>
-     <!-- Audio Item 38-->
-    <div class="audio-box2" data-id="38" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 38:Travis Scott - YOSEMITE</p>
-      <audio src="Travis Scott - YOSEMITE (Audio)(MP3_160K).mp3"></audio>
-    </div>
-     <!-- Audio Item 39-->
-    <div class="audio-box2" data-id="39" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 39:Wiz Khalifa - Black And Yellow</p>
-      <audio src="Wiz Khalifa - Black And Yellow [Official Music Video](MP3_160K).mp3"></audio>
-    </div>
-
-     <!-- Audio Item 40-->
-    <div class="audio-box2" data-id="40" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 40:24kGoldn - More Than Friends</p>
-      <audio src="24kGoldn - More Than Friends (Official Lyric Video)(MP3_160K).mp3"></audio>
-    </div>
-
-<!-- Audio Item 41-->
-    <div class="audio-box2" data-id="41" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 41:Big Fella Zil - Them Jiggas </p>
-      <audio src="Big Fella Zil - Them Jiggas [ LIVE PERFORMANCE ](MP3_160K).mp3"></audio>
-    </div>
-
-    <!-- Audio Item 42-->
-    <div class="audio-box2" data-id="42" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 42:BigXthaPlug - Mmhmm </p>
-      <audio src="BigXthaPlug - Mmhmm (Official Music Video)(MP3_160K).mp3"></audio>
-    </div>
-
-     <!-- Audio Item 43-->
-    <div class="audio-box2" data-id="43" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 43:BigXthaPlug - Texas</p>
-      <audio src="BigXthaPlug - Texas (Official Music Video)(MP3_160K).mp3"></audio>
-    </div>
-
-    <!-- Audio Item 44-->
-    <div class="audio-box2" data-id="44" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 44:BigXthaPlug - The Largest</p>
-      <audio src="BigXthaPlug - The Largest (Official Music Video)(MP3_160K).mp3"></audio>
-    </div>
-
-    <!-- Audio Item 45-->
-    <div class="audio-box2" data-id="45" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 45:DJ SNAKE - PARADISE</p>
-      <audio src="DJ SNAKE - PARADISE (FT. BIPOLAR SUNSHINE) [LIVE EDIT](MP3_160K).mp3"></audio>
-    </div>
-
-     <!-- Audio Item 46-->
-    <div class="audio-box2" data-id="46" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 46:Drake - Knife Talk</p>
-      <audio src="Drake - Knife Talk (Official Video) ft. 21 Savage_ Project Pat(MP3_160K).mp3"></audio>
-    </div>
-
- <!-- Audio Item 47-->
-    <div class="audio-box2" data-id="47" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 47:Flipp Dinero - Leave Me Alone</p>
-      <audio src="Flipp Dinero - Leave Me Alone (Official Video)(MP3_160K).mp3"></audio>
-    </div>
-
-    <!-- Audio Item 48-->
-    <div class="audio-box2" data-id="48" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 48:Herman x Young Marcell - So Mad</p>
-      <audio src="Herman x Young Marcell - So Mad (Official Lyrics)(MP3_160K).mp3"></audio>
-    </div>
-
-     <!-- Audio Item 49-->
-    <div class="audio-box2" data-id="49" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 49:Icewear vezzo - Pop my Sh_t</p>
-      <audio src="Icewear vezzo - Pop my Sh_t (Official Video(MP3_160K).mp3"></audio>
-    </div>
-
-     <!-- Audio Item 50-->
-    <div class="audio-box2" data-id="50" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 50:J.P. - Bad Bitty</p>
-      <audio src="J.P. - Bad Bitty _ From The Block Performance 🎙(MP3_160K).mp3"></audio>
-    </div>
-
-     <!-- Audio Item 51-->
-    <div class="audio-box2" data-id="51" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 51:Janelle Monáe_ Jidenna - Yoga</p>
-      <audio src="Janelle Monáe_ Jidenna - Yoga(MP3_160K).mp3"></audio>
-    </div>
-
-     <!-- Audio Item 52-->
-    <div class="audio-box2" data-id="52" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 52:King Von - No Flaws</p>
-      <audio src="King Von - No Flaws (Official Music Video)(MP3_160K).mp3"></audio>
-    </div>
-
-    <!-- Audio Item 53-->
-    <div class="audio-box2" data-id="53" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 53:KNG EGO _Whiskey _ You_ _ </p>
-      <audio src="KNG EGO _Whiskey _ You_ _ On The Radar Performance (COUNTRY EDITION)(MP3_160K).mp3"></audio>
-    </div>
-
-     <!-- Audio Item 54-->
-    <div class="audio-box2" data-id="54" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 54:Lil Durk - All My Life ft. J. Cole </p>
-      <audio src="Lil Durk - All My Life ft. J. Cole(MP3_160K).mp3"></audio>
-    </div>
-
-    <!-- Audio Item 55-->
-    <div class="audio-box2" data-id="55" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 55:Lil Man J - _ Me Now </p>
-      <audio src="Lil Man J - _ Me Now (Official Music Video)(MP3_160K).mp3"></audio>
-    </div>
-
-    <!-- Audio Item 56-->
-    <div class="audio-box2" data-id="56" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 56:Lil Man J - Cap Freestyle </p>
-      <audio src="Lil Man J - Cap Freestyle (Official Music Video)(MP3_160K).mp3"></audio>
-    </div>
-
-    <!-- Audio Item 57-->
-    <div class="audio-box2" data-id="57" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 57:Lil Man J - Dominoes</p>
-      <audio src="Lil Man J - Dominoes (Official Music Video)(MP3_160K).mp3"></audio>
-    </div>
-
-    <!-- Audio Item 58-->
-    <div class="audio-box2" data-id="58" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 58:Lil Man J - John F. Kennedy</p>
-      <audio src="Lil Man J - John F. Kennedy (Official Music Video)(MP3_160K).mp3"></audio>
-    </div>
-
-    <!-- Audio Item 59-->
-    <div class="audio-box2" data-id="59" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 59:Lil Man J - So Real</p>
-      <audio src="Lil Man J - So Real (Official Music Video)(MP3_160K).mp3"></audio>
-    </div>
-
-    <!-- Audio Item 60-->
-    <div class="audio-box2" data-id="60" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 60:Migos - Walk It Talk It ft. Drake</p>
-      <audio src="Migos - Walk It Talk It ft. Drake (Audio)(MP3_160K).mp3"></audio>
-    </div>
-
-    <!-- Audio Item 61-->
-    <div class="audio-box2" data-id="61" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 61: Muni Long - Made For Me </p>
-      <audio src="Muni Long - Made For Me (Official Music Video)(MP3_160K).mp3"></audio>
-    </div>
-
-    <!-- Audio Item 62-->
-    <div class="audio-box2" data-id="62" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 62: Nasty C_ T.I. - All In</p>
-      <audio src="Nasty C_ T.I. - All In (Visualizer)(MP3_160K).mp3"></audio>
-    </div>
-
-    <!-- Audio Item 63-->
-    <div class="audio-box2" data-id="63" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 63: Post Malone - White Iverson</p>
-      <audio src="Post Malone - White Iverson(MP3_160K).mp3"></audio>
-    </div>
-
-     <!-- Audio Item 64-->
-    <div class="audio-box2" data-id="64" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 64: Rae Sremmurd - Black Beatles</p>
-      <audio src="Rae Sremmurd - Black Beatles ft. Gucci Mane (Official Video)(MP3_160K).mp3"></audio>
-    </div>
-
-    <!-- Audio Item 65-->
-    <div class="audio-box2" data-id="65" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 65: Rae Sremmurd - Black Beatles</p>
-      <audio src="Rae Sremmurd - Black Beatles ft. Gucci Mane (Official Video)(MP3_160K).mp3"></audio>
-    </div>
-
-    <!-- Audio Item 66-->
-    <div class="audio-box2" data-id="66" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 66: Rich The Kid - Plug Walk</p>
-      <audio src="Rich The Kid - Plug Walk(MP3_160K).mp3"></audio>
-    </div>
-
-     <!-- Audio Item 67-->
-    <div class="audio-box2" data-id="67" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 67: Shaboozey - Beverly Hills</p>
-      <audio src="Shaboozey - Beverly Hills (Official Video)(MP3_160K).mp3"></audio>
-    </div>
-
-    <!-- Audio Item 68-->
-    <div class="audio-box2" data-id="68" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 68: Stir Fry</p>
-      <audio src="Stir Fry(MP3_160K).mp3"></audio>
-    </div>
-
-     <!-- Audio Item 69-->
-    <div class="audio-box2" data-id="69" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 69: That Mexican OT - Twisting Fingers</p>
-      <audio src="That Mexican OT - Twisting Fingers feat. Moneybagg Yo (Official Music Video)(MP3_160K).mp3"></audio>
-    </div>
-
-     <!-- Audio Item 70-->
-    <div class="audio-box2" data-id="70" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 70: The Kahoot Rap</p>
-      <audio src="The Kahoot Rap (Kahoot Star)(MP3_160K).mp3"></audio>
-    </div>
-
-     <!-- Audio Item 71-->
-    <div class="audio-box2" data-id="71" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 71: Ty Dolla _ign - Spicy</p>
-      <audio src="Ty Dolla _ign - Spicy (feat. Post Malone) [Lyric Video](MP3_160K).mp3"></audio>
-    </div>
-
-    <!-- Audio Item 72-->
-    <div class="audio-box2" data-id="72" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 72: Woody Walk</p>
-      <audio src="Woody Walk (UnOfficial Music Video)(MP3_160K).mp3"></audio>
-    </div>
-
-    <!-- Audio Item 73-->
-    <div class="audio-box2" data-id="73" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 73: YoungBloodZ - Damn_</p>
-      <audio src="YoungBloodZ - Damn_ (Video) ft. Lil_ Jon(MP3_160K).mp3"></audio>
-    </div>
-
-    <!-- Audio Item 74-->
-    <div class="audio-box2" data-id="74" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 74: WatchMe x  朴鲨 </p>
-      <audio src="破圈合作_王鹤棣 x 王齐铭WatchMe x  朴鲨 -《海边探戈》Seaside Tango  [ OFFICIAL MUSIC VIDEO ](MP3_160K).mp3"></audio>
-    </div>
-
-    <!-- Audio Item 75-->
-    <div class="audio-box2" data-id="75" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 75: 21 Savage - redrum</p>
-      <audio src="21 Savage - redrum (Official Audio)(MP3_160K).mp3"></audio>
-    </div>
-
-    <!-- Audio Item 76-->
-    <div class="audio-box2" data-id="76" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 76: Arizona Zervas - ROXANNE </p>
-      <audio src="Arizona Zervas - ROXANNE (Official Video)(MP3_160K).mp3"></audio>
-    </div>
-
-     <!-- Audio Item 77-->
-    <div class="audio-box2" data-id="77" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 77: Civ - 1AM</p>
-      <audio src="Civ - 1AM (Lyrics) _we pop out at 1 in the morning_(MP3_160K).mp3"></audio>
-    </div>
-
-     <!-- Audio Item 78-->
-    <div class="audio-box2" data-id="78" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 78: DeDe3x- Fresh Ft Jay _ Tray</p>
-      <audio src="DeDe3x- Fresh Ft Jay _ Tray (OFFICIAL VIDEO )(MP3_160K).mp3"></audio>
-    </div>
-
-     <!-- Audio Item 79-->
-    <div class="audio-box2" data-id="79" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 79 :Death (feat. DaBaby)</p>
-      <audio src="Death (feat. DaBaby)(MP3_160K).mp3"></audio>
-    </div>
-
-    <!-- Audio Item 80-->
-    <div class="audio-box2" data-id="80" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 80 :Doechii - What It Is</p>
-      <audio src="Doechii - What It Is (Block Boy) feat. Kodak Black [Official Video](MP3_160K).mp3"></audio>
-    </div>
-
-    <!-- Audio Item 81-->
-    <div class="audio-box2" data-id="82" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 83 :Doja Cat - Agora Hills</p>
-      <audio src="Doja Cat - Agora Hills (Lyrics)(MP3_160K).mp3"></audio>
-    </div>
-
-    <!-- Audio Item 82-->
-    <div class="audio-box2" data-id="82" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 82 :Ella Mai - Boo_d Up</p>
-      <audio src="Ella Mai - Boo_d Up(MP3_160K).mp3"></audio>
-    </div>
-
-    <!-- Audio Item 83-->
-    <div class="audio-box2" data-id="83" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 83 :Ella Mai - Trip</p>
-      <audio src="Ella Mai - Trip(MP3_160K).mp3"></audio>
-    </div>
-
-    <!-- Audio Item 84-->
-    <div class="audio-box2" data-id="84" class="image-box">
-      <img id="songimage" src="images/beamedsmoke.png"  onclick="toggleAudio(this)" onclick="playAudio(this)" />
-      <p>Track 84 :</p>
-      <audio src=""></audio>
-    </div>
-    
-
-  </div>
-    </div>
-</td>    
-</tr>
-    </table>
-    <script>
-
- const audioBoxes2 = document.querySelectorAll('.audio-box2');
-    let currentAudio2 = null;
-
-    function stopAllAudio2() {
-      audioBoxes2.forEach(box => {
-        const audio = box.querySelector('audio');
-        audio.pause();
-        audio.currentTime = 0;
-      });
-      currentAudio2 = null;
-    }
-
-    function playAudio2(imgElement) {
-      stopAllAudio2();
-      const audio = imgElement.parentElement.querySelector('audio');
-      audio.play();
-      currentAudio2 = audio;
-    }
-
-    function playById2() {
-      const id = document.getElementById('audioIdInput2').value.trim();
-      const box = [...audioBoxes2].find(b => b.getAttribute('data-id') === id);
-      if (box) {
-        stopAllAudio2();
-        const audio = box.querySelector('audio');
-        audio.play();
-        currentAudio2 = audio;
-      } else {
-        alert('Audio with that ID not found.');
-      }
-    }
-
-    function pauseCurrent2() {
-      if (currentAudio2 && !currentAudio2.paused) {
-        currentAudio2.pause();
-      }
-    }
-
-    function playAll2(index = 0) {
-      if (index >= audioBoxes2.length) return;
-      stopAllAudio2();
-      const audio = audioBoxes2[index].querySelector('audio');
-      audio.play();
-      currentAudio2 = audio;
-      audio.onended = () => playAll2(index + 1);
-    }
-
-
-
-
-    const audioBoxes = document.querySelectorAll('.audio-box');
-    let currentAudio = null;
-
-    function stopAllAudio() {
-      audioBoxes.forEach(box => {
-        const audio = box.querySelector('audio');
-        audio.pause();
-        audio.currentTime = 0;
-      });
-      currentAudio = null;
-    }
-
-    function playAudio(imgElement) {
-      stopAllAudio();
-      const audio = imgElement.parentElement.querySelector('audio');
-      audio.play();
-      currentAudio = audio;
-    }
-
-    function playById() {
-      const id = document.getElementById('audioIdInput').value.trim();
-      const box = [...audioBoxes].find(b => b.getAttribute('data-id') === id);
-      if (box) {
-        stopAllAudio();
-        const audio = box.querySelector('audio');
-        audio.play();
-        currentAudio = audio;
-      } else {
-        alert('Audio with that ID not found.');
-      }
-    }
-
-    function pauseCurrent() {
-      if (currentAudio && !currentAudio.paused) {
-        currentAudio.pause();
-      }
-    }
-
-    function playAll(index = 0) {
-      if (index >= audioBoxes.length) return;
-      stopAllAudio();
-      const audio = audioBoxes[index].querySelector('audio');
-      audio.play();
-      currentAudio = audio;
-      audio.onended = () => playAll(index + 1);
-    }
-      const audioFiles = [
-      "Bruno mars - liquor Store Blues (feat. Damian Marley)(official music vedio)(MP3_160K).mp3",
-      "French Montana_ Post Malone_ Cardi B - Writing on the Wall (Official Video)(MP3_160K).mp3",
-      "Herman - Vibe (Official Music Video)(MP3_160K).mp3",
-      "Josh Levi - BIRTHDAY DANCE (Official Video)(MP3_160K).mp3",
-      "Glass Animals - Heat Waves (Official Video)(MP3_160K).mp3",
-      "James Blunt - You_re Beautiful (Official Music Video) [4K](MP3_160K).mp3",
-       "julie and the phantoms - Wake Up.mp3",
-        "justin bieber - Hold On.mp3",
-         "livingston - Last Man Standing.mp3",
-          "Lord Huron - The Night We Met (Lyrics)(MP3_160K).mp3",
-           "Selena Gomez - Lose You To Love Me (Official Music Video)(MP3_160K).mp3",
-            "Shaboozey - Highway (Official Video)(MP3_160K).mp3",
-              "Shaboozey - Vegas _ A COLORS SHOW(MP3_160K).mp3",
-              "the 1975 - somebody else __ lyrics(MP3_160K).mp3",
-              "The Climb - Miley Cyrus (Lyrics) 🎵(MP3_160K).mp3",
-              "Until you come back home - Selena ft Justin(MP3_160K).mp3"
-      
-    ];
-    const audioFiles2 = [
-      "6.6.25 Sweet Love 🤍 _ N.John (Sovath Monineak) _losangeles _explorepage  _newmusic  _njohn(MP3_160K).mp3",
-      "Clean Bandit and Mabel - Tick Tock (feat. 24kGoldn) [Official Video](MP3_160K).mp3",
-      "_Unsaid Emily_ Lyric Video _ Julie and the Phantoms _ Netflix After School(MP3_160K).mp3",
-      "Alison Wonderland - Be Like That.mp3",
-      "Bust Your Windows (Cover of Jazmine Sullivan)(MP3_160K).mp3",
-      "Don_t Stop Believin_ (Glee Cast Version) (Cover of Journey)(MP3_160K).mp3",
-      "Ed Sheeran - Beautiful People (feat. Khalid) [Official Music Video](MP3_160K).mp3",
-      "hold on.mp3",
-        "It_s My Life _ Confessions Part II(MP3_160K).mp3",
-        "j-hope _Killin_ It Girl (feat. GloRilla)_ Official MV(MP3_160K).mp3",
-      "lean on.mp3",
-        "Martin Garrix _ Dua Lipa - Scared To Be Lonely (Official Video)(MP3_160K).mp3",
-        "mrs hollywood.mp3",
-        "MØ - Final Song (Official Video)(MP3_160K).mp3",
-        "one last time.mp3",
-        "Selena Gomez - Good For You(MP3_160K).mp3",
-        "Sevyn Streeter - It Won_t Stop ft. Chris Brown [Official Video](MP3_160K).mp3",
-        "Sia - The Greatest (Lyrics)(MP3_160K).mp3",
-        "Surf Mesa _ Madison Beer - Carried Away (Lyrics)(MP3_160K).mp3",
-        "sweat melody.mp3",
-        "Tate McRae - greedy (Official Video)(MP3_160K).mp3",
-        "Taylor Swift - Delicate(MP3_160K).mp3",
-        "The Weeknd - Blinding Lights (Official Audio)(MP3_160K).mp3",
-        "The Weeknd - Starboy (Lyrics) ft. Daft Punk(MP3_160K).mp3",
-        "thunderclouds.mp3",
-        "Tiësto_ Jonas Blue _ Rita Ora - Ritual (Official Video)(MP3_160K).mp3",
-        "twenty one pilots - Ride (Official Video)(MP3_160K).mp3",
-        "X (EQUIS) - Nicky Jam x J. Balvin _ Video Oficial  (Prod. Afro Bros _ Jeon)(MP3_160K).mp3",
-        "Jonas Blue _ Rita Ora - Ritual(MP3_160K).mp3",
-        "twenty one pilots - Ride (Official Video)(MP3_160K).mp3"
-    ];
-
-    const audioFolder = "Vvynas Vane playlist/Vane sad hipop songs/";
-    const searchBar = document.getElementById("searchBar");
-    const suggestions = document.getElementById("suggestions");
-    const audioList = document.getElementById("audioList");
-
-    const searchBar2 = document.getElementById("searchBar2");
-    const suggestions2 = document.getElementById("suggestions2");
-    const audioList2 = document.getElementById("audioList2");
-    const audioFolder2 = "Vvynas Vane playlist/Vane hipop/";
-
-
-    searchBar.addEventListener("input", () => {
-      const query = searchBar.value.toLowerCase();
-      suggestions.innerHTML = "";
-      if (query) {
-        const matches = audioFiles.filter(file => file.toLowerCase().includes(query));
-        matches.forEach(file => {
-          const item = document.createElement("div");
-          item.textContent = file;
-          item.addEventListener("click", () => {
-            searchBar.value = file;
-            suggestions.style.display = "none";
-            showAudio(file);
-          });
-          suggestions.appendChild(item);
-        });
-        suggestions.style.display = matches.length ? "block" : "none";
-      } else {
-        suggestions.style.display = "none";
-        audioList.innerHTML = "";
-      }
-    });
-
-     searchBar2.addEventListener("input", () => {
-      const query = searchBar2.value.toLowerCase();
-      suggestions2.innerHTML = "";
-      if (query) {
-        const matches = audioFiles2.filter(file => file.toLowerCase().includes(query));
-        matches.forEach(file => {
-          const item = document.createElement("div");
-          item.textContent = file;
-          item.addEventListener("click", () => {
-            searchBar2.value = file;
-            suggestions2.style.display = "none";
-            showAudio2(file);
-          });
-          suggestions2.appendChild(item);
-        });
-        suggestions2.style.display = matches.length ? "block" : "none";
-      } else {
-        suggestions2.style.display = "none";
-        audioList2.innerHTML = "";
-      }
-    });
-
-    function showAudio(file) {
-      audioList.innerHTML = `
-        <audio controls>
-          <source src="${audioFolder + file}" type="audio/mp3">
-          Your browser does not support the audio element.
-        </audio>
-      `;
-    }
-     function showAudio2(file) {
-      audioList2.innerHTML = `
-        <audio controls>
-          <source src="${audioFolder2 + file}" type="audio/mp3">
-          Your browser does not support the audio element.
-        </audio>
-      `;
-    }
-
-    // Close suggestions when clicking outside
-    document.addEventListener("click", (e) => {
-      if (!document.querySelector(".search-container").contains(e.target)) {
-        suggestions.style.display = "none";
-      }
-    });
-     document.addEventListener("click", (e) => {
-      if (!document.querySelector(".search-container2").contains(e.target)) {
-        suggestions2.style.display = "none";
-      }
-    });
-    // Remove blur and animation when user clicks anywhere
-  document.addEventListener('click', function () {
-    const overlay = document.getElementById('blur-overlay');
-    overlay.style.animation = 'slideUp 1s ease forwards';
-    setTimeout(() => {
-      overlay.remove();
-    }, 1000); // match animation duration
-  });
-
-
-let currentAudioa = null;
-let currentImageBoxa = null;
-
-function toggleAudio(imgElement) {
-  const box = imgElement.parentElement;
-  const audio = box.querySelector('audio');
-
-  // If clicked again on same image
-  if (currentAudioa === audio) {
-    if (audio.paused) {
-      audio.play();
-      addAnimation(box);
-    } else {
-      audio.pause();
-      removeAnimation();
-    }
-    return;
+          <label id="Vpartysongsheading">◈ PARTY MATRIX</label>
+          <div id="control-panel">
+            <label id="enterid">TRACK ID:</label>
+            <input type="number" id="audioIdInput2" min="1" />
+            <button onclick="playById2()">▶ PLAY</button>
+            <button onclick="pauseCurrent2()">⏸ PAUSE</button>
+            <button onclick="playAll2()">⟳ AUTO PLAY</button>
+          </div>
+          <div class="search-container2">
+            <input type="text" id="searchBar2" placeholder="Search signal..." autocomplete="off">
+            <div id="suggestions2"></div>
+          </div>
+          <div class="audio-list2" id="audioList2"></div>
+          <div class="audio-container" id="audioContainer2">
+            <div class="audio-box2" data-id="1"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>01 · 21 Savage — Secret ft Summer Walker</p><audio src="21 Savage - Secret ft Summer Walker (Official Audio)(MP3_160K).mp3"></audio></div>
+            <div class="audio-box2" data-id="2"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>02 · 444</p><audio src="444(MP3_160K).mp3"></audio></div>
+            <div class="audio-box2" data-id="3"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>03 · Nasty C — I Miss You</p><audio src="5. Nasty_C - I Miss You (From Lost Files)(MP3_160K).mp3"></audio></div>
+            <div class="audio-box2" data-id="4"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>04 · A Boogie — Swervin</p><audio src="A Boogie Wit Da Hoodie - Swervin [Official Music Video](MP3_160K).mp3"></audio></div>
+            <div class="audio-box2" data-id="5"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>05 · Akon — Right Now</p><audio src="Akon - Right Now (Na Na Na) (Official Video)(MP3_160K).mp3"></audio></div>
+            <div class="audio-box2" data-id="6"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>06 · Attachments</p><audio src="Attachments.mp3"></audio></div>
+            <div class="audio-box2" data-id="7"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>07 · Big Sean — Wolves ft. Post Malone</p><audio src="Big Sean - Wolves ft. Post Malone(MP3_160K).mp3"></audio></div>
+            <div class="audio-box2" data-id="8"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>08 · BigXthaPlug — 2AM</p><audio src="BigXthaPlug - 2AM (Official Music Video)(MP3_160K).mp3"></audio></div>
+            <div class="audio-box2" data-id="9"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>09 · Chris Brown — New Flame ft. Usher, Rick Ross</p><audio src="Chris Brown - New Flame (Official Video) ft. Usher_ Rick Ross(MP3_160K).mp3"></audio></div>
+            <div class="audio-box2" data-id="10"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>10 · Fifth Harmony — Worth It ft. Kid Ink</p><audio src="Fifth Harmony - Worth It (Official Video) ft. Kid Ink(MP3_160K).mp3"></audio></div>
+            <div class="audio-box2" data-id="11"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>11 · Bruno Mars, Kodak Black — Wake Up in The Sky</p><audio src="Gucci Mane_ Bruno Mars_ Kodak Black - Wake Up in The Sky [Official Music Video](MP3_160K).mp3"></audio></div>
+            <div class="audio-box2" data-id="12"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>12 · Internet Money — His & Hers</p><audio src="Internet Money - His _ Hers (Lyrics) ft. Don Toliver_ Lil Uzi Vert _ Gunna(MP3_160K).mp3"></audio></div>
+            <div class="audio-box2" data-id="13"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>13 · Internet Money — Blast Off ft. Juice WRLD & Trippie Redd</p><audio src="Internet Money – Blast Off Feat. Juice Wrld _ Trippie Redd (Official Music Video)(MP3_160K).mp3"></audio></div>
+            <div class="audio-box2" data-id="14"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>14 · JETSKI ft. Lil Mosey & Lil Tecca</p><audio src="Internet Money – JETSKI ft. Lil Mosey _ Lil Tecca (Official Video)(MP3_160K).mp3"></audio></div>
+            <div class="audio-box2" data-id="15"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>15 · J. Balvin, Bad Bunny — No Me Conoce</p><audio src="Jhay Cortez_ J. Balvin_ Bad Bunny - No Me Conoce (Remix)(MP3_160K).mp3"></audio></div>
+            <div class="audio-box2" data-id="16"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>16 · Juice WRLD — Stay High</p><audio src="Juice WRLD - Stay High (Official Audio)(MP3_160K).mp3"></audio></div>
+            <div class="audio-box2" data-id="17"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>17 · Lil Baby — My Dawg</p><audio src="Lil Baby - My Dawg (Lyrics)(MP3_160K).mp3"></audio></div>
+            <div class="audio-box2" data-id="18"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>18 · Lil Durk — Pelle Coat</p><audio src="Lil Durk - Pelle Coat (Lyrics)(MP3_160K).mp3"></audio></div>
+            <div class="audio-box2" data-id="19"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>19 · Lil Uzi Vert — P2</p><audio src="Lil Uzi Vert - P2 [Official Audio](MP3_160K).mp3"></audio></div>
+            <div class="audio-box2" data-id="20"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>20 · Marshmello x Roddy Ricch — Project Dreams</p><audio src="Marshmello x Roddy Ricch - Project Dreams (Official Music Video)(MP3_160K).mp3"></audio></div>
+            <div class="audio-box2" data-id="21"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>21 · MINUTEMEN</p><audio src="MINUTEMEN(MP3_160K).mp3"></audio></div>
+            <div class="audio-box2" data-id="22"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>22 · Nasty C & Runtown — Said</p><audio src="Nasty C _ Runtown - Said (Official Music Video)(MP3_160K).mp3"></audio></div>
+            <div class="audio-box2" data-id="23"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>23 · NLE Choppa — Famous Hoes</p><audio src="NLE Choppa - Famous Hoes [Official Music Video](MP3_160K).mp3"></audio></div>
+            <div class="audio-box2" data-id="24"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>24 · Post Malone — Go Flex</p><audio src="Post Malone - Go Flex (Official Music Video)(MP3_160K).mp3"></audio></div>
+            <div class="audio-box2" data-id="25"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>25 · Post Malone — Saint-Tropez</p><audio src="Post Malone - Saint-Tropez (Official Music Video)(MP3_160K).mp3"></audio></div>
+            <div class="audio-box2" data-id="26"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>26 · Post Malone & The Weeknd — One Right Now</p><audio src="Post Malone_ The Weeknd - One Right Now (Official Music Video)(MP3_160K).mp3"></audio></div>
+            <div class="audio-box2" data-id="27"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>27 · Pressa — Attachments ft. Coi Leray</p><audio src="Pressa - Attachments (Official Video) ft. Coi Leray(MP3_160K).mp3"></audio></div>
+            <div class="audio-box2" data-id="28"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>28 · Rae Sremmurd — No Flex Zone</p><audio src="Rae Sremmurd - No Flex Zone (Explicit) [Official Video](MP3_160K).mp3"></audio></div>
+            <div class="audio-box2" data-id="29"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>29 · Rae Sremmurd — Swang</p><audio src="Rae Sremmurd - Swang (Official Video)(MP3_160K).mp3"></audio></div>
+            <div class="audio-box2" data-id="30"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>30 · Rae Sremmurd — Powerglide ft. Juicy J</p><audio src="Rae Sremmurd_ Swae Lee_ Slim Jxmmi - Powerglide ft. Juicy J(MP3_160K).mp3"></audio></div>
+            <div class="audio-box2" data-id="31"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>31 · Rich Homie Quan — Flex</p><audio src="Rich Homie Quan - Flex (Ooh_ Ooh_ Ooh)(MP3_160K).mp3"></audio></div>
+            <div class="audio-box2" data-id="32"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>32 · Shaboozey — Snake</p><audio src="Shaboozey - Snake (Official Video)(MP3_160K).mp3"></audio></div>
+            <div class="audio-box2" data-id="33"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>33 · Shaboozey — Tall Boy</p><audio src="Shaboozey - Tall Boy (Official Video)(MP3_160K).mp3"></audio></div>
+            <div class="audio-box2" data-id="34"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>34 · Rae Sremmurd — Guatemala</p><audio src="Swae Lee_ Slim Jxmmi_ Rae Sremmurd - Guatemala (Audio)(MP3_160K).mp3"></audio></div>
+            <div class="audio-box2" data-id="35"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>35 · Swervin ft. 6ix9ine</p><audio src="Swervin (feat. 6ix9ine).mp3"></audio></div>
+            <div class="audio-box2" data-id="36"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>36 · Tommy Richman — ACTIN UP</p><audio src="Tommy Richman - ACTIN UP (Official Music Video)(MP3_160K).mp3"></audio></div>
+            <div class="audio-box2" data-id="37"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>37 · Tommy Richman — MILLION DOLLAR BABY</p><audio src="Tommy Richman - MILLION DOLLAR BABY (Official Music Video)(MP3_160K).mp3"></audio></div>
+            <div class="audio-box2" data-id="38"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>38 · Travis Scott — YOSEMITE</p><audio src="Travis Scott - YOSEMITE (Audio)(MP3_160K).mp3"></audio></div>
+            <div class="audio-box2" data-id="39"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>39 · Wiz Khalifa — Black And Yellow</p><audio src="Wiz Khalifa - Black And Yellow [Official Music Video](MP3_160K).mp3"></audio></div>
+            <div class="audio-box2" data-id="40"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>40 · 24kGoldn — More Than Friends</p><audio src="24kGoldn - More Than Friends (Official Lyric Video)(MP3_160K).mp3"></audio></div>
+            <div class="audio-box2" data-id="41"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>41 · Big Fella Zil — Them Jiggas</p><audio src="Big Fella Zil - Them Jiggas [ LIVE PERFORMANCE ](MP3_160K).mp3"></audio></div>
+            <div class="audio-box2" data-id="42"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>42 · BigXthaPlug — Mmhmm</p><audio src="BigXthaPlug - Mmhmm (Official Music Video)(MP3_160K).mp3"></audio></div>
+            <div class="audio-box2" data-id="43"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>43 · BigXthaPlug — Texas</p><audio src="BigXthaPlug - Texas (Official Music Video)(MP3_160K).mp3"></audio></div>
+            <div class="audio-box2" data-id="44"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>44 · BigXthaPlug — The Largest</p><audio src="BigXthaPlug - The Largest (Official Music Video)(MP3_160K).mp3"></audio></div>
+            <div class="audio-box2" data-id="45"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>45 · DJ SNAKE — PARADISE</p><audio src="DJ SNAKE - PARADISE (FT. BIPOLAR SUNSHINE) [LIVE EDIT](MP3_160K).mp3"></audio></div>
+            <div class="audio-box2" data-id="46"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>46 · Drake — Knife Talk ft. 21 Savage</p><audio src="Drake - Knife Talk (Official Video) ft. 21 Savage_ Project Pat(MP3_160K).mp3"></audio></div>
+            <div class="audio-box2" data-id="47"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>47 · Flipp Dinero — Leave Me Alone</p><audio src="Flipp Dinero - Leave Me Alone (Official Video)(MP3_160K).mp3"></audio></div>
+            <div class="audio-box2" data-id="48"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>48 · Herman x Young Marcell — So Mad</p><audio src="Herman x Young Marcell - So Mad (Official Lyrics)(MP3_160K).mp3"></audio></div>
+            <div class="audio-box2" data-id="49"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>49 · Icewear Vezzo — Pop my Sh_t</p><audio src="Icewear vezzo - Pop my Sh_t (Official Video(MP3_160K).mp3"></audio></div>
+            <div class="audio-box2" data-id="50"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>50 · J.P. — Bad Bitty</p><audio src="J.P. - Bad Bitty _ From The Block Performance 🎙(MP3_160K).mp3"></audio></div>
+            <div class="audio-box2" data-id="51"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>51 · Janelle Monáe & Jidenna — Yoga</p><audio src="Janelle Monáe_ Jidenna - Yoga(MP3_160K).mp3"></audio></div>
+            <div class="audio-box2" data-id="52"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>52 · King Von — No Flaws</p><audio src="King Von - No Flaws (Official Music Video)(MP3_160K).mp3"></audio></div>
+            <div class="audio-box2" data-id="53"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>53 · KNG EGO — Whiskey & You</p><audio src="KNG EGO _Whiskey _ You_ _ On The Radar Performance (COUNTRY EDITION)(MP3_160K).mp3"></audio></div>
+            <div class="audio-box2" data-id="54"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>54 · Lil Durk — All My Life ft. J. Cole</p><audio src="Lil Durk - All My Life ft. J. Cole(MP3_160K).mp3"></audio></div>
+            <div class="audio-box2" data-id="55"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>55 · Lil Man J — Me Now</p><audio src="Lil Man J - _ Me Now (Official Music Video)(MP3_160K).mp3"></audio></div>
+            <div class="audio-box2" data-id="56"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>56 · Lil Man J — Cap Freestyle</p><audio src="Lil Man J - Cap Freestyle (Official Music Video)(MP3_160K).mp3"></audio></div>
+            <div class="audio-box2" data-id="57"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>57 · Lil Man J — Dominoes</p><audio src="Lil Man J - Dominoes (Official Music Video)(MP3_160K).mp3"></audio></div>
+            <div class="audio-box2" data-id="58"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>58 · Lil Man J — John F. Kennedy</p><audio src="Lil Man J - John F. Kennedy (Official Music Video)(MP3_160K).mp3"></audio></div>
+            <div class="audio-box2" data-id="59"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>59 · Lil Man J — So Real</p><audio src="Lil Man J - So Real (Official Music Video)(MP3_160K).mp3"></audio></div>
+            <div class="audio-box2" data-id="60"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>60 · Migos — Walk It Talk It ft. Drake</p><audio src="Migos - Walk It Talk It ft. Drake (Audio)(MP3_160K).mp3"></audio></div>
+            <div class="audio-box2" data-id="61"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>61 · Muni Long — Made For Me</p><audio src="Muni Long - Made For Me (Official Music Video)(MP3_160K).mp3"></audio></div>
+            <div class="audio-box2" data-id="62"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>62 · Nasty C & T.I. — All In</p><audio src="Nasty C_ T.I. - All In (Visualizer)(MP3_160K).mp3"></audio></div>
+            <div class="audio-box2" data-id="63"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>63 · Post Malone — White Iverson</p><audio src="Post Malone - White Iverson(MP3_160K).mp3"></audio></div>
+            <div class="audio-box2" data-id="64"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>64 · Rae Sremmurd — Black Beatles ft. Gucci Mane</p><audio src="Rae Sremmurd - Black Beatles ft. Gucci Mane (Official Video)(MP3_160K).mp3"></audio></div>
+          </div>
+        </div>
+      </td>
+    </tr>
+  </table>
+
+<script>
+  const audioBoxes = document.querySelectorAll('.audio-box');
+  const audioBoxes2 = document.querySelectorAll('.audio-box2');
+  let currentAudio = null, currentAudio2 = null;
+
+  function stopAllAudio() { audioBoxes.forEach(b=>{b.querySelector('audio').pause();b.querySelector('audio').currentTime=0;}); currentAudio=null; }
+  function stopAllAudio2() { audioBoxes2.forEach(b=>{b.querySelector('audio').pause();b.querySelector('audio').currentTime=0;}); currentAudio2=null; }
+  function playById() { const id=document.getElementById('audioIdInput').value.trim(); const box=[...audioBoxes].find(b=>b.getAttribute('data-id')===id); if(box){stopAllAudio();const a=box.querySelector('audio');a.play();currentAudio=a;}else alert('Not found.'); }
+  function pauseCurrent() { if(currentAudio&&!currentAudio.paused)currentAudio.pause(); }
+  function playAll(i=0) { if(i>=audioBoxes.length)return; stopAllAudio(); const a=audioBoxes[i].querySelector('audio'); a.play();currentAudio=a; a.onended=()=>playAll(i+1); }
+  function playById2() { const id=document.getElementById('audioIdInput2').value.trim(); const box=[...audioBoxes2].find(b=>b.getAttribute('data-id')===id); if(box){stopAllAudio2();const a=box.querySelector('audio');a.play();currentAudio2=a;}else alert('Not found.'); }
+  function pauseCurrent2() { if(currentAudio2&&!currentAudio2.paused)currentAudio2.pause(); }
+  function playAll2(i=0) { if(i>=audioBoxes2.length)return; stopAllAudio2(); const a=audioBoxes2[i].querySelector('audio'); a.play();currentAudio2=a; a.onended=()=>playAll2(i+1); }
+
+  let currentAudioa=null;
+  function toggleAudio(img) {
+    const box=img.parentElement; const audio=box.querySelector('audio');
+    if(currentAudioa===audio){audio.paused?(audio.play(),addAnimation(box)):(audio.pause(),removeAnimation());return;}
+    if(currentAudioa){currentAudioa.pause();currentAudioa.currentTime=0;removeAnimation();}
+    audio.play();currentAudioa=audio;addAnimation(box);
   }
+  function addAnimation(box){removeAnimation();const a=document.createElement('div');a.className='audio-animation';for(let i=0;i<4;i++){const d=document.createElement('div');d.className='dot';a.appendChild(d);}box.appendChild(a);}
+  function removeAnimation(){document.querySelectorAll('.audio-animation').forEach(el=>el.remove());}
 
-  // Stop previous
-  if (currentAudioa) {
-    currentAudioa.pause();
-    currentAudioa.currentTime = 0;
-    removeAnimation();
-  }
+  document.getElementById('searchBar').addEventListener('input',function(){document.getElementById('suggestions').style.display='none';});
+  document.getElementById('searchBar2').addEventListener('input',function(){document.getElementById('suggestions2').style.display='none';});
 
-  // Play new
-  audio.play();
-  currentAudioa = audio;
-  currentImageBoxa = box;
-  addAnimation(box);
-}
-
-function addAnimation(box) {
-  removeAnimation();
-
-  const animation = document.createElement('div');
-  animation.className = 'container audio-animation';
-  for (let i = 0; i < 4; i++) {
-    const dot = document.createElement('div');
-    dot.className = 'dot';
-    animation.appendChild(dot);
-  }
-  box.appendChild(animation);
-}
-
-function removeAnimation() {
-  document.querySelectorAll('.audio-animation').forEach(el => el.remove());
-}
-
-
- // Wait 2 minutes (120000 ms) before showing the ad
-    setTimeout(() => {
-      const overlay = document.getElementById('adOverlay');
-      const ad = document.getElementById('adContainer');
-      const skip = document.getElementById('skipBtn');
-
-      overlay.style.display = 'flex';
-
-      // Show skip button after 10 seconds
-      setTimeout(() => {
-        skip.style.display = 'block';
-      }, 10000);
-
-      // End ad automatically after 2 minutes total
-      setTimeout(() => {
-        endAd();
-      }, 120000 + 120000); // total 4 mins after page load
-
-      // Skip button click
-      skip.addEventListener('click', () => {
-        endAd();
-      });
-
-      function endAd() {
-        ad.classList.add('shatter');
-        overlay.style.pointerEvents = 'none'; // block clicks temporarily
-        setTimeout(() => {
-          overlay.style.display = 'none';
-          ad.classList.remove('shatter');
-          overlay.style.pointerEvents = 'auto';
-          skip.style.display = 'none';
-        }, 1000); // match shatter animation duration
-      }
-    }, 120000); // 2 mins after load
-
-  </script>
+  setTimeout(()=>{
+    const overlay=document.getElementById('adOverlay'),ad=document.getElementById('adContainer'),skip=document.getElementById('skipBtn');
+    overlay.style.display='flex';
+    setTimeout(()=>{skip.style.display='block';},10000);
+    skip.addEventListener('click',()=>{ad.classList.add('shatter');overlay.style.pointerEvents='none';setTimeout(()=>{overlay.style.display='none';ad.classList.remove('shatter');overlay.style.pointerEvents='auto';skip.style.display='none';},800);});
+  },120000);
+</script>
 </body>
 </html>
