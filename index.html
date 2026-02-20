@@ -1,589 +1,269 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="style.css" rel="stylesheet">
-    <title>Vvane Sound World</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="style.css" rel="stylesheet">
+  <title>Vvane Sound World</title>
 </head>
-<body >
-  <div id="introOverlay">
-    <div id="bgradius">
-    <svg
-    class="container" 
-    x="0px" 
-    y="0px"
-    viewBox="0 0 50 31.25"
-    height="31.25"
-    width="50"
-    preserveAspectRatio='xMidYMid meet'
-  >
-    <path 
-      class="track"
-      stroke-width="4" 
-      fill="none" 
-      pathlength="100"
-      d="M0.625 21.5 h10.25 l3.75 -5.875 l7.375 15 l9.75 -30 l7.375 20.875 v0 h10.25"
-    />
-    <path 
-      class="car"
-      stroke-width="4" 
-      fill="none" 
-      pathlength="100"
-      d="M0.625 21.5 h10.25 l3.75 -5.875 l7.375 15 l9.75 -30 l7.375 20.875 v0 h10.25"
-    />
-  </svg>
-  <div id="intro-text" onclick="this.remove()"></div>
+<body>
+
+<div class="hex-bg"></div>
+<div class="scanlines"></div>
+<div class="corner-tl"></div>
+<div class="corner-br"></div>
+
+<div id="introOverlay">
+  <div id="bgradius">
+    <svg class="container" x="0px" y="0px"
+      viewBox="0 0 50 31.25" height="50" width="80"
+      preserveAspectRatio='xMidYMid meet'>
+      <path class="track" stroke-width="4" fill="none" pathlength="100"
+        d="M0.625 21.5 h10.25 l3.75 -5.875 l7.375 15 l9.75 -30 l7.375 20.875 v0 h10.25"/>
+      <path class="car" stroke-width="4" fill="none" pathlength="100"
+        d="M0.625 21.5 h10.25 l3.75 -5.875 l7.375 15 l9.75 -30 l7.375 20.875 v0 h10.25"/>
+    </svg>
+    <div id="intro-text"></div>
+    <div class="click-hint">[ TAP TO ENTER ]</div>
   </div>
-  
-  </div>
-  <div id="content">
+</div>
+
+<div id="content">
   <nav id="navbar">
-    <div id ="logo">
+    <div id="logo">
       <p id="titttle">Vvane Sound World</p>
     </div>
-   <a href="sighn up.html"><img src="downloadsighn.png" alt="download sighn" id="downloadsighn"></a> 
-  </nav>  
-  <P class="sample">samples just for you</P>
+    <a href="sighn_up.html">
+      <img src="downloadsighn.png" alt="sign in" id="downloadsighn">
+    </a>
+  </nav>
+
+  <p class="sample">— neural frequency samples —</p>
+
   <div id="sampleaudio">
 
-    <div id="latin" >
-    <p id="sampleheading">Reggaetón Songs</p>
-    <ul>
-        <li class="outer-div"> 
-  <div id="iconanim" >
-    <div class="custom-container">
-      <div class="custom-bar"></div>
-      <div class="custom-bar"></div>
-      <div class="custom-bar"></div>
-      <div class="custom-bar"></div>
+    <div id="latin">
+      <p id="sampleheading">⬡ Reggaetón Signals</p>
+      <ul>
+        <li class="outer-div">
+          <div id="iconanim"><div class="custom-container"><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div></div></div>
+          <audio class="custom-audio" controls><source src="Bad Bunny - Efecto (360° Visualizer) _ Un Verano Sin Ti(MP3_160K).mp3" type="audio/mp3"></audio>
+        </li>
+        <li class="outer-div">
+          <div id="iconanim"><div class="custom-container"><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div></div></div>
+          <audio class="custom-audio" controls><source src="Myke Towers - COSMETICOS (Visualizer)(MP3_160K).mp3" type="audio/mp3"></audio>
+        </li>
+        <li class="outer-div">
+          <div id="iconanim"><div class="custom-container"><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div></div></div>
+          <audio class="custom-audio" controls><source src="Feid - Ferxxo 100 (Official Video)(MP3_160K).mp3" type="audio/mp3"></audio>
+        </li>
+        <li class="outer-div">
+          <div id="iconanim"><div class="custom-container"><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div></div></div>
+          <audio class="custom-audio" controls><source src="Cris MJ - Partyson (Video Oficial)(MP3_160K).mp3" type="audio/mp3"></audio>
+        </li>
+        <li class="outer-div">
+          <div id="iconanim"><div class="custom-container"><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div></div></div>
+          <audio class="custom-audio" controls><source src="Pedro Capó_ Farruko - Calma (Remix - Official Video)(MP3_160K).mp3" type="audio/mp3"></audio>
+        </li>
+        <li class="outer-div">
+          <div id="iconanim"><div class="custom-container"><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div></div></div>
+          <audio class="custom-audio" controls><source src="Anuel AA_ KAROL G - Secreto(MP3_160K).mp3" type="audio/mp3"></audio>
+        </li>
+      </ul>
     </div>
-  </div>
-  <audio class="custom-audio"  controls>
-  <source
-   src="Bad Bunny - Efecto (360° Visualizer) _ Un Verano Sin Ti(MP3_160K).mp3" 
-   type="audio/mp3"> 
-</audio>
-</li>
-<li class="outer-div"> 
-  <div id="iconanim" >
-    <div class="custom-container">
-      <div class="custom-bar"></div>
-      <div class="custom-bar"></div>
-      <div class="custom-bar"></div>
-      <div class="custom-bar"></div>
-    </div>
-  </div>
-  <audio class="custom-audio" controls>
-  <source
-   src="Myke Towers - COSMETICOS (Visualizer)(MP3_160K).mp3" 
-   type="audio/mp3"> 
-</audio>
-</li>
-<li class="outer-div"> 
-  <div id="iconanim" >
-    <div class="custom-container">
-      <div class="custom-bar"></div>
-      <div class="custom-bar"></div>
-      <div class="custom-bar"></div>
-      <div class="custom-bar"></div>
-    </div>
-  </div>
-  <audio class="custom-audio"  controls>
-  <source
-   src="Feid - Ferxxo 100 (Official Video)(MP3_160K).mp3" 
-   type="audio/mp3"> 
-</audio>
-</li>
-<li class="outer-div"> 
-  <div id="iconanim" >
-    <div class="custom-container">
-      <div class="custom-bar"></div>
-      <div class="custom-bar"></div>
-      <div class="custom-bar"></div>
-      <div class="custom-bar"></div>
-    </div>
-  </div>
-  <audio class="custom-audio"  controls>
-  <source
-   src="Cris MJ - Partyson (Video Oficial)(MP3_160K).mp3" 
-   type="audio/mp3"> 
-</audio>
-</li>
-<li class="outer-div"> 
-  <div id="iconanim" >
-    <div class="custom-container">
-      <div class="custom-bar"></div>
-      <div class="custom-bar"></div>
-      <div class="custom-bar"></div>
-      <div class="custom-bar"></div>
-    </div>
-  </div>
-  <audio class="custom-audio"  controls>
-  <source
-   src="Pedro Capó_ Farruko - Calma (Remix - Official Video)(MP3_160K).mp3" 
-   type="audio/mp3">
-</audio>
-</li>
-<li class="outer-div"> 
-  <div id="iconanim" >
-    <div class="custom-container">
-      <div class="custom-bar"></div>
-      <div class="custom-bar"></div>
-      <div class="custom-bar"></div>
-      <div class="custom-bar"></div>
-    </div>
-  </div>
-  <audio class="custom-audio"  controls>
-  <source
-   src="Anuel AA_ KAROL G - Secreto(MP3_160K).mp3" 
-   type="audio/mp3"> 
-</audio>
-</li>
-    </ul>
-</div>
 
-
-
-
-
- <div id="latin" >
-    <p id="sampleheading">Afro Songs</p>
-    <ul>
-       <li class="outer-div"> 
-  <div id="iconanim" >
-    <div class="custom-container">
-      <div class="custom-bar"></div>
-      <div class="custom-bar"></div>
-      <div class="custom-bar"></div>
-      <div class="custom-bar"></div>
+    <div id="latin">
+      <p id="sampleheading">⬡ Afro Pulse</p>
+      <ul>
+        <li class="outer-div">
+          <div id="iconanim"><div class="custom-container"><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div></div></div>
+          <audio class="custom-audio" controls><source src="Fave - Mr Man (Visualizer)(MP3_160K).mp3" type="audio/mp3"></audio>
+        </li>
+        <li class="outer-div">
+          <div id="iconanim"><div class="custom-container"><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div></div></div>
+          <audio class="custom-audio" controls><source src="Diamond Platnumz - Yatapita (Official Lyric Audio)(MP3_160K).mp3" type="audio/mp3"></audio>
+        </li>
+        <li class="outer-div">
+          <div id="iconanim"><div class="custom-container"><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div></div></div>
+          <audio class="custom-audio" controls><source src="Pheelz x Davido - _Electricity_ (Official Music Video)(MP3_160K).mp3" type="audio/mp3"></audio>
+        </li>
+        <li class="outer-div">
+          <div id="iconanim"><div class="custom-container"><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div></div></div>
+          <audio class="custom-audio" controls><source src="Timaya - Cold Outside ft Buju ( official lyrics video)(MP3_160K).mp3" type="audio/mp3"></audio>
+        </li>
+        <li class="outer-div">
+          <div id="iconanim"><div class="custom-container"><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div></div></div>
+          <audio class="custom-audio" controls><source src="Tiwa savage All over lyrics(MP3_160K).mp3" type="audio/mp3"></audio>
+        </li>
+        <li class="outer-div">
+          <div id="iconanim"><div class="custom-container"><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div></div></div>
+          <audio class="custom-audio" controls><source src="Victoria Kimani - China Love (Official Video) ft. R.City(MP3_160K).mp3" type="audio/mp3"></audio>
+        </li>
+      </ul>
     </div>
-  </div>
-  <audio class="custom-audio"  controls>
-  <source
-   src="Fave - Mr Man (Visualizer)(MP3_160K).mp3" 
-   type="audio/mp3"> 
-</audio>
-</li>
-<li class="outer-div"> 
-  <div id="iconanim" >
-    <div class="custom-container">
-      <div class="custom-bar"></div>
-      <div class="custom-bar"></div>
-      <div class="custom-bar"></div>
-      <div class="custom-bar"></div>
-    </div>
-  </div>
-  <audio class="custom-audio"  controls>
-  <source
-   src="Diamond Platnumz - Yatapita (Official Lyric Audio)(MP3_160K).mp3" 
-   type="audio/mp3"> 
-</audio>
-</li>
-<li class="outer-div"> 
-  <div id="iconanim" >
-    <div class="custom-container">
-      <div class="custom-bar"></div>
-      <div class="custom-bar"></div>
-      <div class="custom-bar"></div>
-      <div class="custom-bar"></div>
-    </div>
-  </div>
-  <audio class="custom-audio"  controls>
-  <source
-   src="Pheelz x Davido - _Electricity_ (Official Music Video)(MP3_160K).mp3" 
-   type="audio/mp3">
-</audio>
-</li>
-<li class="outer-div"> 
-  <div id="iconanim" >
-    <div class="custom-container">
-      <div class="custom-bar"></div>
-      <div class="custom-bar"></div>
-      <div class="custom-bar"></div>
-      <div class="custom-bar"></div>
-    </div>
-  </div>
-  <audio class="custom-audio"  controls>
-  <source
-   src="Timaya - Cold Outside ft Buju ( official lyrics video)(MP3_160K).mp3" 
-   type="audio/mp3"> 
-</audio>
-</li>
-<li class="outer-div"> 
-  <div id="iconanim" >
-    <div class="custom-container">
-      <div class="custom-bar"></div>
-      <div class="custom-bar"></div>
-      <div class="custom-bar"></div>
-      <div class="custom-bar"></div>
-    </div>
-  </div>
-  <audio class="custom-audio"  controls>
-  <source
-   src="Tiwa savage All over lyrics(MP3_160K).mp3" 
-   type="audio/mp3"> 
-</audio>
-</li>
-<li class="outer-div"> 
-  <div id="iconanim" >
-    <div class="custom-container">
-      <div class="custom-bar"></div>
-      <div class="custom-bar"></div>
-      <div class="custom-bar"></div>
-      <div class="custom-bar"></div>
-    </div>
-  </div>
-  <audio class="custom-audio"  controls>
-  <source
-   src="Victoria Kimani - China Love (Official Video) ft. R.City(MP3_160K).mp3" 
-   type="audio/mp3"> 
-</audio>
-</li>
-    </ul>
 
-</div>
-
-
-
-
-
- <div id="latin" >
-    <p id="sampleheading">hipop songs</p>
-    <ul>
-        <li class="outer-div"> 
-  <div id="iconanim" >
-    <div class="custom-container">
-      <div class="custom-bar"></div>
-      <div class="custom-bar"></div>
-      <div class="custom-bar"></div>
-      <div class="custom-bar"></div>
+    <div id="latin">
+      <p id="sampleheading">⬡ Hip-Hop Frequencies</p>
+      <ul>
+        <li class="outer-div">
+          <div id="iconanim"><div class="custom-container"><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div></div></div>
+          <audio class="custom-audio" controls><source src="5. Nasty_C - I Miss You (From Lost Files)(MP3_160K).mp3" type="audio/mp3"></audio>
+        </li>
+        <li class="outer-div">
+          <div id="iconanim"><div class="custom-container"><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div></div></div>
+          <audio class="custom-audio" controls><source src="Bruno Mars - Liquor Store Blues (feat. Damian Marley) (Official Music Video)(MP3_160K).mp3" type="audio/mp3"></audio>
+        </li>
+        <li class="outer-div">
+          <div id="iconanim"><div class="custom-container"><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div></div></div>
+          <audio class="custom-audio" controls><source src="444(MP3_160K).mp3" type="audio/mp3"></audio>
+        </li>
+        <li class="outer-div">
+          <div id="iconanim"><div class="custom-container"><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div></div></div>
+          <audio class="custom-audio" controls><source src="XXXTENTACION - Hope (Lyrics)(MP3_160K).mp3" type="audio/mp3"></audio>
+        </li>
+        <li class="outer-div">
+          <div id="iconanim"><div class="custom-container"><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div></div></div>
+          <audio class="custom-audio" controls><source src="BigXthaPlug - 2AM (Official Music Video)(MP3_160K).mp3" type="audio/mp3"></audio>
+        </li>
+        <li class="outer-div">
+          <div id="iconanim"><div class="custom-container"><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div></div></div>
+          <audio class="custom-audio" controls><source src="XXXTENTACION - SAD_(MP3_160K).mp3" type="audio/mp3"></audio>
+        </li>
+      </ul>
     </div>
-  </div>
-  <audio class="custom-audio"  controls>
-  <source
-   src="5. Nasty_C - I Miss You (From Lost Files)(MP3_160K).mp3" 
-   type="audio/mp3"> 
-</audio>
-</li>
-<li class="outer-div"> 
-  <div id="iconanim" >
-    <div class="custom-container">
-      <div class="custom-bar"></div>
-      <div class="custom-bar"></div>
-      <div class="custom-bar"></div>
-      <div class="custom-bar"></div>
-    </div>
-  </div>
-  <audio class="custom-audio"  controls>
-  <source
-   src="Bruno Mars - Liquor Store Blues (feat. Damian Marley) (Official Music Video)(MP3_160K).mp3" 
-   type="audio/mp3"> 
-</audio>
-</li>
-<li class="outer-div"> 
-  <div id="iconanim" >
-    <div class="custom-container">
-      <div class="custom-bar"></div>
-      <div class="custom-bar"></div>
-      <div class="custom-bar"></div>
-      <div class="custom-bar"></div>
-    </div>
-  </div>
-  <audio class="custom-audio"  controls>
-  <source
-   src="444(MP3_160K).mp3" 
-   type="audio/mp3"> 
-</audio>
-</li>
-<li class="outer-div"> 
-  <div id="iconanim" >
-    <div class="custom-container">
-      <div class="custom-bar"></div>
-      <div class="custom-bar"></div>
-      <div class="custom-bar"></div>
-      <div class="custom-bar"></div>
-    </div>
-  </div>
-  <audio class="custom-audio"  controls>
-  <source
-   src="XXXTENTACION - Hope (Lyrics)(MP3_160K).mp3" 
-   type="audio/mp3"> 
-</audio>
-</li>
-<li class="outer-div"> 
-  <div id="iconanim" >
-    <div class="custom-container">
-      <div class="custom-bar"></div>
-      <div class="custom-bar"></div>
-      <div class="custom-bar"></div>
-      <div class="custom-bar"></div>
-    </div>
-  </div>
-  <audio class="custom-audio"  controls>
-  <source
-   src="BigXthaPlug - 2AM (Official Music Video)(MP3_160K).mp3" 
-   type="audio/mp3"> 
-</audio>
-</li>
-<li class="outer-div"> 
-  <div id="iconanim" >
-    <div class="custom-container">
-      <div class="custom-bar"></div>
-      <div class="custom-bar"></div>
-      <div class="custom-bar"></div>
-      <div class="custom-bar"></div>
-    </div>
-  </div>
-  <audio class="custom-audio"  controls>
-  <source
-   src="XXXTENTACION - SAD_(MP3_160K).mp3" 
-   type="audio/mp3"> 
-</audio>
-</li>
-    </ul>
 
-</div>
-
-
-
- <div id="latin" >
-    <p id="sampleheading">Rnb songs</p>
-    <ul>
-        <li class="outer-div"> 
-  <div id="iconanim" >
-    <div class="custom-container">
-      <div class="custom-bar"></div>
-      <div class="custom-bar"></div>
-      <div class="custom-bar"></div>
-      <div class="custom-bar"></div>
+    <div id="latin">
+      <p id="sampleheading">⬡ R&B Transmissions</p>
+      <ul>
+        <li class="outer-div">
+          <div id="iconanim"><div class="custom-container"><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div></div></div>
+          <audio class="custom-audio" controls><source src="James Blunt - You_re Beautiful (Official Music Video) [4K](MP3_160K).mp3" type="audio/mp3"></audio>
+        </li>
+        <li class="outer-div">
+          <div id="iconanim"><div class="custom-container"><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div></div></div>
+          <audio class="custom-audio" controls><source src="Ed Sheeran - Beautiful People (feat. Khalid) [Official Music Video](MP3_160K).mp3" type="audio/mp3"></audio>
+        </li>
+        <li class="outer-div">
+          <div id="iconanim"><div class="custom-container"><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div></div></div>
+          <audio class="custom-audio" controls><source src="j-hope _Killin_ It Girl (feat. GloRilla)_ Official MV(MP3_160K).mp3" type="audio/mp3"></audio>
+        </li>
+        <li class="outer-div">
+          <div id="iconanim"><div class="custom-container"><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div></div></div>
+          <audio class="custom-audio" controls><source src="Tate McRae - greedy (Official Video)(MP3_160K).mp3" type="audio/mp3"></audio>
+        </li>
+        <li class="outer-div">
+          <div id="iconanim"><div class="custom-container"><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div></div></div>
+          <audio class="custom-audio" controls><source src="Elley Duhé - MIDDLE OF THE NIGHT (Official Video)(MP3_160K).mp3" type="audio/mp3"></audio>
+        </li>
+        <li class="outer-div">
+          <div id="iconanim"><div class="custom-container"><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div></div></div>
+          <audio class="custom-audio" controls><source src="Lord Huron - The Night We Met (Lyrics)(MP3_160K).mp3" type="audio/mp3"></audio>
+        </li>
+      </ul>
     </div>
+
+  </div><!-- /sampleaudio -->
+
+  <div class="holdplaylist" id="container">
+    <a href="latino.html" target="_blank">
+      <div class="playlist1" id="box1"><Label>REGGAETON VYBZ</Label></div>
+    </a>
+    <a href="Rnbs.html" target="_blank">
+      <div class="playlist2" id="box2"><Label>RNBS VYBZ</Label></div>
+    </a>
+    <a href="Afro.html" target="_blank">
+      <div class="playlist3" id="box3"><Label>AFRO VYBZ</Label></div>
+    </a>
+    <a href="hipop.html" target="_blank">
+      <div class="playlist4" id="box4"><Label>HIPOP VYBZ</Label></div>
+    </a>
   </div>
-  <audio class="custom-audio"  controls>
-  <source
-   src="James Blunt - You_re Beautiful (Official Music Video) [4K](MP3_160K).mp3" 
-   type="audio/mp3"> 
-</audio>
-</li>
-<li class="outer-div"> 
-  <div id="iconanim" >
-    <div class="custom-container">
-      <div class="custom-bar"></div>
-      <div class="custom-bar"></div>
-      <div class="custom-bar"></div>
-      <div class="custom-bar"></div>
-    </div>
-  </div>
-  <audio class="custom-audio"  controls>
-  <source
-   src="Ed Sheeran - Beautiful People (feat. Khalid) [Official Music Video](MP3_160K).mp3" 
-   type="audio/mp3"> 
-</audio>
-</li>
-<li class="outer-div"> 
-  <div id="iconanim" >
-    <div class="custom-container">
-      <div class="custom-bar"></div>
-      <div class="custom-bar"></div>
-      <div class="custom-bar"></div>
-      <div class="custom-bar"></div>
-    </div>
-  </div>
-  <audio class="custom-audio"  controls>
-  <source
-   src="j-hope _Killin_ It Girl (feat. GloRilla)_ Official MV(MP3_160K).mp3" 
-   type="audio/mp3"> 
-</audio>
-</li>
-<li class="outer-div"> 
-  <div id="iconanim" >
-    <div class="custom-container">
-      <div class="custom-bar"></div>
-      <div class="custom-bar"></div>
-      <div class="custom-bar"></div>
-      <div class="custom-bar"></div>
-    </div>
-  </div>
-  <audio class="custom-audio"  controls>
-  <source
-   src="Tate McRae - greedy (Official Video)(MP3_160K).mp3" 
-   type="audio/mp3"> 
-</audio>
-</li>
-<li class="outer-div"> 
-  <div id="iconanim" >
-    <div class="custom-container">
-      <div class="custom-bar"></div>
-      <div class="custom-bar"></div>
-      <div class="custom-bar"></div>
-      <div class="custom-bar"></div>
-    </div>
-  </div>
-  <audio class="custom-audio"  controls>
-  <source
-   src="Elley Duhé - MIDDLE OF THE NIGHT (Official Video)(MP3_160K).mp3" 
-   type="audio/mp3"> 
-</audio>
-</li>
-<li class="outer-div"> 
-  <div id="iconanim" >
-    <div class="custom-container">
-      <div class="custom-bar"></div>
-      <div class="custom-bar"></div>
-      <div class="custom-bar"></div>
-      <div class="custom-bar"></div>
-    </div>
-  </div>
-  <audio class="custom-audio"  controls>
-  <source
-   src="Lord Huron - The Night We Met (Lyrics)(MP3_160K).mp3" 
-   type="audio/mp3"> 
-</audio>
-</li>
-    </ul>
 
-</div>
-</div>
-<div class="holdplaylist" id="container">
-
- <a href="latino.html" target="_blank">   
-<div class="playlist1" id="box1">
-    <Label>REGGAETON VYBZ</Label>
-</div>
-</a>
-
-<a href="Rnbs.html" target="_blank">
-<div class="playlist2" id="box2">
-    <Label>RNBS VYBZ</Label>
-</div>
-</a>
-<a href="Afro.html" target="_blank">
-<div class="playlist3" id="box3">
-    <Label>AFRO VYBZ</Label>
-</div>
-</a>
-
-<a href="hipop.html" target="_blank">
-<div class="playlist4" id="box4">
-    <Label>HIPOP VYBZ</Label>
-</div>
-</a>
-
-</div>
- </div>
-
-
+</div><!-- /content -->
 
 <script>
-
- const container1 = document.getElementById("container");
-
-    function getTwoUniqueIndices(length) {
-      let index1 = Math.floor(Math.random() * length);
-      let index2;
-      do {
-        index2 = Math.floor(Math.random() * length);
-      } while (index1 === index2);
-      return [index1, index2];
-    }
-
-    function switchTwoDivs() {
-      const boxes = Array.from(container1.children);
-      const [i, j] = getTwoUniqueIndices(boxes.length);
-      const box1 = boxes[i];
-      const box2 = boxes[j];
-
-      // Fade out
-      box1.classList.add("hidden");
-      box2.classList.add("hidden");
-
-      setTimeout(() => {
-        // Swap in DOM
-        const temp = document.createElement("div");
-        container1.replaceChild(temp, box1);
-        container1.replaceChild(box1, box2);
-        container1.replaceChild(box2, temp);
-
-        // Fade back in
-        setTimeout(() => {
-          box1.classList.remove("hidden");
-          box2.classList.remove("hidden");
-        }, 50);
-      }, 1000); // Wait for fade out
-    }
-
-    // Run every 5 minutes (for testing use 5 seconds)
-    setInterval(switchTwoDivs, 10000); // Use 5000 for demo
-    // switchTwoDivs(); // Uncomment to trigger immediately
-
-
-
-   const text = "Let it be done with music";
+  /* ── INTRO TEXT ── */
+  const text = "Let it be done with music";
   const words = text.split(" ");
   const container = document.getElementById("intro-text");
-
   let i = 0;
-
   function animateWords() {
     if (i >= words.length) return;
     const span = document.createElement("span");
     span.textContent = words[i] + " ";
     container.appendChild(span);
-
-    setTimeout(() => {
-      span.classList.add("highlight");
-    }, 100);
-
+    setTimeout(() => span.classList.add("highlight"), 100);
     i++;
-    setTimeout(animateWords, 400); // Adjust speed to user reading pace
+    setTimeout(animateWords, 400);
   }
-
-  // Clear existing content and start animation
   container.innerHTML = "";
   animateWords();
 
+  /* ── OVERLAY CLICK ── */
+  const overlay = document.getElementById('introOverlay');
+  overlay.addEventListener('click', () => {
+    overlay.style.animation = 'slideUp 1s ease-in forwards';
+    setTimeout(() => {
+      overlay.style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }, 1000);
+  });
+
+  /* ── VISUALIZER ── */
   document.querySelectorAll('.outer-div').forEach((li) => {
     const audio = li.querySelector('.custom-audio');
     const visualizer = li.querySelector('.custom-container');
-
-    const toggleVisualizer = () => {
-      if (!audio.paused && !audio.ended) {
-        visualizer.classList.add('playing');
-      } else {
-        visualizer.classList.remove('playing');
-      }
+    const toggle = () => {
+      if (!audio.paused && !audio.ended) visualizer.classList.add('playing');
+      else visualizer.classList.remove('playing');
     };
-
-    audio.addEventListener('play', toggleVisualizer);
-    audio.addEventListener('pause', toggleVisualizer);
-    audio.addEventListener('ended', toggleVisualizer);
-
-    // Optional: run on page load
-    window.addEventListener('DOMContentLoaded', toggleVisualizer);
+    audio.addEventListener('play', toggle);
+    audio.addEventListener('pause', toggle);
+    audio.addEventListener('ended', toggle);
   });
 
-
-const audios= document.querySelectorAll('audio');
-audios.forEach(audio => {
-  audio.addEventListener('play', () => {
-    audios.forEach(otherAudio => {
-      if (otherAudio !== audio) {
-        otherAudio.pause();
-      }
+  /* ── ONE AUDIO AT A TIME ── */
+  const audios = document.querySelectorAll('audio');
+  audios.forEach(audio => {
+    audio.addEventListener('play', () => {
+      audios.forEach(other => { if (other !== audio) other.pause(); });
     });
   });
-});
 
-const overlay = document.getElementById('introOverlay');
-    overlay.addEventListener('click', () => {
-      overlay.style.animation = 'slideUp 1s ease-in forwards';
-      // Allow interaction after animation
-      setTimeout(() => {
-        overlay.style.display = 'none';
-        document.body.style.overflow = 'auto';
-      }, 1000);
-    });
+  /* ── SHUFFLE PLAYLIST CARDS ── */
+  const container1 = document.getElementById("container");
+  function getTwoUniqueIndices(length) {
+    let i1 = Math.floor(Math.random() * length), i2;
+    do { i2 = Math.floor(Math.random() * length); } while (i1 === i2);
+    return [i1, i2];
+  }
+  function switchTwoDivs() {
+    const boxes = Array.from(container1.children);
+    const [i, j] = getTwoUniqueIndices(boxes.length);
+    const b1 = boxes[i], b2 = boxes[j];
+    b1.classList.add("hidden"); b2.classList.add("hidden");
+    setTimeout(() => {
+      const temp = document.createElement("div");
+      container1.replaceChild(temp, b1);
+      container1.replaceChild(b1, b2);
+      container1.replaceChild(b2, temp);
+      setTimeout(() => { b1.classList.remove("hidden"); b2.classList.remove("hidden"); }, 50);
+    }, 1000);
+  }
+  setInterval(switchTwoDivs, 10000);
+
+  /* ── CURSOR PARTICLE TRAIL ── */
+  document.addEventListener('mousemove', (e) => {
+    if (Math.random() > 0.7) {
+      const dot = document.createElement('div');
+      dot.style.cssText = `position:fixed;width:3px;height:3px;border-radius:50%;background:#00f5c4;
+        box-shadow:0 0 6px #00f5c4;left:${e.clientX}px;top:${e.clientY}px;
+        pointer-events:none;z-index:9998;transition:all 0.8s;opacity:0.8;`;
+      document.body.appendChild(dot);
+      setTimeout(() => { dot.style.opacity = '0'; dot.style.transform = 'scale(0)'; }, 50);
+      setTimeout(() => dot.remove(), 850);
+    }
+  });
 </script>
-  
 </body>
 </html>
