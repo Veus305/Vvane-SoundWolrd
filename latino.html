@@ -3,186 +3,444 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>REGGAETÓN VYBZ — Vvane Sound World</title>
-  <link href="style2.css" rel="stylesheet">
+  <title>REGGAETON / LATINO — Vvane Sound World</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Nunito:wght@400;700;900&family=Cabin+Condensed:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    :root { --accent: #ff6a00; }
-    #Vsadsongsheading { color: var(--accent) !important; text-shadow: 0 0 8px #ff6a00, 0 0 25px rgba(255,106,0,0.4) !important; }
-    .audio-box { border-left-color: var(--accent) !important; }
-    #playlistheading { color: #ff9a44; text-shadow: 0 0 10px #ff6a00, 0 0 30px rgba(255,106,0,0.4); }
-    #playlistimage { border-color: #ff6a00; box-shadow: 0 0 8px #ff6a00, 0 0 25px rgba(255,106,0,0.3) !important; }
-    #Vsadsongs::before { background: linear-gradient(90deg, transparent, #ff6a00, transparent) !important; }
+    :root{--coral:#ff6b35;--teal:#00c9a7;--mango:#ffca28;--rose:#ff3d71;--deep:#0a1628;--navy:#071020;--warm:#fff3e0;}
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{background:var(--navy);color:var(--warm);font-family:'Nunito',sans-serif;min-height:100vh;overflow-x:hidden;position:relative;}
+    #bgCanvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;}
+    body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 20% 80%,rgba(255,107,53,.06) 0%,transparent 50%),radial-gradient(ellipse at 80% 20%,rgba(0,201,167,.05) 0%,transparent 50%);pointer-events:none;z-index:0;}
+    @keyframes fiesta{0%{filter:hue-rotate(0deg);}100%{filter:hue-rotate(360deg);}}
+    nav{position:sticky;top:0;z-index:100;background:linear-gradient(90deg,#071020f5,#0a1628ee,#071020f5);border-bottom:2px solid var(--coral);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 3px 20px rgba(255,107,53,.3);}
+    #tittle{font-family:'Pacifico',cursive;font-size:1.3rem;color:var(--coral);text-shadow:0 0 15px rgba(255,107,53,.6),2px 2px 0 rgba(0,201,167,.3);}
+    #homebutton{background:linear-gradient(135deg,var(--coral),var(--rose));border:none;color:white;padding:9px 22px;font-family:'Cabin Condensed',sans-serif;font-size:.88rem;letter-spacing:2px;cursor:pointer;border-radius:25px;transition:all .3s;font-weight:700;}
+    #homebutton:hover{background:linear-gradient(135deg,var(--mango),var(--coral));box-shadow:0 0 20px rgba(255,107,53,.5);transform:translateY(-2px) scale(1.02);}
+    .ad-overlay{display:none;position:fixed;inset:0;background:rgba(7,16,32,.95);z-index:999;justify-content:center;align-items:center;}
+    .ad-container{border:2px solid var(--coral);border-radius:12px;background:linear-gradient(135deg,#0a1628,#071020);padding:60px 80px;text-align:center;box-shadow:0 0 60px rgba(255,107,53,.25);}
+    .ad-container::before{content:'🎵 PAUSA MUSICAL 🎵';display:block;font-family:'Pacifico',cursive;font-size:1.1rem;color:var(--coral);margin-bottom:20px;}
+    .skip-btn{display:none;background:linear-gradient(135deg,var(--coral),var(--rose));border:none;color:white;padding:12px 30px;cursor:pointer;font-family:'Cabin Condensed',sans-serif;font-size:.9rem;border-radius:20px;letter-spacing:1px;transition:all .3s;}
+    @keyframes shatter{0%{transform:scale(1);opacity:1;}50%{transform:scale(1.05) rotate(2deg);opacity:.7;}100%{transform:scale(0) rotate(15deg);opacity:0;}}
+    .shatter{animation:shatter .8s forwards;}
+    #playlisttable{width:100%;position:relative;z-index:1;border-collapse:collapse;}
+    #playlistalbum td{text-align:center;padding:40px 20px 30px;}
+    #playlistimage{width:140px;height:140px;border-radius:50%;border:3px solid var(--coral);box-shadow:0 0 20px rgba(255,107,53,.4),0 0 50px rgba(0,201,167,.15);object-fit:cover;}
+    #playlistheading{font-family:'Pacifico',cursive;font-size:2.2rem;color:var(--coral);text-shadow:0 0 20px rgba(255,107,53,.5),3px 3px 0 rgba(0,201,167,.3);letter-spacing:3px;margin:16px 0 8px;display:block;}
+    #notrack{font-family:'Cabin Condensed',sans-serif;color:var(--teal);letter-spacing:3px;font-size:.8rem;}
+    #Vsongs>td{width:50%;vertical-align:top;padding:20px 18px;}
+    #Vsadsongs,#Vpartysongs{background:linear-gradient(160deg,rgba(10,22,40,.6),rgba(7,16,32,.8));border:1px solid rgba(255,107,53,.2);border-radius:12px;padding:20px;position:relative;overflow:hidden;}
+    #Vsadsongs::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--teal),var(--coral),var(--teal),transparent);border-radius:12px 12px 0 0;}
+    #Vpartysongs::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--coral),var(--mango),var(--coral),transparent);border-radius:12px 12px 0 0;}
+    #Vsadsongsheading,#Vpartysongsheading{font-family:'Pacifico',cursive;font-size:1rem;color:var(--teal);letter-spacing:2px;text-shadow:0 0 10px rgba(0,201,167,.4);display:block;margin-bottom:16px;}
+    #Vpartysongsheading{color:var(--coral);text-shadow:0 0 10px rgba(255,107,53,.4);}
+    #control-panel{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:14px;}
+    #enterid{font-family:'Cabin Condensed',sans-serif;font-size:.76rem;color:var(--teal);letter-spacing:1px;}
+    #control-panel input{width:56px;padding:6px 8px;background:rgba(10,22,40,.8);border:1px solid rgba(0,201,167,.4);color:var(--warm);font-family:'Cabin Condensed',monospace;font-size:.82rem;border-radius:6px;}
+    #control-panel button{background:transparent;border:1px solid var(--coral);color:var(--coral);padding:6px 14px;font-family:'Cabin Condensed',sans-serif;font-size:.76rem;cursor:pointer;border-radius:16px;transition:all .25s;}
+    #control-panel button:hover{background:var(--coral);color:white;box-shadow:0 0 12px rgba(255,107,53,.4);}
+    .search-container,.search-container2{position:relative;margin-bottom:12px;}
+    .search-container input,.search-container2 input{width:100%;padding:9px 16px;background:rgba(10,22,40,.6);border:1px solid rgba(0,201,167,.25);border-left:3px solid var(--teal);color:var(--warm);font-family:'Nunito',sans-serif;font-size:.82rem;outline:none;border-radius:0 8px 8px 0;transition:all .3s;}
+    .search-container input:focus,.search-container2 input:focus{border-color:var(--coral);box-shadow:0 0 10px rgba(255,107,53,.2);}
+    #suggestions,#suggestions2{display:none;position:absolute;top:100%;left:0;right:0;z-index:200;background:#071020;border:1px solid var(--coral);max-height:220px;overflow-y:auto;box-shadow:0 8px 24px rgba(0,0,0,.5);border-radius:0 0 6px 6px;}
+    #suggestions div,#suggestions2 div{padding:9px 14px;font-size:.78rem;cursor:pointer;transition:background .15s;color:#fff3e0;border-bottom:1px solid rgba(255,255,255,.04);}
+    #suggestions div:hover,#suggestions2 div:hover{background:rgba(255,107,53,.2);}
+    .audio-container{max-height:520px;overflow-y:auto;padding-right:4px;}
+    .audio-container::-webkit-scrollbar{width:4px;}
+    .audio-container::-webkit-scrollbar-thumb{background:var(--coral);border-radius:2px;}
+    .audio-box,.audio-box2{display:flex;align-items:center;gap:12px;padding:10px 14px;margin-bottom:5px;border-left:3px solid var(--teal);background:rgba(10,22,40,.4);cursor:pointer;transition:all .3s;position:relative;border-radius:0 8px 8px 0;}
+    .audio-box:hover{background:rgba(0,201,167,.08);transform:translateX(5px);box-shadow:0 2px 12px rgba(0,201,167,.1);}
+    .audio-box2{border-left-color:var(--coral);}
+    .audio-box2:hover{background:rgba(255,107,53,.08);transform:translateX(5px);box-shadow:0 2px 12px rgba(255,107,53,.1);}
+    .audio-box p,.audio-box2 p{font-family:'Nunito',sans-serif;font-size:.8rem;color:#c8d8e8;font-weight:600;}
+    #songimage{width:38px;height:38px;border-radius:50%;object-fit:cover;border:2px solid rgba(0,201,167,.4);transition:all .3s;cursor:pointer;}
+    .audio-box:hover #songimage{border-color:var(--teal);box-shadow:0 0 10px rgba(0,201,167,.5);}
+    .audio-box2:hover #songimage{border-color:var(--coral);box-shadow:0 0 10px rgba(255,107,53,.5);}
+    .audio-animation{display:flex;align-items:flex-end;gap:3px;height:22px;margin-left:auto;}
+    .dot{width:3px;background:var(--coral);border-radius:3px;animation:bounce .65s ease-in-out infinite;}
+    .dot:nth-child(1){height:8px;animation-delay:0s;}.dot:nth-child(2){height:16px;animation-delay:.1s;}.dot:nth-child(3){height:22px;animation-delay:.2s;}.dot:nth-child(4){height:14px;animation-delay:.3s;}.dot:nth-child(5){height:10px;animation-delay:.4s;}
+    @keyframes bounce{0%,100%{transform:scaleY(.4);}50%{transform:scaleY(1);}}
+    #modeIndicator{position:fixed;bottom:24px;right:24px;font-family:'Cabin Condensed',sans-serif;font-size:.8rem;padding:10px 18px;border:2px solid var(--coral);background:rgba(7,16,32,.92);color:var(--coral);letter-spacing:2px;z-index:10;opacity:0;transition:opacity .5s;border-radius:20px;}
+    #modeIndicator.visible{opacity:1;}
   </style>
 </head>
 <body>
-
-  <nav id="navbar">
-    <div id="logo">
-      <p id="tittle">Vvane Sound World</p>
-      <button id="homebutton" onclick="location.href='index.html'">⬡ Home</button>
-    </div>
-  </nav>
-
-  <div class="ad-overlay" id="adOverlay">
-    <div class="ad-container" id="adContainer">
-      <button class="skip-btn" id="skipBtn">[ SKIP TRANSMISSION ]</button>
-    </div>
-  </div>
-
-  <table id="playlisttable">
-    <tr id="playlistalbum">
-      <td class="blur-content">
-        <img id="playlistimage" src="theboy.jpeg" alt="Reggaeton Playlist">
-        <p id="playlistheading">REGGAETÓN VYBZ</p>
-        <label id="notrack">// 63 TRACKS LOADED</label>
-      </td>
-    </tr>
-    <tr id="Vsongs">
-      <td>
-        <div id="Vsadsongs">
-          <label id="Vsadsongsheading">◈ SAD FREQUENCY</label>
-          <div id="control-panel">
-            <label id="enterid">TRACK ID:</label>
-            <input type="number" id="audioIdInput" min="1" />
-            <button onclick="playById()">▶ PLAY</button>
-            <button onclick="pauseCurrent()">⏸ PAUSE</button>
-            <button onclick="playAll()">⟳ AUTO PLAY</button>
-          </div>
-          <div class="search-container">
-            <input type="text" id="searchBar" placeholder="Search signal..." autocomplete="off">
-            <div id="suggestions"></div>
-          </div>
-          <div class="audio-list" id="audioList"></div>
-          <div class="audio-container" id="audioContainer">
-            <div class="audio-box" data-id="1"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>01 · Bad Bunny — Efecto</p><audio src="Bad Bunny - Efecto (360° Visualizer) _ Un Verano Sin Ti(MP3_160K).mp3"></audio></div>
-            <div class="audio-box" data-id="2"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>02 · Anuel AA & Haze — Amanece</p><audio src="Anuel AA _ Haze - Amanece [Official Video](MP3_160K).mp3"></audio></div>
-            <div class="audio-box" data-id="3"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>03 · Bad Bunny — Un Ratito</p><audio src="Bad Bunny - Un Ratito (360° Visualizer) _ Un Verano Sin Ti(MP3_160K).mp3"></audio></div>
-            <div class="audio-box" data-id="4"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>04 · Bad Bunny — VETE</p><audio src="BAD BUNNY - VETE _ YHLQMDLG (Video Oficial)(MP3_160K).mp3"></audio></div>
-            <div class="audio-box" data-id="5"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>05 · BLESSD ❌ Ovy On The Drums — BILLBOARD</p><audio src="BLESSD  ❌ Ovy On The Drums - BILLBOARD (Official Video)(MP3_160K).mp3"></audio></div>
-            <div class="audio-box" data-id="6"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>06 · DÁKITI</p><audio src="DÁKITI(MP3_160K).mp3"></audio></div>
-            <div class="audio-box" data-id="7"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>07 · Feid — Ferxxo 100</p><audio src="Feid - Ferxxo 100 (Official Video)(MP3_160K).mp3"></audio></div>
-            <div class="audio-box" data-id="8"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>08 · Feid — Normal</p><audio src="Feid - Normal (Official Video)(MP3_160K).mp3"></audio></div>
-            <div class="audio-box" data-id="9"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>09 · Feid — Si Te La Encuentras Por Ahí</p><audio src="Feid - Si Te La Encuentras Por Ahí (Official Video)(MP3_160K).mp3"></audio></div>
-            <div class="audio-box" data-id="10"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>10 · Feid — SI TÚ SUPIERAS</p><audio src="Feid - SI TÚ SUPIERAS (Official Video)(MP3_160K).mp3"></audio></div>
-            <div class="audio-box" data-id="11"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>11 · Feid — VACAXIONES</p><audio src="Feid - VACAXIONES (Official Video)(MP3_160K).mp3"></audio></div>
-            <div class="audio-box" data-id="12"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>12 · Feid — VACAXIONES (Alt)</p><audio src="Feid - VACAXIONES (Official Video)(MP3_160K).mp3"></audio></div>
-            <div class="audio-box" data-id="13"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>13 · J Balvin, Dua Lipa, Bad Bunny — UN DIA</p><audio src="J Balvin_ Dua Lipa_ Bad Bunny_ Tainy - UN DIA (ONE DAY)(MP3_160K).mp3"></audio></div>
-            <div class="audio-box" data-id="14"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>14 · ME ARREPENTÍ — AK4_20 FT PAILITA & CRIS MJ</p><audio src="ME ARREPENTÍ - AK4_20 FT PAILITA _CRIS MJ(MP3_160K).mp3"></audio></div>
-            <div class="audio-box" data-id="15"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>15 · Myke Towers — ESENCIA</p><audio src="Myke Towers - ESENCIA (Visualizer)(MP3_160K).mp3"></audio></div>
-            <div class="audio-box" data-id="16"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>16 · Ozuna FT Anuel AA — Bebe</p><audio src="Ozuna FT Anuel AA - Bebe (Lyric Video) _ Odisea(MP3_160K).mp3"></audio></div>
-            <div class="audio-box" data-id="17"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>17 · Pedro Capó, Farruko — Calma (Remix)</p><audio src="Pedro Capó_ Farruko - Calma (Remix - Official Video)(MP3_160K).mp3"></audio></div>
-            <div class="audio-box" data-id="18"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>18 · QUEVEDO — BZRP Music Sessions #52</p><audio src="QUEVEDO __ BZRP Music Sessions _52(MP3_160K).mp3"></audio></div>
-            <div class="audio-box" data-id="19"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>19 · SHAKIRA — BZRP Music Sessions #53</p><audio src="SHAKIRA __ BZRP Music Sessions _53(MP3_160K).mp3"></audio></div>
-            <div class="audio-box" data-id="20"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>20 · Rita Ora, Sofía Reyes, Reik — Seaside</p><audio src="Diane Warren_ Rita Ora_ Sofía Reyes_ Reik - Seaside (Official Music Video)(MP3_160K).mp3"></audio></div>
-            <div class="audio-box" data-id="21"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>21 · Feid — Normal (Alt)</p><audio src="Feid - Normal (Official Video)(MP3_160K).mp3"></audio></div>
-            <div class="audio-box" data-id="22"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>22 · Myke Towers — 100 COPAS</p><audio src="Myke Towers - 100 COPAS (Visualizer)(MP3_160K).mp3"></audio></div>
-            <div class="audio-box" data-id="23"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>23 · Myke Towers — BUCHANANS 18</p><audio src="Myke Towers - BUCHANANS 18 (Visualizer)(MP3_160K).mp3"></audio></div>
-            <div class="audio-box" data-id="24"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>24 · Myke Towers — EL GISTRO</p><audio src="Myke Towers - EL GISTRO (Visualizer)(MP3_160K).mp3"></audio></div>
-            <div class="audio-box" data-id="25"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>25 · Myke Towers — EXPECTATIVAS</p><audio src="Myke Towers - EXPECTATIVAS (Visualizer)(MP3_160K).mp3"></audio></div>
-            <div class="audio-box" data-id="26"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>26 · Myke Towers — MONÓTONO</p><audio src="Myke Towers - MONÓTONO (Visualizer)(MP3_160K).mp3"></audio></div>
-            <div class="audio-box" data-id="27"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>27 · Quevedo — Punto G</p><audio src="Punto G - Quevedo(MP3_160K).mp3"></audio></div>
-            <div class="audio-box" data-id="28"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>28 · Sebastián Yatra, Myke Towers — Pareja del Año</p><audio src="Sebastián Yatra_ Myke Towers - Pareja del Año (Official Performance Video)(MP3_160K).mp3"></audio></div>
-            <div class="audio-box" data-id="29"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>29 · Quevedo — TUCHAT</p><audio src="TUCHAT - Quevedo (Official Video)(MP3_160K).mp3"></audio></div>
-            <div class="audio-box" data-id="30"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>30 · Quevedo — Vista Al Mar</p><audio src="Vista Al Mar - Quevedo(MP3_160K).mp3"></audio></div>
-            <div class="audio-box" data-id="31"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>31 · Myke Towers — POR UN QLO ASÍ</p><audio src="Myke Towers - POR UN QLO ASÍ (Visualizer)(MP3_160K).mp3"></audio></div>
-          </div>
-        </div>
-      </td>
-
-      <td>
-        <div id="Vpartysongs">
-          <label id="Vpartysongsheading">◈ PARTY MATRIX</label>
-          <div id="control-panel">
-            <label id="enterid">TRACK ID:</label>
-            <input type="number" id="audioIdInput2" min="1" />
-            <button onclick="playById2()">▶ PLAY</button>
-            <button onclick="pauseCurrent2()">⏸ PAUSE</button>
-            <button onclick="playAll2()">⟳ AUTO PLAY</button>
-          </div>
-          <div class="search-container2">
-            <input type="text" id="searchBar2" placeholder="Search signal..." autocomplete="off">
-            <div id="suggestions2"></div>
-          </div>
-          <div class="audio-list2" id="audioList2"></div>
-          <div class="audio-container" id="audioContainer2">
-            <div class="audio-box2" data-id="1"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>01 · Nicky Jam — Hasta el Amanecer</p><audio src="22. Hasta el Amanecer - Nicky Jam _ Video Oficial(MP3_160K).mp3"></audio></div>
-            <div class="audio-box2" data-id="2"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>02 · 6ix9ine — BEBE ft. Anuel AA</p><audio src="6ix9ine - BEBE ft. Anuel AA(MP3_160K).mp3"></audio></div>
-            <div class="audio-box2" data-id="3"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>03 · 6ix9ine — Pa Ti ft. Yailin</p><audio src="6ix9ine - Pa Ti (feat. Yailin La Más Viral) (Official Music Video)(MP3_160K).mp3"></audio></div>
-            <div class="audio-box2" data-id="4"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>04 · Alex Sensation & Ozuna — Que Va</p><audio src="Alex Sensation_ Ozuna - Que Va(MP3_160K).mp3"></audio></div>
-            <div class="audio-box2" data-id="5"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>05 · Anuel AA & KAROL G — Secreto</p><audio src="Anuel AA_ KAROL G - Secreto(MP3_160K).mp3"></audio></div>
-            <div class="audio-box2" data-id="6"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>06 · Bad Bunny ft. Rauw Alejandro — Party</p><audio src="Bad Bunny (ft. Rauw Alejandro) - Party (360° Visualizer) _ Un Verano Sin Ti(MP3_160K).mp3"></audio></div>
-            <div class="audio-box2" data-id="7"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>07 · Chulo Pt.2</p><audio src="Chulo pt.2(MP3_160K).mp3"></audio></div>
-            <div class="audio-box2" data-id="8"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>08 · CNCO & Little Mix — Reggaetón Lento (Remix)</p><audio src="CNCO_ Little Mix - Reggaetón Lento (Remix) [Official Video](MP3_160K).mp3"></audio></div>
-            <div class="audio-box2" data-id="9"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>09 · CNCO, Meghan Trainor, Sean Paul — Hey DJ</p><audio src="CNCO_ Meghan Trainor_ Sean Paul - Hey DJ (Remix) [Official Video](MP3_160K).mp3"></audio></div>
-            <div class="audio-box2" data-id="10"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>10 · Cris MJ — Partyson</p><audio src="Cris MJ - Partyson (Video Oficial)(MP3_160K).mp3"></audio></div>
-            <div class="audio-box2" data-id="11"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>11 · Cris MJ & Dei V — Diabólica</p><audio src="Cris MJ_ Dei V - Diabólica (Visualizer) _ Partyson(MP3_160K).mp3"></audio></div>
-            <div class="audio-box2" data-id="12"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>12 · Cristal</p><audio src="Cristal(MP3_160K).mp3"></audio></div>
-            <div class="audio-box2" data-id="13"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>13 · Enrique Iglesias — DUELE EL CORAZON ft. Wisin</p><audio src="Enrique Iglesias - DUELE EL CORAZON ft. Wisin(MP3_160K).mp3"></audio></div>
-            <div class="audio-box2" data-id="14"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>14 · Enrique Iglesias — EL BAÑO ft. Bad Bunny</p><audio src="Enrique Iglesias - EL BAÑO ft. Bad Bunny(MP3_160K).mp3"></audio></div>
-            <div class="audio-box2" data-id="15"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>15 · Enrique Iglesias & Yotuel — Fría</p><audio src="Enrique Iglesias_ Yotuel - Fría (Official Video)(MP3_160K).mp3"></audio></div>
-            <div class="audio-box2" data-id="16"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>16 · Era Istrefi — Bonbon</p><audio src="Era Istrefi - Bonbon (Official Video) [Ultra Records](MP3_160K).mp3"></audio></div>
-            <div class="audio-box2" data-id="17"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>17 · Feid — VACAXIONES</p><audio src="Feid - VACAXIONES (Official Video)(MP3_160K).mp3"></audio></div>
-            <div class="audio-box2" data-id="18"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>18 · I Don't Even Speak Spanish Lol</p><audio src="I don_t even speak spanish lol(MP3_160K).mp3"></audio></div>
-            <div class="audio-box2" data-id="19"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>19 · J Balvin — Azul</p><audio src="J Balvin - Azul (Official Animated Video)(MP3_160K).mp3"></audio></div>
-            <div class="audio-box2" data-id="20"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>20 · KAROL G & Ovy On The Drums — Cairo</p><audio src="KAROL G_ Ovy On The Drums - Cairo (Official Video)(MP3_160K).mp3"></audio></div>
-            <div class="audio-box2" data-id="21"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>21 · MTZ Manuel Turizo — La Nota</p><audio src="La Nota - MTZ Manuel Turizo x Rauw Alejandro x Myke Towers _ Video Oficial(MP3_160K).mp3"></audio></div>
-            <div class="audio-box2" data-id="22"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>22 · Maluma — 11 P.M.</p><audio src="Maluma - 11 P.M. (Letra)(MP3_160K).mp3"></audio></div>
-            <div class="audio-box2" data-id="23"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>23 · Maluma — Hawái</p><audio src="Maluma - Hawái (Letra_Lyrics)(MP3_160K).mp3"></audio></div>
-            <div class="audio-box2" data-id="24"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>24 · Cris MJ — MARISOLA</p><audio src="MARISOLA (Video Oficial) - CRIS MJ x STANDLY x STARS MUSIC CHILE(MP3_160K).mp3"></audio></div>
-            <div class="audio-box2" data-id="25"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>25 · Myke Towers — COSMETICOS</p><audio src="Myke Towers - COSMETICOS (Visualizer)(MP3_160K).mp3"></audio></div>
-            <div class="audio-box2" data-id="26"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>26 · Myke Towers — LA FALDA</p><audio src="Myke Towers - LA FALDA (Video Oficial)(MP3_160K).mp3"></audio></div>
-            <div class="audio-box2" data-id="27"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>27 · Myke Towers — Lala</p><audio src="Myke Towers - Lala (Video Oficial)(MP3_160K).mp3"></audio></div>
-            <div class="audio-box2" data-id="28"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>28 · Natti Natasha x Ozuna — Criminal</p><audio src="Natti Natasha x Ozuna - Criminal (Lyrics)(MP3_160K).mp3"></audio></div>
-            <div class="audio-box2" data-id="29"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>29 · Anuel AA, Quevedo, Maluma — OA</p><audio src="OA -  Anuel AA_ Quevedo_ Maluma Feat. DJ Luian_ Mambo Kingz (Video Oficial)(MP3_160K).mp3"></audio></div>
-            <div class="audio-box2" data-id="30"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>30 · Ozuna x Karol G x Myke Towers — Caramelo Remix</p><audio src="Ozuna x Karol G x Myke Towers - Caramelo Remix  (Video Oficial)(MP3_160K).mp3"></audio></div>
-            <div class="audio-box2" data-id="31"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>31 · Ozuna & Feid — Hey Mor</p><audio src="Ozuna_ Feid - Hey Mor (Video Oficial) _ Ozutochi(MP3_160K).mp3"></audio></div>
-            <div class="audio-box2" data-id="32"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>32 · Quevedo & Myke Towers — Playa Del Inglés</p><audio src="Playa Del Inglés - Quevedo_ Myke Towers (Video Oficial)(MP3_160K).mp3"></audio></div>
-            <div class="audio-box2" data-id="33"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>33 · QUEVEDO — BZRP Music Sessions</p><audio src="QUEVEDO __ BZRP Music Sessions _52(MP3_160K).mp3"></audio></div>
-            <div class="audio-box2" data-id="34"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>34 · Ram Dance Style</p><audio src="Ram Dance Style(MP3_160K).mp3"></audio></div>
-            <div class="audio-box2" data-id="35"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>35 · Bellakath ft Dani Flow — REGGAETON CHAMPAGNE</p><audio src="REGGAETON CHAMPAGNE - Bellakath ft Dani Flow (Video Oficial)(MP3_160K).mp3"></audio></div>
-            <div class="audio-box2" data-id="36"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>36 · REGGAETON NUEVO 2023 MIX 🔥</p><audio src="REGGAETON NUEVO 2023 MIX 🔥 _ LO MAS SONADO _ DJ NINO G 🔥 feid_ karol g_ bad bunny_ Peso Pluma(MP3_160K).mp3"></audio></div>
-            <div class="audio-box2" data-id="37"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>37 · Rvssian — IDKW ft. Young Thug</p><audio src="Rvssian - IDKW (Lyrics) Feat. Young Thug w_ Swae Lee _ Shenseea(MP3_160K).mp3"></audio></div>
-            <div class="audio-box2" data-id="38"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>38 · SOG, Big Metra — Al Natural</p><audio src="SOG_ Big Metra - Al Natural (Video Oficial)(MP3_160K).mp3"></audio></div>
-            <div class="audio-box2" data-id="39"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>39 · Standly — Pégate</p><audio src="Standly - Pégate (Prod. By Big Cvyu)(MP3_160K).mp3"></audio></div>
-            <div class="audio-box2" data-id="40"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>40 · Tainy, Anuel AA, Ozuna — Adicto</p><audio src="Tainy_ Anuel AA_ Ozuna - Adicto (Official Video)(MP3_160K).mp3"></audio></div>
-            <div class="audio-box2" data-id="41"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>41 · Nicky Jam x Ozuna — Te Robaré</p><audio src="Te Robaré - Nicky Jam x Ozuna  _ Video Oficial(MP3_160K).mp3"></audio></div>
-            <div class="audio-box2" data-id="42"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>42 · Wisin — Escápate Conmigo ft. Ozuna</p><audio src="Wisin - Escápate Conmigo (Official Video) ft. Ozuna(MP3_160K).mp3"></audio></div>
-            <div class="audio-box2" data-id="43"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>43 · Nicky Jam x J. Balvin — X (EQUIS)</p><audio src="X (EQUIS) - Nicky Jam x J. Balvin _ Video Oficial  (Prod. Afro Bros _ Jeon)(MP3_160K).mp3"></audio></div>
-            <div class="audio-box2" data-id="44"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>44 · 8Uno — Pelotero A La Bola</p><audio src="8Uno - Pelotero A La Bola Feat. Airam Páez (Video Oficial) _warnermusicmexico(MP3_160K).mp3"></audio></div>
-            <div class="audio-box2" data-id="45"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>45 · Marcynho Sensação — COMPREI UM PAREDÃO</p><audio src="COMPREI UM PAREDÃO - Marcynho Sensação (Sensação no Batidão)(MP3_160K).mp3"></audio></div>
-            <div class="audio-box2" data-id="46"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>46 · Cris MJ — Vamo a Bailotear</p><audio src="Cris MJ - Vamo a Bailotear (Visualizer) _ Apocalipsis(MP3_160K).mp3"></audio></div>
-            <div class="audio-box2" data-id="47"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>47 · Farruko — Pepas</p><audio src="Farruko - Pepas (Letra_Lyrics)(MP3_160K).mp3"></audio></div>
-            <div class="audio-box2" data-id="48"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>48 · KAROL G — Si Antes Te Hubiera Conocido</p><audio src="KAROL G - Si Antes Te Hubiera Conocido _ Coke Studio(MP3_160K).mp3"></audio></div>
-            <div class="audio-box2" data-id="49"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>49 · Caribbean Hits — MULHER ROLEIRA</p><audio src="MULHER ROLEIRA (SOLINHO ENVOLVENTE) - Caribbean Hits e Marcynho Sensação (Clipe Oficial)(MP3_160K).mp3"></audio></div>
-            <div class="audio-box2" data-id="50"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>50 · Myke Towers & Gabito Ballesteros — NO QUIERE FLORES</p><audio src="Myke Towers _ Gabito Ballesteros - NO QUIERE FLORES (Visualizer)(MP3_160K).mp3"></audio></div>
-            <div class="audio-box2" data-id="51"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>51 · Nio Garcia, Brray, Anuel AA, Myke Towers — La Jeepeta Remix</p><audio src="Nio Garcia x Brray x Juanka x Anuel AA x Myke Towers - La Jeepeta Remix (Video Oficial)(MP3_160K).mp3"></audio></div>
-            <div class="audio-box2" data-id="52"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>52 · Myke Towers & iZaak — SURFERITA</p><audio src="Myke Towers _ iZaak - SURFERITA (Visualizer)(MP3_160K).mp3"></audio></div>
-            <div class="audio-box2" data-id="53"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>53 · Myke Towers & iZaak — SURFERITA (Alt)</p><audio src="Myke Towers _ iZaak - SURFERITA (Visualizer)(MP3_160K).mp3"></audio></div>
-            <div class="audio-box2" data-id="54"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>54 · Quevedo — TUCHAT</p><audio src="TUCHAT - Quevedo (Official Video)(MP3_160K).mp3"></audio></div>
-            <div class="audio-box2" data-id="55"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>55 · Myke Towers & De La Ghetto — RICA BEBE</p><audio src="Myke Towers _ De La Ghetto - RICA BEBE (Visualizer)(MP3_160K).mp3"></audio></div>
-            <div class="audio-box2" data-id="56"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>56 · Yandel & Feid — Yandel 150</p><audio src="Yandel_ Feid  - Yandel 150 (Video Oficial)(MP3_160K).mp3"></audio></div>
-          </div>
-        </div>
-      </td>
-    </tr>
-  </table>
-
+<canvas id="bgCanvas"></canvas>
+<nav><p id="tittle">Vvane Sound World</p><button id="homebutton" onclick="location.href='index.html'">🏠 Home</button></nav>
+<div class="ad-overlay" id="adOverlay"><div class="ad-container" id="adContainer"><button class="skip-btn" id="skipBtn">Saltar ⏭</button></div></div>
+<div id="modeIndicator"></div>
+<table id="playlisttable">
+  <tr id="playlistalbum"><td colspan="2"><img id="playlistimage" src="theboy.jpeg" alt="Latino"/><p id="playlistheading">LATINO VYBZ</p><label id="notrack">🎵 87 TRACKS 🎵</label></td></tr>
+  <tr id="Vsongs">
+    <td><div id="Vsadsongs">
+      <label id="Vsadsongsheading">🌊 Olas del Alma</label>
+      <div id="control-panel"><label id="enterid">ID:</label><input type="number" id="audioIdInput" min="1"/><button onclick="sad.playById()">▶ PLAY</button><button onclick="sad.pause()">⏸ PAUSE</button><button onclick="sad.playAll()">⟳ AUTO</button></div>
+      <div class="search-container"><input type="text" id="searchBar" placeholder="Buscar canción..." autocomplete="off"><div id="suggestions"></div></div>
+      <div class="audio-container"><div class="audio-box" data-id="01"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>01 · Bad Bunny — Efecto</p><audio src="Bad Bunny - Efecto (360° Visualizer) _ Un Verano Sin Ti(MP3_160K).mp3"></audio></div>
+<div class="audio-box" data-id="02"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>02 · Anuel AA & Haze — Amanece</p><audio src="Anuel AA _ Haze - Amanece [Official Video](MP3_160K).mp3"></audio></div>
+<div class="audio-box" data-id="03"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>03 · Bad Bunny — Un Ratito</p><audio src="Bad Bunny - Un Ratito (360° Visualizer) _ Un Verano Sin Ti(MP3_160K).mp3"></audio></div>
+<div class="audio-box" data-id="04"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>04 · Bad Bunny — VETE</p><audio src="BAD BUNNY - VETE _ YHLQMDLG (Video Oficial)(MP3_160K).mp3"></audio></div>
+<div class="audio-box" data-id="05"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>05 · BLESSD ❌ Ovy On The Drums — BILLBOARD</p><audio src="BLESSD  ❌ Ovy On The Drums - BILLBOARD (Official Video)(MP3_160K).mp3"></audio></div>
+<div class="audio-box" data-id="06"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>06 · DÁKITI</p><audio src="DÁKITI(MP3_160K).mp3"></audio></div>
+<div class="audio-box" data-id="07"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>07 · Feid — Ferxxo 100</p><audio src="Feid - Ferxxo 100 (Official Video)(MP3_160K).mp3"></audio></div>
+<div class="audio-box" data-id="08"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>08 · Feid — Normal</p><audio src="Feid - Normal (Official Video)(MP3_160K).mp3"></audio></div>
+<div class="audio-box" data-id="09"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>09 · Feid — Si Te La Encuentras Por Ahí</p><audio src="Feid - Si Te La Encuentras Por Ahí (Official Video)(MP3_160K).mp3"></audio></div>
+<div class="audio-box" data-id="10"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>10 · Feid — SI TÚ SUPIERAS</p><audio src="Feid - SI TÚ SUPIERAS (Official Video)(MP3_160K).mp3"></audio></div>
+<div class="audio-box" data-id="11"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>11 · Feid — VACAXIONES</p><audio src="Feid - VACAXIONES (Official Video)(MP3_160K).mp3"></audio></div>
+<div class="audio-box" data-id="12"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>12 · Feid — VACAXIONES (Alt)</p><audio src="Feid - VACAXIONES (Official Video)(MP3_160K).mp3"></audio></div>
+<div class="audio-box" data-id="13"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>13 · J Balvin, Dua Lipa, Bad Bunny — UN DIA</p><audio src="J Balvin_ Dua Lipa_ Bad Bunny_ Tainy - UN DIA (ONE DAY)(MP3_160K).mp3"></audio></div>
+<div class="audio-box" data-id="14"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>14 · ME ARREPENTÍ — AK4_20 FT PAILITA & CRIS MJ</p><audio src="ME ARREPENTÍ - AK4_20 FT PAILITA _CRIS MJ(MP3_160K).mp3"></audio></div>
+<div class="audio-box" data-id="15"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>15 · Myke Towers — ESENCIA</p><audio src="Myke Towers - ESENCIA (Visualizer)(MP3_160K).mp3"></audio></div>
+<div class="audio-box" data-id="16"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>16 · Ozuna FT Anuel AA — Bebe</p><audio src="Ozuna FT Anuel AA - Bebe (Lyric Video) _ Odisea(MP3_160K).mp3"></audio></div>
+<div class="audio-box" data-id="17"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>17 · Pedro Capó, Farruko — Calma (Remix)</p><audio src="Pedro Capó_ Farruko - Calma (Remix - Official Video)(MP3_160K).mp3"></audio></div>
+<div class="audio-box" data-id="18"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>18 · QUEVEDO — BZRP Music Sessions #52</p><audio src="QUEVEDO __ BZRP Music Sessions _52(MP3_160K).mp3"></audio></div>
+<div class="audio-box" data-id="19"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>19 · SHAKIRA — BZRP Music Sessions #53</p><audio src="SHAKIRA __ BZRP Music Sessions _53(MP3_160K).mp3"></audio></div>
+<div class="audio-box" data-id="20"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>20 · Rita Ora, Sofía Reyes, Reik — Seaside</p><audio src="Diane Warren_ Rita Ora_ Sofía Reyes_ Reik - Seaside (Official Music Video)(MP3_160K).mp3"></audio></div>
+<div class="audio-box" data-id="21"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>21 · Feid — Normal (Alt)</p><audio src="Feid - Normal (Official Video)(MP3_160K).mp3"></audio></div>
+<div class="audio-box" data-id="22"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>22 · Myke Towers — 100 COPAS</p><audio src="Myke Towers - 100 COPAS (Visualizer)(MP3_160K).mp3"></audio></div>
+<div class="audio-box" data-id="23"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>23 · Myke Towers — BUCHANANS 18</p><audio src="Myke Towers - BUCHANANS 18 (Visualizer)(MP3_160K).mp3"></audio></div>
+<div class="audio-box" data-id="24"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>24 · Myke Towers — EL GISTRO</p><audio src="Myke Towers - EL GISTRO (Visualizer)(MP3_160K).mp3"></audio></div>
+<div class="audio-box" data-id="25"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>25 · Myke Towers — EXPECTATIVAS</p><audio src="Myke Towers - EXPECTATIVAS (Visualizer)(MP3_160K).mp3"></audio></div>
+<div class="audio-box" data-id="26"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>26 · Myke Towers — MONÓTONO</p><audio src="Myke Towers - MONÓTONO (Visualizer)(MP3_160K).mp3"></audio></div>
+<div class="audio-box" data-id="27"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>27 · Quevedo — Punto G</p><audio src="Punto G - Quevedo(MP3_160K).mp3"></audio></div>
+<div class="audio-box" data-id="28"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>28 · Sebastián Yatra, Myke Towers — Pareja del Año</p><audio src="Sebastián Yatra_ Myke Towers - Pareja del Año (Official Performance Video)(MP3_160K).mp3"></audio></div>
+<div class="audio-box" data-id="29"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>29 · Quevedo — TUCHAT</p><audio src="TUCHAT - Quevedo (Official Video)(MP3_160K).mp3"></audio></div>
+<div class="audio-box" data-id="30"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>30 · Quevedo — Vista Al Mar</p><audio src="Vista Al Mar - Quevedo(MP3_160K).mp3"></audio></div>
+<div class="audio-box" data-id="31"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>31 · Myke Towers — POR UN QLO ASÍ</p><audio src="Myke Towers - POR UN QLO ASÍ (Visualizer)(MP3_160K).mp3"></audio></div>
+</div>
+    </div></td>
+    <td><div id="Vpartysongs">
+      <label id="Vpartysongsheading">☀️ Fuego Latino</label>
+      <div id="control-panel"><label id="enterid">ID:</label><input type="number" id="audioIdInput2" min="1"/><button onclick="party.playById()">▶ PLAY</button><button onclick="party.pause()">⏸ PAUSE</button><button onclick="party.playAll()">⟳ AUTO</button></div>
+      <div class="search-container2"><input type="text" id="searchBar2" placeholder="Buscar canción..." autocomplete="off"><div id="suggestions2"></div></div>
+      <div class="audio-container"><div class="audio-box2" data-id="01"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>01 · Nicky Jam — Hasta el Amanecer</p><audio src="22. Hasta el Amanecer - Nicky Jam _ Video Oficial(MP3_160K).mp3"></audio></div>
+<div class="audio-box2" data-id="02"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>02 · 6ix9ine — BEBE ft. Anuel AA</p><audio src="6ix9ine - BEBE ft. Anuel AA(MP3_160K).mp3"></audio></div>
+<div class="audio-box2" data-id="03"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>03 · 6ix9ine — Pa Ti ft. Yailin</p><audio src="6ix9ine - Pa Ti (feat. Yailin La Más Viral) (Official Music Video)(MP3_160K).mp3"></audio></div>
+<div class="audio-box2" data-id="04"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>04 · Alex Sensation & Ozuna — Que Va</p><audio src="Alex Sensation_ Ozuna - Que Va(MP3_160K).mp3"></audio></div>
+<div class="audio-box2" data-id="05"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>05 · Anuel AA & KAROL G — Secreto</p><audio src="Anuel AA_ KAROL G - Secreto(MP3_160K).mp3"></audio></div>
+<div class="audio-box2" data-id="06"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>06 · Bad Bunny ft. Rauw Alejandro — Party</p><audio src="Bad Bunny (ft. Rauw Alejandro) - Party (360° Visualizer) _ Un Verano Sin Ti(MP3_160K).mp3"></audio></div>
+<div class="audio-box2" data-id="07"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>07 · Chulo Pt.2</p><audio src="Chulo pt.2(MP3_160K).mp3"></audio></div>
+<div class="audio-box2" data-id="08"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>08 · CNCO & Little Mix — Reggaetón Lento (Remix)</p><audio src="CNCO_ Little Mix - Reggaetón Lento (Remix) [Official Video](MP3_160K).mp3"></audio></div>
+<div class="audio-box2" data-id="09"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>09 · CNCO, Meghan Trainor, Sean Paul — Hey DJ</p><audio src="CNCO_ Meghan Trainor_ Sean Paul - Hey DJ (Remix) [Official Video](MP3_160K).mp3"></audio></div>
+<div class="audio-box2" data-id="10"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>10 · Cris MJ — Partyson</p><audio src="Cris MJ - Partyson (Video Oficial)(MP3_160K).mp3"></audio></div>
+<div class="audio-box2" data-id="11"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>11 · Cris MJ & Dei V — Diabólica</p><audio src="Cris MJ_ Dei V - Diabólica (Visualizer) _ Partyson(MP3_160K).mp3"></audio></div>
+<div class="audio-box2" data-id="12"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>12 · Cristal</p><audio src="Cristal(MP3_160K).mp3"></audio></div>
+<div class="audio-box2" data-id="13"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>13 · Enrique Iglesias — DUELE EL CORAZON ft. Wisin</p><audio src="Enrique Iglesias - DUELE EL CORAZON ft. Wisin(MP3_160K).mp3"></audio></div>
+<div class="audio-box2" data-id="14"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>14 · Enrique Iglesias — EL BAÑO ft. Bad Bunny</p><audio src="Enrique Iglesias - EL BAÑO ft. Bad Bunny(MP3_160K).mp3"></audio></div>
+<div class="audio-box2" data-id="15"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>15 · Enrique Iglesias & Yotuel — Fría</p><audio src="Enrique Iglesias_ Yotuel - Fría (Official Video)(MP3_160K).mp3"></audio></div>
+<div class="audio-box2" data-id="16"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>16 · Era Istrefi — Bonbon</p><audio src="Era Istrefi - Bonbon (Official Video) [Ultra Records](MP3_160K).mp3"></audio></div>
+<div class="audio-box2" data-id="17"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>17 · Feid — VACAXIONES</p><audio src="Feid - VACAXIONES (Official Video)(MP3_160K).mp3"></audio></div>
+<div class="audio-box2" data-id="18"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>18 · I Don't Even Speak Spanish Lol</p><audio src="I don_t even speak spanish lol(MP3_160K).mp3"></audio></div>
+<div class="audio-box2" data-id="19"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>19 · J Balvin — Azul</p><audio src="J Balvin - Azul (Official Animated Video)(MP3_160K).mp3"></audio></div>
+<div class="audio-box2" data-id="20"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>20 · KAROL G & Ovy On The Drums — Cairo</p><audio src="KAROL G_ Ovy On The Drums - Cairo (Official Video)(MP3_160K).mp3"></audio></div>
+<div class="audio-box2" data-id="21"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>21 · MTZ Manuel Turizo — La Nota</p><audio src="La Nota - MTZ Manuel Turizo x Rauw Alejandro x Myke Towers _ Video Oficial(MP3_160K).mp3"></audio></div>
+<div class="audio-box2" data-id="22"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>22 · Maluma — 11 P.M.</p><audio src="Maluma - 11 P.M. (Letra)(MP3_160K).mp3"></audio></div>
+<div class="audio-box2" data-id="23"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>23 · Maluma — Hawái</p><audio src="Maluma - Hawái (Letra_Lyrics)(MP3_160K).mp3"></audio></div>
+<div class="audio-box2" data-id="24"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>24 · Cris MJ — MARISOLA</p><audio src="MARISOLA (Video Oficial) - CRIS MJ x STANDLY x STARS MUSIC CHILE(MP3_160K).mp3"></audio></div>
+<div class="audio-box2" data-id="25"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>25 · Myke Towers — COSMETICOS</p><audio src="Myke Towers - COSMETICOS (Visualizer)(MP3_160K).mp3"></audio></div>
+<div class="audio-box2" data-id="26"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>26 · Myke Towers — LA FALDA</p><audio src="Myke Towers - LA FALDA (Video Oficial)(MP3_160K).mp3"></audio></div>
+<div class="audio-box2" data-id="27"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>27 · Myke Towers — Lala</p><audio src="Myke Towers - Lala (Video Oficial)(MP3_160K).mp3"></audio></div>
+<div class="audio-box2" data-id="28"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>28 · Natti Natasha x Ozuna — Criminal</p><audio src="Natti Natasha x Ozuna - Criminal (Lyrics)(MP3_160K).mp3"></audio></div>
+<div class="audio-box2" data-id="29"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>29 · Anuel AA, Quevedo, Maluma — OA</p><audio src="OA -  Anuel AA_ Quevedo_ Maluma Feat. DJ Luian_ Mambo Kingz (Video Oficial)(MP3_160K).mp3"></audio></div>
+<div class="audio-box2" data-id="30"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>30 · Ozuna x Karol G x Myke Towers — Caramelo Remix</p><audio src="Ozuna x Karol G x Myke Towers - Caramelo Remix  (Video Oficial)(MP3_160K).mp3"></audio></div>
+<div class="audio-box2" data-id="31"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>31 · Ozuna & Feid — Hey Mor</p><audio src="Ozuna_ Feid - Hey Mor (Video Oficial) _ Ozutochi(MP3_160K).mp3"></audio></div>
+<div class="audio-box2" data-id="32"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>32 · Quevedo & Myke Towers — Playa Del Inglés</p><audio src="Playa Del Inglés - Quevedo_ Myke Towers (Video Oficial)(MP3_160K).mp3"></audio></div>
+<div class="audio-box2" data-id="33"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>33 · QUEVEDO — BZRP Music Sessions</p><audio src="QUEVEDO __ BZRP Music Sessions _52(MP3_160K).mp3"></audio></div>
+<div class="audio-box2" data-id="34"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>34 · Ram Dance Style</p><audio src="Ram Dance Style(MP3_160K).mp3"></audio></div>
+<div class="audio-box2" data-id="35"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>35 · Bellakath ft Dani Flow — REGGAETON CHAMPAGNE</p><audio src="REGGAETON CHAMPAGNE - Bellakath ft Dani Flow (Video Oficial)(MP3_160K).mp3"></audio></div>
+<div class="audio-box2" data-id="36"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>36 · REGGAETON NUEVO 2023 MIX 🔥</p><audio src="REGGAETON NUEVO 2023 MIX 🔥 _ LO MAS SONADO _ DJ NINO G 🔥 feid_ karol g_ bad bunny_ Peso Pluma(MP3_160K).mp3"></audio></div>
+<div class="audio-box2" data-id="37"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>37 · Rvssian — IDKW ft. Young Thug</p><audio src="Rvssian - IDKW (Lyrics) Feat. Young Thug w_ Swae Lee _ Shenseea(MP3_160K).mp3"></audio></div>
+<div class="audio-box2" data-id="38"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>38 · SOG, Big Metra — Al Natural</p><audio src="SOG_ Big Metra - Al Natural (Video Oficial)(MP3_160K).mp3"></audio></div>
+<div class="audio-box2" data-id="39"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>39 · Standly — Pégate</p><audio src="Standly - Pégate (Prod. By Big Cvyu)(MP3_160K).mp3"></audio></div>
+<div class="audio-box2" data-id="40"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>40 · Tainy, Anuel AA, Ozuna — Adicto</p><audio src="Tainy_ Anuel AA_ Ozuna - Adicto (Official Video)(MP3_160K).mp3"></audio></div>
+<div class="audio-box2" data-id="41"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>41 · Nicky Jam x Ozuna — Te Robaré</p><audio src="Te Robaré - Nicky Jam x Ozuna  _ Video Oficial(MP3_160K).mp3"></audio></div>
+<div class="audio-box2" data-id="42"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>42 · Wisin — Escápate Conmigo ft. Ozuna</p><audio src="Wisin - Escápate Conmigo (Official Video) ft. Ozuna(MP3_160K).mp3"></audio></div>
+<div class="audio-box2" data-id="43"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>43 · Nicky Jam x J. Balvin — X (EQUIS)</p><audio src="X (EQUIS) - Nicky Jam x J. Balvin _ Video Oficial  (Prod. Afro Bros _ Jeon)(MP3_160K).mp3"></audio></div>
+<div class="audio-box2" data-id="44"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>44 · 8Uno — Pelotero A La Bola</p><audio src="8Uno - Pelotero A La Bola Feat. Airam Páez (Video Oficial) _warnermusicmexico(MP3_160K).mp3"></audio></div>
+<div class="audio-box2" data-id="45"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>45 · Marcynho Sensação — COMPREI UM PAREDÃO</p><audio src="COMPREI UM PAREDÃO - Marcynho Sensação (Sensação no Batidão)(MP3_160K).mp3"></audio></div>
+<div class="audio-box2" data-id="46"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>46 · Cris MJ — Vamo a Bailotear</p><audio src="Cris MJ - Vamo a Bailotear (Visualizer) _ Apocalipsis(MP3_160K).mp3"></audio></div>
+<div class="audio-box2" data-id="47"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>47 · Farruko — Pepas</p><audio src="Farruko - Pepas (Letra_Lyrics)(MP3_160K).mp3"></audio></div>
+<div class="audio-box2" data-id="48"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>48 · KAROL G — Si Antes Te Hubiera Conocido</p><audio src="KAROL G - Si Antes Te Hubiera Conocido _ Coke Studio(MP3_160K).mp3"></audio></div>
+<div class="audio-box2" data-id="49"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>49 · Caribbean Hits — MULHER ROLEIRA</p><audio src="MULHER ROLEIRA (SOLINHO ENVOLVENTE) - Caribbean Hits e Marcynho Sensação (Clipe Oficial)(MP3_160K).mp3"></audio></div>
+<div class="audio-box2" data-id="50"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>50 · Myke Towers & Gabito Ballesteros — NO QUIERE FLORES</p><audio src="Myke Towers _ Gabito Ballesteros - NO QUIERE FLORES (Visualizer)(MP3_160K).mp3"></audio></div>
+<div class="audio-box2" data-id="51"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>51 · Nio Garcia, Brray, Anuel AA, Myke Towers — La Jeepeta Remix</p><audio src="Nio Garcia x Brray x Juanka x Anuel AA x Myke Towers - La Jeepeta Remix (Video Oficial)(MP3_160K).mp3"></audio></div>
+<div class="audio-box2" data-id="52"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>52 · Myke Towers & iZaak — SURFERITA</p><audio src="Myke Towers _ iZaak - SURFERITA (Visualizer)(MP3_160K).mp3"></audio></div>
+<div class="audio-box2" data-id="53"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>53 · Myke Towers & iZaak — SURFERITA (Alt)</p><audio src="Myke Towers _ iZaak - SURFERITA (Visualizer)(MP3_160K).mp3"></audio></div>
+<div class="audio-box2" data-id="54"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>54 · Quevedo — TUCHAT</p><audio src="TUCHAT - Quevedo (Official Video)(MP3_160K).mp3"></audio></div>
+<div class="audio-box2" data-id="55"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>55 · Myke Towers & De La Ghetto — RICA BEBE</p><audio src="Myke Towers _ De La Ghetto - RICA BEBE (Visualizer)(MP3_160K).mp3"></audio></div>
+<div class="audio-box2" data-id="56"><img id="songimage" src="images/beamedsmoke.png" onclick="toggleAudio(this)"/><p>56 · Yandel & Feid — Yandel 150</p><audio src="Yandel_ Feid  - Yandel 150 (Video Oficial)(MP3_160K).mp3"></audio></div>
+</div>
+    </div></td>
+  </tr>
+</table>
 <script>
-  const audioBoxes=document.querySelectorAll('.audio-box'), audioBoxes2=document.querySelectorAll('.audio-box2');
-  let currentAudio=null, currentAudio2=null, currentAudioa=null;
-  function stopAllAudio(){audioBoxes.forEach(b=>{b.querySelector('audio').pause();b.querySelector('audio').currentTime=0;});currentAudio=null;}
-  function stopAllAudio2(){audioBoxes2.forEach(b=>{b.querySelector('audio').pause();b.querySelector('audio').currentTime=0;});currentAudio2=null;}
-  function playById(){const id=document.getElementById('audioIdInput').value.trim();const box=[...audioBoxes].find(b=>b.getAttribute('data-id')===id);if(box){stopAllAudio();const a=box.querySelector('audio');a.play();currentAudio=a;}else alert('Not found.');}
-  function pauseCurrent(){if(currentAudio&&!currentAudio.paused)currentAudio.pause();}
-  function playAll(i=0){if(i>=audioBoxes.length)return;stopAllAudio();const a=audioBoxes[i].querySelector('audio');a.play();currentAudio=a;a.onended=()=>playAll(i+1);}
-  function playById2(){const id=document.getElementById('audioIdInput2').value.trim();const box=[...audioBoxes2].find(b=>b.getAttribute('data-id')===id);if(box){stopAllAudio2();const a=box.querySelector('audio');a.play();currentAudio2=a;}else alert('Not found.');}
-  function pauseCurrent2(){if(currentAudio2&&!currentAudio2.paused)currentAudio2.pause();}
-  function playAll2(i=0){if(i>=audioBoxes2.length)return;stopAllAudio2();const a=audioBoxes2[i].querySelector('audio');a.play();currentAudio2=a;a.onended=()=>playAll2(i+1);}
-  function toggleAudio(img){const box=img.parentElement;const audio=box.querySelector('audio');if(currentAudioa===audio){audio.paused?(audio.play(),addAnimation(box)):(audio.pause(),removeAnimation());return;}if(currentAudioa){currentAudioa.pause();currentAudioa.currentTime=0;removeAnimation();}audio.play();currentAudioa=audio;addAnimation(box);}
-  function addAnimation(box){removeAnimation();const a=document.createElement('div');a.className='audio-animation';for(let i=0;i<4;i++){const d=document.createElement('div');d.className='dot';a.appendChild(d);}box.appendChild(a);}
-  function removeAnimation(){document.querySelectorAll('.audio-animation').forEach(el=>el.remove());}
-  document.addEventListener('click',e=>{if(document.querySelector('.search-container')&&!document.querySelector('.search-container').contains(e.target))document.getElementById('suggestions').style.display='none';if(document.querySelector('.search-container2')&&!document.querySelector('.search-container2').contains(e.target))document.getElementById('suggestions2').style.display='none';});
-  setTimeout(()=>{const overlay=document.getElementById('adOverlay'),ad=document.getElementById('adContainer'),skip=document.getElementById('skipBtn');overlay.style.display='flex';setTimeout(()=>{skip.style.display='block';},10000);skip.addEventListener('click',()=>{ad.classList.add('shatter');overlay.style.pointerEvents='none';setTimeout(()=>{overlay.style.display='none';ad.classList.remove('shatter');overlay.style.pointerEvents='auto';skip.style.display='none';},800);});},120000);
+const canvas=document.getElementById('bgCanvas'),ctx=canvas.getContext('2d');
+let currentMode=null,animFrame=null,currentAudioa=null;
+function resize(){canvas.width=innerWidth;canvas.height=innerHeight;}
+window.addEventListener('resize',resize);resize();
+function stopFX(){if(animFrame){cancelAnimationFrame(animFrame);animFrame=null;}currentMode=null;ctx.clearRect(0,0,canvas.width,canvas.height);}
+function showMode(t){const el=document.getElementById('modeIndicator');el.textContent=t;el.classList.add('visible');setTimeout(()=>el.classList.remove('visible'),3200);}
+function startSun(){
+  stopFX();currentMode='sun';showMode('☀️ FIESTA MODE — SOL TROPICAL');
+  let phase=0;
+  function draw(){
+    if(currentMode!=='sun')return;
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    phase+=0.002;
+    const prog=Math.min((Math.sin(phase*0.35+Math.PI*1.5)+1)/2,1);
+    // Tropical sky gradient
+    const sky=ctx.createLinearGradient(0,0,0,canvas.height);
+    if(prog<0.3){sky.addColorStop(0,'#050814');sky.addColorStop(0.6,'#1a0820');sky.addColorStop(1,'#3d0a10');}
+    else if(prog<0.65){sky.addColorStop(0,'#071020');sky.addColorStop(0.4,'#c03020');sky.addColorStop(0.75,'#ff6b35');sky.addColorStop(1,'#ffca28');}
+    else{sky.addColorStop(0,'#0a1830');sky.addColorStop(0.3,'#1560a0');sky.addColorStop(0.65,'#ff8040');sky.addColorStop(0.85,'#ffb840');sky.addColorStop(1,'#ffe860');}
+    ctx.fillStyle=sky;ctx.fillRect(0,0,canvas.width,canvas.height);
+    // Palm trees
+    [[0.05,0.82,0.7],[0.1,0.80,0.5],[0.88,0.81,0.65],[0.93,0.80,0.5]].forEach(([rx,ry,sc])=>{
+      const px=canvas.width*rx,py=canvas.height*ry;
+      ctx.save();ctx.translate(px,py);
+      ctx.fillStyle='rgba(12,6,0,0.9)';
+      ctx.fillRect(-4*sc,0,8*sc,-90*sc);
+      // Fronds
+      for(let f=0;f<6;f++){
+        const ang=(f/6)*Math.PI-Math.PI/2+Math.PI/6;
+        ctx.beginPath();ctx.moveTo(0,-90*sc);
+        ctx.quadraticCurveTo(Math.cos(ang)*45*sc,Math.sin(ang)*45*sc-90*sc,Math.cos(ang)*80*sc,Math.sin(ang)*50*sc-70*sc);
+        ctx.strokeStyle='rgba(12,6,0,0.85)';ctx.lineWidth=4*sc;ctx.stroke();
+      }
+      ctx.restore();
+    });
+    // Tropical sun
+    const sunX=canvas.width*0.55;
+    const sunY=canvas.height*(1.05-prog*0.78);
+    const sunR=55+prog*25;
+    // Heat shimmer
+    if(prog>0.5){
+      const sh=ctx.createLinearGradient(0,canvas.height*0.78,0,canvas.height*0.85);
+      sh.addColorStop(0,'transparent');sh.addColorStop(0.5,`rgba(255,180,60,${(prog-0.5)*0.3})`);sh.addColorStop(1,'transparent');
+      ctx.fillStyle=sh;ctx.fillRect(0,canvas.height*0.75,canvas.width,canvas.height*0.12);
+    }
+    ctx.save();ctx.translate(sunX,sunY);
+    for(let i=0;i<16;i++){
+      const ang=(i/16)*Math.PI*2+phase*1.3;
+      const len=sunR*(2+Math.sin(i*1.5+phase*5)*0.25);
+      ctx.beginPath();ctx.moveTo(Math.cos(ang)*sunR*1.1,Math.sin(ang)*sunR*1.1);
+      ctx.lineTo(Math.cos(ang)*len,Math.sin(ang)*len);
+      ctx.strokeStyle=`rgba(255,200,50,${0.2*prog})`;ctx.lineWidth=2;ctx.stroke();
+    }
+    const sg=ctx.createRadialGradient(0,0,0,0,0,sunR);
+    sg.addColorStop(0,'#fff8e0');sg.addColorStop(0.35,'#ffca28');sg.addColorStop(0.7,'#ff6b35');sg.addColorStop(1,'rgba(255,61,113,0)');
+    ctx.beginPath();ctx.arc(0,0,sunR,0,Math.PI*2);ctx.fillStyle=sg;ctx.fill();ctx.restore();
+    animFrame=requestAnimationFrame(draw);
+  }
+  draw();
+}
+function startWaves(){
+  stopFX();currentMode='wave';showMode('🌊 SOUL MODE — CARIBE NOCTURNO');
+  let t=0;
+  function draw(){
+    if(currentMode!=='wave')return;
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    t+=0.009;
+    const sky=ctx.createLinearGradient(0,0,0,canvas.height*0.65);
+    sky.addColorStop(0,'#020810');sky.addColorStop(0.45,'#041a28');sky.addColorStop(1,'#073040');
+    ctx.fillStyle=sky;ctx.fillRect(0,0,canvas.width,canvas.height*0.65);
+    // Warm Caribbean stars
+    for(let i=0;i<85;i++){
+      const sx=(i*151.3)%canvas.width,sy=(i*83.7)%(canvas.height*0.58);
+      const br=0.35+0.65*Math.abs(Math.sin(t*0.55+i*0.9));
+      ctx.beginPath();ctx.arc(sx,sy,0.85,0,Math.PI*2);
+      ctx.fillStyle=`rgba(255,${200+Math.floor(55*Math.sin(i))},150,`+br+`)`;ctx.fill();
+    }
+    // Warm moon - teal tinted
+    const mx=canvas.width*0.65,my=canvas.height*0.14;
+    const mg=ctx.createRadialGradient(mx,my,0,mx,my,28);
+    mg.addColorStop(0,'#e0fff8');mg.addColorStop(0.5,'#00c9a7');mg.addColorStop(1,'rgba(0,150,120,0)');
+    ctx.beginPath();ctx.arc(mx,my,28,0,Math.PI*2);ctx.fillStyle=mg;ctx.fill();
+    // Turquoise Caribbean waves
+    for(let w=0;w<6;w++){
+      const wY=canvas.height*(0.63+w*0.07);const a=0.07+w*0.13;
+      ctx.beginPath();ctx.moveTo(0,wY);
+      for(let x=0;x<=canvas.width;x+=3){
+        const y=wY+Math.sin(x*0.006+t*(1.1+w*0.22))*(8+w*5)+Math.sin(x*0.011-t*0.5+w)*(5+w*3);
+        ctx.lineTo(x,y);
+      }
+      ctx.lineTo(canvas.width,canvas.height);ctx.lineTo(0,canvas.height);ctx.closePath();
+      const wg=ctx.createLinearGradient(0,wY-8,0,wY+45);
+      wg.addColorStop(0,`rgba(0,${120+w*10},130,${a+0.12})`);wg.addColorStop(1,`rgba(0,50,80,${a*0.4})`);
+      ctx.fillStyle=wg;ctx.fill();
+      ctx.beginPath();ctx.moveTo(0,wY);
+      for(let x=0;x<=canvas.width;x+=3){
+        const y=wY+Math.sin(x*0.006+t*(1.1+w*0.22))*(8+w*5)+Math.sin(x*0.011-t*0.5+w)*(5+w*3);
+        ctx.lineTo(x,y);
+      }
+      ctx.strokeStyle=`rgba(0,220,180,${0.05+w*0.03})`;ctx.lineWidth=1.5;ctx.stroke();
+    }
+    animFrame=requestAnimationFrame(draw);
+  }
+  draw();
+}
+function toggleAudio(img){
+  const box=img.closest('.audio-box,.audio-box2');const audio=box.querySelector('audio');
+  const isSad=box.classList.contains('audio-box');
+  if(currentAudioa===audio){if(audio.paused){audio.play();addAnim(box);isSad?startWaves():startSun();}else{audio.pause();removeAnim();stopFX();}return;}
+  if(currentAudioa){currentAudioa.pause();currentAudioa.currentTime=0;removeAnim();stopFX();}
+  audio.play();currentAudioa=audio;addAnim(box);isSad?startWaves():startSun();
+  audio.onended=()=>{removeAnim();stopFX();currentAudioa=null;};
+}
+function addAnim(box){removeAnim();const a=document.createElement('div');a.className='audio-animation';for(let i=0;i<5;i++){const d=document.createElement('div');d.className='dot';a.appendChild(d);}box.appendChild(a);}
+function removeAnim(){document.querySelectorAll('.audio-animation').forEach(e=>e.remove());}
+const sadBoxes=document.querySelectorAll('.audio-box');let sadCur=null;
+const sad={
+  playById(){const id=document.getElementById('audioIdInput').value.trim();const box=[...sadBoxes].find(b=>b.getAttribute('data-id')===id);if(!box)return alert('No encontrado.');if(sadCur){sadCur.pause();sadCur.currentTime=0;}if(currentAudioa){currentAudioa.pause();}sadCur=box.querySelector('audio');currentAudioa=sadCur;sadCur.play();startWaves();},
+  pause(){if(sadCur&&!sadCur.paused){sadCur.pause();stopFX();}},
+  playAll(i=0){if(i>=sadBoxes.length)return;if(sadCur){sadCur.pause();sadCur.currentTime=0;}sadCur=sadBoxes[i].querySelector('audio');currentAudioa=sadCur;sadCur.play();startWaves();sadCur.onended=()=>this.playAll(i+1);}
+};
+const partyBoxes=document.querySelectorAll('.audio-box2');let partyCur=null;
+const party={
+  playById(){const id=document.getElementById('audioIdInput2').value.trim();const box=[...partyBoxes].find(b=>b.getAttribute('data-id')===id);if(!box)return alert('No encontrado.');if(partyCur){partyCur.pause();partyCur.currentTime=0;}if(currentAudioa){currentAudioa.pause();}partyCur=box.querySelector('audio');currentAudioa=partyCur;partyCur.play();startSun();},
+  pause(){if(partyCur&&!partyCur.paused){partyCur.pause();stopFX();}},
+  playAll(i=0){if(i>=partyBoxes.length)return;if(partyCur){partyCur.pause();partyCur.currentTime=0;}partyCur=partyBoxes[i].querySelector('audio');currentAudioa=partyCur;partyCur.play();startSun();partyCur.onended=()=>this.playAll(i+1);}
+};
+setTimeout(()=>{const ov=document.getElementById('adOverlay'),ad=document.getElementById('adContainer'),skip=document.getElementById('skipBtn');ov.style.display='flex';setTimeout(()=>{skip.style.display='block';},10000);skip.addEventListener('click',()=>{ad.classList.add('shatter');ov.style.pointerEvents='none';setTimeout(()=>{ov.style.display='none';ad.classList.remove('shatter');ov.style.pointerEvents='auto';skip.style.display='none';},800);});},120000);
+
+// ═══════════════════════════════════════════════
+//  FULL SEARCH ENGINE — filter, highlight, play
+// ═══════════════════════════════════════════════
+function buildSearch(barId, sugId, containerSelector, boxClass, isSad) {
+  const bar = document.getElementById(barId);
+  const sug = document.getElementById(sugId);
+  if (!bar || !sug) return;
+
+  // Collect all boxes in this column
+  const allBoxes = Array.from(document.querySelectorAll(boxClass));
+
+  // Extract label text from each box's <p>
+  function getLabel(box) {
+    const p = box.querySelector('p');
+    return p ? p.textContent.toLowerCase() : '';
+  }
+
+  // Highlight matching substring in text
+  function highlight(text, query) {
+    if (!query) return text;
+    const idx = text.toLowerCase().indexOf(query.toLowerCase());
+    if (idx === -1) return text;
+    return text.slice(0, idx)
+      + '<mark style="background:rgba(255,255,255,0.25);color:inherit;border-radius:2px;padding:0 2px;">'
+      + text.slice(idx, idx + query.length)
+      + '<\/mark>'
+      + text.slice(idx + query.length);
+  }
+
+  // Show/hide boxes based on query
+  function filterBoxes(query) {
+    allBoxes.forEach(box => {
+      const label = getLabel(box);
+      const p = box.querySelector('p');
+      if (!query) {
+        // Reset: show all, remove highlights
+        box.style.display = '';
+        if (p) p.innerHTML = p.textContent;
+      } else if (label.includes(query.toLowerCase())) {
+        box.style.display = '';
+        if (p) p.innerHTML = highlight(p.textContent, query);
+      } else {
+        box.style.display = 'none';
+      }
+    });
+  }
+
+  // Build suggestion dropdown from matching labels
+  function buildSuggestions(query) {
+    sug.innerHTML = '';
+    if (!query) { sug.style.display = 'none'; return; }
+
+    const matches = allBoxes.filter(box => getLabel(box).includes(query.toLowerCase()));
+
+
+    if (!matches.length) {
+      const noRes = document.createElement('div');
+      noRes.textContent = 'No tracks found';
+      noRes.style.cssText = 'padding:10px 14px;color:rgba(255,107,53,.5);font-style:italic;pointer-events:none;';
+      sug.appendChild(noRes);
+      sug.style.display = 'block';
+      return;
+    }
+
+    matches.forEach(box => {
+      const p = box.querySelector('p');
+      const label = p ? p.textContent : '';
+      const div = document.createElement('div');
+      div.innerHTML = highlight(label, query);
+      div.style.cursor = 'pointer';
+
+      div.addEventListener('mousedown', (e) => {
+        e.preventDefault(); // prevent blur from firing before click
+        // Clear search, show all, scroll to & play this track
+        bar.value = '';
+        filterBoxes('');
+        sug.style.display = 'none';
+
+        // Scroll into view
+        box.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+        // Flash highlight
+        box.style.transition = 'background 0.1s';
+        box.style.background = 'rgba(255,255,255,0.12)';
+        setTimeout(() => { box.style.background = ''; }, 600);
+
+        // Play the track
+        const img = box.querySelector('img');
+        if (img) toggleAudio(img);
+      });
+
+      sug.appendChild(div);
+    });
+
+    sug.style.display = 'block';
+  }
+
+  bar.addEventListener('input', () => {
+    const query = bar.value.trim();
+    filterBoxes(query);
+    buildSuggestions(query);
+  });
+
+  bar.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      bar.value = '';
+      filterBoxes('');
+      sug.style.display = 'none';
+    }
+    if (e.key === 'Enter') {
+      const query = bar.value.trim();
+      const visible = allBoxes.filter(b => b.style.display !== 'none' && getLabel(b).includes(query.toLowerCase()));
+      if (visible.length === 1) {
+        const img = visible[0].querySelector('img');
+        if (img) toggleAudio(img);
+        bar.value = '';
+        filterBoxes('');
+        sug.style.display = 'none';
+      }
+    }
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!bar.contains(e.target) && !sug.contains(e.target)) {
+      sug.style.display = 'none';
+    }
+  });
+
+  // Focus: show suggestions if bar has text
+  bar.addEventListener('focus', () => {
+    const query = bar.value.trim();
+    if (query) buildSuggestions(query);
+  });
+}
+
+// Wire up both columns
+buildSearch('searchBar',  'suggestions',  '#audioContainer',  '.audio-box',  true);
+buildSearch('searchBar2', 'suggestions2', '#audioContainer2', '.audio-box2', false);
+
 </script>
 </body>
 </html>
