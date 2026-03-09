@@ -3,24 +3,422 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="style.css" rel="stylesheet">
   <title>Vvane Sound World</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Rajdhani:wght@300;500;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+  <style>
+    /* ═══════════════════════════════════════════
+       VVANE SOUND WORLD — INDEX
+       Aesthetic: Cosmic Portal / Sound Dimension
+       Own embedded CSS, no external sheet
+    ═══════════════════════════════════════════ */
+    :root {
+      --cosmos: #04000e;
+      --nebula: #0e0528;
+      --plasma: #00f5c4;
+      --aurora: #7b2fff;
+      --star: #e8d8ff;
+      --gold: #c9a227;
+      --rose: #ff6eb4;
+      --sun: #ff8c30;
+      --glow-plasma: 0 0 10px #00f5c4, 0 0 30px rgba(0,245,196,.3);
+    }
+
+    * { margin:0; padding:0; box-sizing:border-box; }
+
+    html, body {
+      background: var(--cosmos);
+      color: var(--star);
+      font-family: 'Rajdhani', sans-serif;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    /* ── LIVING CANVAS BACKGROUND ── */
+    #bgCanvas {
+      position: fixed; top:0; left:0;
+      width:100%; height:100%;
+      pointer-events: none; z-index:0;
+    }
+
+    /* ── NEBULA GRAIN OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image:
+        radial-gradient(ellipse at 15% 85%, rgba(123,47,255,.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 85% 15%, rgba(0,245,196,.06) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 50%, rgba(255,110,180,.04) 0%, transparent 70%);
+      pointer-events: none; z-index:0;
+    }
+
+    /* ── INTRO OVERLAY ── */
+    #introOverlay {
+      position: fixed; inset:0; z-index: 500;
+      display: flex; justify-content: center; align-items: center;
+      background: radial-gradient(ellipse at center, #0e0528 0%, #04000e 70%);
+      cursor: pointer;
+    }
+    #introOverlay::before {
+      content: '';
+      position: absolute; inset:0;
+      background: repeating-linear-gradient(
+        0deg, transparent, transparent 3px,
+        rgba(0,245,196,.015) 3px, rgba(0,245,196,.015) 4px
+      );
+    }
+    @keyframes slideUp {
+      0%   { transform: translateY(0); opacity:1; }
+      80%  { transform: translateY(-110vh); opacity:.2; }
+      100% { transform: translateY(-110vh); opacity:0; }
+    }
+
+    #bgradius {
+      text-align: center;
+      position: relative; z-index:1;
+    }
+
+    /* ECG svg */
+    .container { display:block; margin: 0 auto 20px; }
+    .track {
+      stroke: rgba(0,245,196,.18);
+      stroke-dasharray: 100;
+      stroke-dashoffset: 0;
+    }
+    .car {
+      stroke: #00f5c4;
+      stroke-dasharray: 26 74;
+      stroke-dashoffset: 62;
+      filter: drop-shadow(0 0 4px #00f5c4);
+      animation: ecg 2s linear infinite;
+    }
+    @keyframes ecg {
+      from { stroke-dashoffset:62; }
+      to   { stroke-dashoffset:-38; }
+    }
+
+    #intro-text {
+      font-family: 'Cinzel Decorative', cursive;
+      font-size: clamp(1rem, 3vw, 1.6rem);
+      color: var(--plasma);
+      text-shadow: var(--glow-plasma);
+      letter-spacing: 4px;
+      margin-bottom: 24px;
+      min-height: 60px;
+    }
+    #intro-text span {
+      opacity: 0;
+      display: inline-block;
+      transform: translateY(12px);
+      transition: opacity .4s, transform .4s;
+      margin-right: 8px;
+    }
+    #intro-text span.highlight { opacity:1; transform:translateY(0); }
+
+    .click-hint {
+      font-family: 'Orbitron', monospace;
+      font-size: .75rem;
+      color: rgba(0,245,196,.5);
+      letter-spacing: 5px;
+      animation: blink 1.8s ease-in-out infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:.3;} 50%{opacity:1;} }
+
+    /* ── NAVBAR ── */
+    #content { position:relative; z-index:1; }
+
+    #navbar {
+      position: sticky; top:0; z-index:100;
+      background: linear-gradient(90deg, #04000ef0, #0e0528e8, #04000ef0);
+      border-bottom: 1px solid rgba(0,245,196,.3);
+      padding: 16px 28px;
+      display: flex; align-items:center; justify-content:space-between;
+      box-shadow: 0 3px 30px rgba(0,245,196,.12);
+    }
+    #navbar::after {
+      content:'';
+      position:absolute; bottom:-2px; left:0; right:0; height:1px;
+      background: linear-gradient(90deg, transparent, var(--plasma), var(--aurora), var(--plasma), transparent);
+      animation: navglow 5s linear infinite;
+    }
+    @keyframes navglow { 0%{opacity:.2;} 50%{opacity:.9;} 100%{opacity:.2;} }
+
+    #titttle {
+      font-family: 'Cinzel Decorative', cursive;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--plasma);
+      text-shadow: var(--glow-plasma);
+      letter-spacing: 3px;
+    }
+    #downloadsighn {
+      width: 36px; height:36px;
+      border-radius: 50%;
+      border: 1px solid rgba(0,245,196,.4);
+      transition: all .3s;
+      object-fit: cover;
+    }
+    #downloadsighn:hover {
+      border-color: var(--plasma);
+      box-shadow: 0 0 15px rgba(0,245,196,.5);
+      transform: scale(1.08);
+    }
+
+    /* ── SECTION LABEL ── */
+    .sample {
+      text-align: center;
+      font-family: 'Orbitron', monospace;
+      font-size: .7rem;
+      color: rgba(0,245,196,.5);
+      letter-spacing: 6px;
+      padding: 28px 0 20px;
+    }
+
+    /* ── SAMPLE AUDIO GRID ── */
+    #sampleaudio {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+      padding: 0 24px 32px;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    .genre-card {
+      background: linear-gradient(145deg, rgba(14,5,40,.7), rgba(4,0,14,.85));
+      border: 1px solid rgba(0,245,196,.15);
+      border-radius: 6px;
+      padding: 18px 16px;
+      position: relative;
+      overflow: hidden;
+      transition: transform .3s, border-color .3s;
+    }
+    .genre-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(0,245,196,.35);
+      box-shadow: 0 8px 40px rgba(0,245,196,.08);
+    }
+
+    /* Genre-specific top accent bars */
+    .genre-card.reggaeton::before { background: linear-gradient(90deg, var(--sun), #ff3d71); }
+    .genre-card.afro::before      { background: linear-gradient(90deg, #e8a020, #c0392b); }
+    .genre-card.hiphop::before    { background: linear-gradient(90deg, #9b30ff, #df00ff); }
+    .genre-card.rnb::before       { background: linear-gradient(90deg, #e8839a, #c9a227); }
+    .genre-card::before {
+      content:'';
+      position:absolute; top:0; left:0; right:0; height:2px;
+    }
+
+    #sampleheading {
+      font-family: 'Orbitron', monospace;
+      font-size: .75rem;
+      letter-spacing: 3px;
+      margin-bottom: 14px;
+      display: block;
+    }
+    .genre-card.reggaeton #sampleheading { color: var(--sun); }
+    .genre-card.afro      #sampleheading { color: #e8a020; }
+    .genre-card.hiphop    #sampleheading { color: #9b30ff; }
+    .genre-card.rnb       #sampleheading { color: #e8839a; }
+
+    .genre-card ul { list-style: none; }
+
+    .outer-div {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 7px 0;
+      border-bottom: 1px solid rgba(255,255,255,.04);
+    }
+    .outer-div:last-child { border-bottom: none; }
+
+    /* ── AUDIO VISUALIZER ICON ── */
+    #iconanim { flex-shrink: 0; }
+    .custom-container {
+      display: flex;
+      align-items: flex-end;
+      gap: 2px;
+      height: 16px;
+      width: 18px;
+    }
+    .custom-bar {
+      width: 3px;
+      background: rgba(0,245,196,.4);
+      border-radius: 2px;
+      height: 4px;
+      transition: height .1s;
+    }
+    .custom-container.playing .custom-bar:nth-child(1) { animation: vbar .5s ease-in-out infinite; }
+    .custom-container.playing .custom-bar:nth-child(2) { animation: vbar .5s ease-in-out .1s infinite; }
+    .custom-container.playing .custom-bar:nth-child(3) { animation: vbar .5s ease-in-out .2s infinite; }
+    .custom-container.playing .custom-bar:nth-child(4) { animation: vbar .5s ease-in-out .3s infinite; }
+    @keyframes vbar {
+      0%,100% { height: 3px; }
+      50%      { height: 14px; }
+    }
+    .genre-card.reggaeton .custom-container.playing .custom-bar { background: var(--sun); }
+    .genre-card.afro      .custom-container.playing .custom-bar { background: #e8a020; }
+    .genre-card.hiphop    .custom-container.playing .custom-bar { background: #9b30ff; }
+    .genre-card.rnb       .custom-container.playing .custom-bar { background: #e8839a; }
+
+    /* ── NATIVE AUDIO PLAYER STYLING ── */
+    .custom-audio {
+      width: 100%;
+      height: 26px;
+      accent-color: var(--plasma);
+    }
+    .custom-audio::-webkit-media-controls-panel {
+      background: rgba(14,5,40,.9);
+    }
+
+    /* ── PLAYLIST CARDS SECTION ── */
+    .holdplaylist {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      padding: 0 24px 60px;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    .holdplaylist a {
+      text-decoration: none;
+      display: block;
+    }
+
+    .holdplaylist > a > div {
+      height: 130px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 6px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: all .4s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Hidden state for shuffle animation */
+    .holdplaylist > a > div.hidden {
+      opacity: 0;
+      transform: scale(.9) rotate(-2deg);
+    }
+
+    .playlist1 {
+      background: linear-gradient(135deg, #200a02, #3d1200);
+      border-color: rgba(255,107,53,.3) !important;
+    }
+    .playlist1:hover {
+      border-color: var(--sun) !important;
+      box-shadow: 0 0 30px rgba(255,140,48,.3), inset 0 0 30px rgba(255,107,53,.05);
+      transform: translateY(-6px) scale(1.02);
+    }
+
+    .playlist2 {
+      background: linear-gradient(135deg, #0a0818, #180a2a);
+      border-color: rgba(232,131,154,.3) !important;
+    }
+    .playlist2:hover {
+      border-color: #e8839a !important;
+      box-shadow: 0 0 30px rgba(232,131,154,.25), inset 0 0 30px rgba(232,131,154,.05);
+      transform: translateY(-6px) scale(1.02);
+    }
+
+    .playlist3 {
+      background: linear-gradient(135deg, #1a0800, #2a1000);
+      border-color: rgba(232,160,32,.3) !important;
+    }
+    .playlist3:hover {
+      border-color: #e8a020 !important;
+      box-shadow: 0 0 30px rgba(232,160,32,.3), inset 0 0 30px rgba(232,160,32,.05);
+      transform: translateY(-6px) scale(1.02);
+    }
+
+    .playlist4 {
+      background: linear-gradient(135deg, #0d0015, #1a0030);
+      border-color: rgba(155,48,255,.3) !important;
+    }
+    .playlist4:hover {
+      border-color: #9b30ff !important;
+      box-shadow: 0 0 30px rgba(155,48,255,.3), inset 0 0 30px rgba(155,48,255,.05);
+      transform: translateY(-6px) scale(1.02);
+    }
+
+    /* Diagonal light sweep on hover */
+    .holdplaylist > a > div::after {
+      content: '';
+      position: absolute; inset:0;
+      background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,.05) 50%, transparent 70%);
+      transform: translateX(-100%);
+      transition: transform .5s;
+    }
+    .holdplaylist > a > div:hover::after { transform: translateX(100%); }
+
+    .holdplaylist label {
+      font-family: 'Orbitron', monospace;
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      pointer-events: none;
+      position: relative; z-index:1;
+      text-shadow: 0 0 20px currentColor;
+    }
+    .playlist1 label { color: var(--sun); }
+    .playlist2 label { color: #e8839a; }
+    .playlist3 label { color: #e8a020; }
+    .playlist4 label { color: #9b30ff; }
+
+    /* Section divider */
+    .section-title {
+      font-family: 'Orbitron', monospace;
+      font-size: .72rem;
+      color: rgba(0,245,196,.4);
+      letter-spacing: 6px;
+      text-align: center;
+      padding: 16px 0 20px;
+    }
+
+    /* ── CURSOR TRAIL ── */
+    .cursor-dot {
+      position: fixed;
+      width: 4px; height:4px;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transition: opacity .8s, transform .8s;
+    }
+
+    /* ── MODE INDICATOR ── */
+    #modeIndicator {
+      position: fixed; bottom:24px; right:24px;
+      font-family: 'Orbitron', monospace;
+      font-size: .68rem;
+      padding: 8px 16px;
+      border: 1px solid var(--plasma);
+      background: rgba(4,0,14,.92);
+      color: var(--plasma);
+      letter-spacing: 2px;
+      z-index: 10;
+      opacity: 0;
+      transition: opacity .5s;
+    }
+    #modeIndicator.visible { opacity:1; }
+  </style>
 </head>
 <body>
 
-<div class="hex-bg"></div>
-<div class="scanlines"></div>
-<div class="corner-tl"></div>
-<div class="corner-br"></div>
+<!-- Living canvas -->
+<canvas id="bgCanvas"></canvas>
 
+<!-- INTRO OVERLAY -->
 <div id="introOverlay">
   <div id="bgradius">
     <svg class="container" x="0px" y="0px"
       viewBox="0 0 50 31.25" height="50" width="80"
-      preserveAspectRatio='xMidYMid meet'>
+      preserveAspectRatio="xMidYMid meet">
       <path class="track" stroke-width="4" fill="none" pathlength="100"
         d="M0.625 21.5 h10.25 l3.75 -5.875 l7.375 15 l9.75 -30 l7.375 20.875 v0 h10.25"/>
-      <path class="car" stroke-width="4" fill="none" pathlength="100"
+      <path class="car"  stroke-width="4" fill="none" pathlength="100"
         d="M0.625 21.5 h10.25 l3.75 -5.875 l7.375 15 l9.75 -30 l7.375 20.875 v0 h10.25"/>
     </svg>
     <div id="intro-text"></div>
@@ -28,242 +426,424 @@
   </div>
 </div>
 
+<!-- MAIN CONTENT -->
 <div id="content">
+
   <nav id="navbar">
-    <div id="logo">
-      <p id="titttle">Vvane Sound World</p>
-    </div>
+    <p id="titttle">Vvane Sound World</p>
     <a href="sighn_up.html">
       <img src="downloadsighn.png" alt="sign in" id="downloadsighn">
     </a>
   </nav>
 
-  <p class="sample">— neural frequency samples —</p>
+  <p class="sample">— frequency samples — tap to feel the vibe —</p>
 
+  <!-- SAMPLE AUDIO GRID -->
   <div id="sampleaudio">
 
-    <div id="latin">
-      <p id="sampleheading">⬡ Reggaetón Signals</p>
+    <div class="genre-card reggaeton">
+      <p id="sampleheading">🔥 REGGAETÓN SIGNALS</p>
       <ul>
-        <li class="outer-div">
-          <div id="iconanim"><div class="custom-container"><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div></div></div>
-          <audio class="custom-audio" controls><source src="Bad Bunny - Efecto (360° Visualizer) _ Un Verano Sin Ti(MP3_160K).mp3" type="audio/mp3"></audio>
-        </li>
-        <li class="outer-div">
-          <div id="iconanim"><div class="custom-container"><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div></div></div>
-          <audio class="custom-audio" controls><source src="Myke Towers - COSMETICOS (Visualizer)(MP3_160K).mp3" type="audio/mp3"></audio>
-        </li>
-        <li class="outer-div">
-          <div id="iconanim"><div class="custom-container"><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div></div></div>
-          <audio class="custom-audio" controls><source src="Feid - Ferxxo 100 (Official Video)(MP3_160K).mp3" type="audio/mp3"></audio>
-        </li>
-        <li class="outer-div">
-          <div id="iconanim"><div class="custom-container"><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div></div></div>
-          <audio class="custom-audio" controls><source src="Cris MJ - Partyson (Video Oficial)(MP3_160K).mp3" type="audio/mp3"></audio>
-        </li>
-        <li class="outer-div">
-          <div id="iconanim"><div class="custom-container"><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div></div></div>
-          <audio class="custom-audio" controls><source src="Pedro Capó_ Farruko - Calma (Remix - Official Video)(MP3_160K).mp3" type="audio/mp3"></audio>
-        </li>
-        <li class="outer-div">
-          <div id="iconanim"><div class="custom-container"><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div></div></div>
-          <audio class="custom-audio" controls><source src="Anuel AA_ KAROL G - Secreto(MP3_160K).mp3" type="audio/mp3"></audio>
-        </li>
+        <li class="outer-div"><div id="iconanim"><div class="custom-container"><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div></div></div><audio class="custom-audio" controls><source src="Bad Bunny - Efecto (360° Visualizer) _ Un Verano Sin Ti(MP3_160K).mp3" type="audio/mp3"></audio></li>
+        <li class="outer-div"><div id="iconanim"><div class="custom-container"><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div></div></div><audio class="custom-audio" controls><source src="Myke Towers - COSMETICOS (Visualizer)(MP3_160K).mp3" type="audio/mp3"></audio></li>
+        <li class="outer-div"><div id="iconanim"><div class="custom-container"><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div></div></div><audio class="custom-audio" controls><source src="Feid - Ferxxo 100 (Official Video)(MP3_160K).mp3" type="audio/mp3"></audio></li>
+        <li class="outer-div"><div id="iconanim"><div class="custom-container"><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div></div></div><audio class="custom-audio" controls><source src="Cris MJ - Partyson (Video Oficial)(MP3_160K).mp3" type="audio/mp3"></audio></li>
+        <li class="outer-div"><div id="iconanim"><div class="custom-container"><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div></div></div><audio class="custom-audio" controls><source src="Pedro Capó_ Farruko - Calma (Remix - Official Video)(MP3_160K).mp3" type="audio/mp3"></audio></li>
+        <li class="outer-div"><div id="iconanim"><div class="custom-container"><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div></div></div><audio class="custom-audio" controls><source src="Anuel AA_ KAROL G - Secreto(MP3_160K).mp3" type="audio/mp3"></audio></li>
       </ul>
     </div>
 
-    <div id="latin">
-      <p id="sampleheading">⬡ Afro Pulse</p>
+    <div class="genre-card afro">
+      <p id="sampleheading">🌍 AFRO PULSE</p>
       <ul>
-        <li class="outer-div">
-          <div id="iconanim"><div class="custom-container"><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div></div></div>
-          <audio class="custom-audio" controls><source src="Fave - Mr Man (Visualizer)(MP3_160K).mp3" type="audio/mp3"></audio>
-        </li>
-        <li class="outer-div">
-          <div id="iconanim"><div class="custom-container"><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div></div></div>
-          <audio class="custom-audio" controls><source src="Diamond Platnumz - Yatapita (Official Lyric Audio)(MP3_160K).mp3" type="audio/mp3"></audio>
-        </li>
-        <li class="outer-div">
-          <div id="iconanim"><div class="custom-container"><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div></div></div>
-          <audio class="custom-audio" controls><source src="Pheelz x Davido - _Electricity_ (Official Music Video)(MP3_160K).mp3" type="audio/mp3"></audio>
-        </li>
-        <li class="outer-div">
-          <div id="iconanim"><div class="custom-container"><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div></div></div>
-          <audio class="custom-audio" controls><source src="Timaya - Cold Outside ft Buju ( official lyrics video)(MP3_160K).mp3" type="audio/mp3"></audio>
-        </li>
-        <li class="outer-div">
-          <div id="iconanim"><div class="custom-container"><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div></div></div>
-          <audio class="custom-audio" controls><source src="Tiwa savage All over lyrics(MP3_160K).mp3" type="audio/mp3"></audio>
-        </li>
-        <li class="outer-div">
-          <div id="iconanim"><div class="custom-container"><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div></div></div>
-          <audio class="custom-audio" controls><source src="Victoria Kimani - China Love (Official Video) ft. R.City(MP3_160K).mp3" type="audio/mp3"></audio>
-        </li>
+        <li class="outer-div"><div id="iconanim"><div class="custom-container"><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div></div></div><audio class="custom-audio" controls><source src="Fave - Mr Man (Visualizer)(MP3_160K).mp3" type="audio/mp3"></audio></li>
+        <li class="outer-div"><div id="iconanim"><div class="custom-container"><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div></div></div><audio class="custom-audio" controls><source src="Diamond Platnumz - Yatapita (Official Lyric Audio)(MP3_160K).mp3" type="audio/mp3"></audio></li>
+        <li class="outer-div"><div id="iconanim"><div class="custom-container"><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div></div></div><audio class="custom-audio" controls><source src="Pheelz x Davido - _Electricity_ (Official Music Video)(MP3_160K).mp3" type="audio/mp3"></audio></li>
+        <li class="outer-div"><div id="iconanim"><div class="custom-container"><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div></div></div><audio class="custom-audio" controls><source src="Timaya - Cold Outside ft Buju ( official lyrics video)(MP3_160K).mp3" type="audio/mp3"></audio></li>
+        <li class="outer-div"><div id="iconanim"><div class="custom-container"><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div></div></div><audio class="custom-audio" controls><source src="Tiwa savage All over lyrics(MP3_160K).mp3" type="audio/mp3"></audio></li>
+        <li class="outer-div"><div id="iconanim"><div class="custom-container"><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div></div></div><audio class="custom-audio" controls><source src="Victoria Kimani - China Love (Official Video) ft. R.City(MP3_160K).mp3" type="audio/mp3"></audio></li>
       </ul>
     </div>
 
-    <div id="latin">
-      <p id="sampleheading">⬡ Hip-Hop Frequencies</p>
+    <div class="genre-card hiphop">
+      <p id="sampleheading">🎤 HIP-HOP FREQUENCIES</p>
       <ul>
-        <li class="outer-div">
-          <div id="iconanim"><div class="custom-container"><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div></div></div>
-          <audio class="custom-audio" controls><source src="5. Nasty_C - I Miss You (From Lost Files)(MP3_160K).mp3" type="audio/mp3"></audio>
-        </li>
-        <li class="outer-div">
-          <div id="iconanim"><div class="custom-container"><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div></div></div>
-          <audio class="custom-audio" controls><source src="Bruno Mars - Liquor Store Blues (feat. Damian Marley) (Official Music Video)(MP3_160K).mp3" type="audio/mp3"></audio>
-        </li>
-        <li class="outer-div">
-          <div id="iconanim"><div class="custom-container"><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div></div></div>
-          <audio class="custom-audio" controls><source src="444(MP3_160K).mp3" type="audio/mp3"></audio>
-        </li>
-        <li class="outer-div">
-          <div id="iconanim"><div class="custom-container"><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div></div></div>
-          <audio class="custom-audio" controls><source src="XXXTENTACION - Hope (Lyrics)(MP3_160K).mp3" type="audio/mp3"></audio>
-        </li>
-        <li class="outer-div">
-          <div id="iconanim"><div class="custom-container"><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div></div></div>
-          <audio class="custom-audio" controls><source src="BigXthaPlug - 2AM (Official Music Video)(MP3_160K).mp3" type="audio/mp3"></audio>
-        </li>
-        <li class="outer-div">
-          <div id="iconanim"><div class="custom-container"><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div></div></div>
-          <audio class="custom-audio" controls><source src="XXXTENTACION - SAD_(MP3_160K).mp3" type="audio/mp3"></audio>
-        </li>
+        <li class="outer-div"><div id="iconanim"><div class="custom-container"><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div></div></div><audio class="custom-audio" controls><source src="5. Nasty_C - I Miss You (From Lost Files)(MP3_160K).mp3" type="audio/mp3"></audio></li>
+        <li class="outer-div"><div id="iconanim"><div class="custom-container"><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div></div></div><audio class="custom-audio" controls><source src="Bruno Mars - Liquor Store Blues (feat. Damian Marley) (Official Music Video)(MP3_160K).mp3" type="audio/mp3"></audio></li>
+        <li class="outer-div"><div id="iconanim"><div class="custom-container"><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div></div></div><audio class="custom-audio" controls><source src="444(MP3_160K).mp3" type="audio/mp3"></audio></li>
+        <li class="outer-div"><div id="iconanim"><div class="custom-container"><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div></div></div><audio class="custom-audio" controls><source src="XXXTENTACION - Hope (Lyrics)(MP3_160K).mp3" type="audio/mp3"></audio></li>
+        <li class="outer-div"><div id="iconanim"><div class="custom-container"><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div></div></div><audio class="custom-audio" controls><source src="BigXthaPlug - 2AM (Official Music Video)(MP3_160K).mp3" type="audio/mp3"></audio></li>
+        <li class="outer-div"><div id="iconanim"><div class="custom-container"><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div></div></div><audio class="custom-audio" controls><source src="XXXTENTACION - SAD_(MP3_160K).mp3" type="audio/mp3"></audio></li>
       </ul>
     </div>
 
-    <div id="latin">
-      <p id="sampleheading">⬡ R&B Transmissions</p>
+    <div class="genre-card rnb">
+      <p id="sampleheading">🌹 R&B TRANSMISSIONS</p>
       <ul>
-        <li class="outer-div">
-          <div id="iconanim"><div class="custom-container"><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div></div></div>
-          <audio class="custom-audio" controls><source src="James Blunt - You_re Beautiful (Official Music Video) [4K](MP3_160K).mp3" type="audio/mp3"></audio>
-        </li>
-        <li class="outer-div">
-          <div id="iconanim"><div class="custom-container"><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div></div></div>
-          <audio class="custom-audio" controls><source src="Ed Sheeran - Beautiful People (feat. Khalid) [Official Music Video](MP3_160K).mp3" type="audio/mp3"></audio>
-        </li>
-        <li class="outer-div">
-          <div id="iconanim"><div class="custom-container"><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div></div></div>
-          <audio class="custom-audio" controls><source src="j-hope _Killin_ It Girl (feat. GloRilla)_ Official MV(MP3_160K).mp3" type="audio/mp3"></audio>
-        </li>
-        <li class="outer-div">
-          <div id="iconanim"><div class="custom-container"><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div></div></div>
-          <audio class="custom-audio" controls><source src="Tate McRae - greedy (Official Video)(MP3_160K).mp3" type="audio/mp3"></audio>
-        </li>
-        <li class="outer-div">
-          <div id="iconanim"><div class="custom-container"><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div></div></div>
-          <audio class="custom-audio" controls><source src="Elley Duhé - MIDDLE OF THE NIGHT (Official Video)(MP3_160K).mp3" type="audio/mp3"></audio>
-        </li>
-        <li class="outer-div">
-          <div id="iconanim"><div class="custom-container"><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div></div></div>
-          <audio class="custom-audio" controls><source src="Lord Huron - The Night We Met (Lyrics)(MP3_160K).mp3" type="audio/mp3"></audio>
-        </li>
+        <li class="outer-div"><div id="iconanim"><div class="custom-container"><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div></div></div><audio class="custom-audio" controls><source src="James Blunt - You_re Beautiful (Official Music Video) [4K](MP3_160K).mp3" type="audio/mp3"></audio></li>
+        <li class="outer-div"><div id="iconanim"><div class="custom-container"><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div></div></div><audio class="custom-audio" controls><source src="Ed Sheeran - Beautiful People (feat. Khalid) [Official Music Video](MP3_160K).mp3" type="audio/mp3"></audio></li>
+        <li class="outer-div"><div id="iconanim"><div class="custom-container"><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div></div></div><audio class="custom-audio" controls><source src="j-hope _Killin_ It Girl (feat. GloRilla)_ Official MV(MP3_160K).mp3" type="audio/mp3"></audio></li>
+        <li class="outer-div"><div id="iconanim"><div class="custom-container"><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div></div></div><audio class="custom-audio" controls><source src="Tate McRae - greedy (Official Video)(MP3_160K).mp3" type="audio/mp3"></audio></li>
+        <li class="outer-div"><div id="iconanim"><div class="custom-container"><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div></div></div><audio class="custom-audio" controls><source src="Elley Duhé - MIDDLE OF THE NIGHT (Official Video)(MP3_160K).mp3" type="audio/mp3"></audio></li>
+        <li class="outer-div"><div id="iconanim"><div class="custom-container"><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div><div class="custom-bar"></div></div></div><audio class="custom-audio" controls><source src="Lord Huron - The Night We Met (Lyrics)(MP3_160K).mp3" type="audio/mp3"></audio></li>
       </ul>
     </div>
 
   </div><!-- /sampleaudio -->
 
+  <p class="section-title">— enter a world —</p>
+
+  <!-- PLAYLIST PORTAL CARDS -->
   <div class="holdplaylist" id="container">
-    <a href="latino.html" target="_blank">
-      <div class="playlist1" id="box1"><Label>REGGAETON VYBZ</Label></div>
+    <a href="latino.html">
+      <div class="playlist1" id="box1"><label>REGGAETON VYBZ</label></div>
     </a>
-    <a href="Rnbs.html" target="_blank">
-      <div class="playlist2" id="box2"><Label>RNBS VYBZ</Label></div>
+    <a href="Rnbs.html">
+      <div class="playlist2" id="box2"><label>RNBS VYBZ</label></div>
     </a>
-    <a href="Afro.html" target="_blank">
-      <div class="playlist3" id="box3"><Label>AFRO VYBZ</Label></div>
+    <a href="Afro.html">
+      <div class="playlist3" id="box3"><label>AFRO VYBZ</label></div>
     </a>
-    <a href="hipop.html" target="_blank">
-      <div class="playlist4" id="box4"><Label>HIPOP VYBZ</Label></div>
+    <a href="hipop.html">
+      <div class="playlist4" id="box4"><label>HIPOP VYBZ</label></div>
     </a>
   </div>
 
 </div><!-- /content -->
 
+<div id="modeIndicator"></div>
+
 <script>
-  /* ── INTRO TEXT ── */
-  const text = "Let it be done with music";
-  const words = text.split(" ");
-  const container = document.getElementById("intro-text");
-  let i = 0;
-  function animateWords() {
-    if (i >= words.length) return;
-    const span = document.createElement("span");
-    span.textContent = words[i] + " ";
-    container.appendChild(span);
-    setTimeout(() => span.classList.add("highlight"), 100);
-    i++;
-    setTimeout(animateWords, 400);
+// ═══════════════════════════════════════════════
+//  CANVAS — COSMIC BREATHING BACKGROUND
+// ═══════════════════════════════════════════════
+const canvas = document.getElementById('bgCanvas');
+const ctx = canvas.getContext('2d');
+let W, H, stars = [], animFrame = null, currentMode = null;
+
+function resize() {
+  W = canvas.width = innerWidth;
+  H = canvas.height = innerHeight;
+}
+window.addEventListener('resize', resize);
+resize();
+
+// Generate stars
+for (let i = 0; i < 160; i++) {
+  stars.push({
+    x: Math.random(),
+    y: Math.random(),
+    r: 0.4 + Math.random() * 1.2,
+    speed: 0.0003 + Math.random() * 0.0006,
+    phase: Math.random() * Math.PI * 2,
+    hue: Math.random() < 0.3 ? 180 : Math.random() < 0.5 ? 270 : 60
+  });
+}
+
+function stopFX() {
+  if (animFrame) { cancelAnimationFrame(animFrame); animFrame = null; }
+  currentMode = null;
+  ctx.clearRect(0, 0, W, H);
+}
+
+function showMode(text) {
+  const el = document.getElementById('modeIndicator');
+  el.textContent = text;
+  el.classList.add('visible');
+  setTimeout(() => el.classList.remove('visible'), 3200);
+}
+
+// Default: deep cosmos with nebula drift
+function startCosmos() {
+  if (currentMode === 'cosmos') return;
+  stopFX();
+  currentMode = 'cosmos';
+  let t = 0;
+  function draw() {
+    if (currentMode !== 'cosmos') return;
+    ctx.clearRect(0, 0, W, H);
+    t += 0.005;
+
+    // Nebula clouds
+    const neb = ctx.createRadialGradient(W*0.3+Math.sin(t*0.4)*W*0.08, H*0.4+Math.cos(t*0.3)*H*0.06, 0, W*0.3, H*0.4, W*0.4);
+    neb.addColorStop(0, 'rgba(123,47,255,0.06)');
+    neb.addColorStop(1, 'transparent');
+    ctx.fillStyle = neb; ctx.fillRect(0,0,W,H);
+
+    const neb2 = ctx.createRadialGradient(W*0.7+Math.cos(t*0.35)*W*0.07, H*0.6+Math.sin(t*0.28)*H*0.05, 0, W*0.7, H*0.6, W*0.35);
+    neb2.addColorStop(0, 'rgba(0,245,196,0.04)');
+    neb2.addColorStop(1, 'transparent');
+    ctx.fillStyle = neb2; ctx.fillRect(0,0,W,H);
+
+    // Stars
+    stars.forEach(s => {
+      const br = 0.4 + 0.6 * Math.abs(Math.sin(t * s.speed * 200 + s.phase));
+      ctx.beginPath();
+      ctx.arc(s.x * W, s.y * H, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = s.hue === 180
+        ? `rgba(0,245,196,${br * 0.8})`
+        : s.hue === 270
+        ? `rgba(180,140,255,${br * 0.6})`
+        : `rgba(255,240,180,${br * 0.7})`;
+      ctx.fill();
+    });
+
+    animFrame = requestAnimationFrame(draw);
   }
-  container.innerHTML = "";
-  animateWords();
+  draw();
+}
 
-  /* ── OVERLAY CLICK ── */
-  const overlay = document.getElementById('introOverlay');
-  overlay.addEventListener('click', () => {
-    overlay.style.animation = 'slideUp 1s ease-in forwards';
-    setTimeout(() => {
-      overlay.style.display = 'none';
-      document.body.style.overflow = 'auto';
-    }, 1000);
-  });
+// SUN RISING — party tracks
+function startSun() {
+  stopFX(); currentMode = 'sun';
+  showMode('☀️ SUN RISING');
+  let phase = 0;
+  function draw() {
+    if (currentMode !== 'sun') return;
+    ctx.clearRect(0, 0, W, H);
+    phase += 0.0022;
+    const prog = Math.min((Math.sin(phase * 0.38) + 1) / 2, 1);
+    const sunY = H * (1.05 - prog * 0.75);
+    const sunX = W * 0.5 + Math.sin(phase * 0.5) * W * 0.1;
+    const sunR = 52 + prog * 26;
 
-  /* ── VISUALIZER ── */
-  document.querySelectorAll('.outer-div').forEach((li) => {
-    const audio = li.querySelector('.custom-audio');
-    const visualizer = li.querySelector('.custom-container');
-    const toggle = () => {
-      if (!audio.paused && !audio.ended) visualizer.classList.add('playing');
-      else visualizer.classList.remove('playing');
-    };
-    audio.addEventListener('play', toggle);
-    audio.addEventListener('pause', toggle);
-    audio.addEventListener('ended', toggle);
-  });
+    // Sky
+    const sky = ctx.createLinearGradient(0, 0, 0, H);
+    if (prog < 0.3) {
+      sky.addColorStop(0, '#04000e'); sky.addColorStop(0.6, '#1a0520'); sky.addColorStop(1, '#3a0d08');
+    } else if (prog < 0.65) {
+      sky.addColorStop(0, '#0a0515'); sky.addColorStop(0.4, '#8b1a05'); sky.addColorStop(0.8, '#e85000'); sky.addColorStop(1, '#ff8c30');
+    } else {
+      sky.addColorStop(0, '#101830'); sky.addColorStop(0.3, '#4a1060'); sky.addColorStop(0.65, '#e07820'); sky.addColorStop(0.88, '#ffb040'); sky.addColorStop(1, '#ffe070');
+    }
+    ctx.fillStyle = sky; ctx.fillRect(0, 0, W, H);
 
-  /* ── ONE AUDIO AT A TIME ── */
-  const audios = document.querySelectorAll('audio');
-  audios.forEach(audio => {
+    // Ground silhouette
+    ctx.fillStyle = 'rgba(4,0,8,0.96)';
+    ctx.fillRect(0, H * 0.82, W, H);
+
+    // Stars fade as sun rises
+    if (prog < 0.6) {
+      stars.forEach(s => {
+        const br = (0.6 - prog) * 0.8 * Math.abs(Math.sin(phase * s.speed * 80 + s.phase));
+        ctx.beginPath(); ctx.arc(s.x * W, s.y * H * 0.75, s.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(200,180,255,${br})`; ctx.fill();
+      });
+    }
+
+    // Sun rays
+    ctx.save(); ctx.translate(sunX, sunY);
+    for (let i = 0; i < 16; i++) {
+      const ang = (i / 16) * Math.PI * 2 + phase * 1.2;
+      const len = sunR * (2.1 + Math.sin(i * 1.3 + phase * 5) * 0.2);
+      ctx.beginPath();
+      ctx.moveTo(Math.cos(ang) * sunR * 1.1, Math.sin(ang) * sunR * 1.1);
+      ctx.lineTo(Math.cos(ang) * len, Math.sin(ang) * len);
+      ctx.strokeStyle = `rgba(255,200,80,${0.18 * prog})`; ctx.lineWidth = 2; ctx.stroke();
+    }
+    const sg = ctx.createRadialGradient(0, 0, 0, 0, 0, sunR);
+    sg.addColorStop(0, '#fffce0'); sg.addColorStop(0.3, '#ffd040');
+    sg.addColorStop(0.65, '#ff8c30'); sg.addColorStop(1, 'rgba(255,80,20,0)');
+    ctx.beginPath(); ctx.arc(0, 0, sunR, 0, Math.PI * 2); ctx.fillStyle = sg; ctx.fill();
+    ctx.restore();
+
+    animFrame = requestAnimationFrame(draw);
+  }
+  draw();
+}
+
+// OCEAN WAVES — moody tracks
+function startWaves() {
+  stopFX(); currentMode = 'waves';
+  showMode('🌊 OCEAN WAVES');
+  let t = 0;
+  function draw() {
+    if (currentMode !== 'waves') return;
+    ctx.clearRect(0, 0, W, H);
+    t += 0.009;
+
+    // Deep ocean night sky
+    const sky = ctx.createLinearGradient(0, 0, 0, H * 0.65);
+    sky.addColorStop(0, '#010610'); sky.addColorStop(0.5, '#040f22'); sky.addColorStop(1, '#071a35');
+    ctx.fillStyle = sky; ctx.fillRect(0, 0, W, H * 0.65);
+
+    // Twinkling stars
+    stars.forEach(s => {
+      const br = 0.25 + 0.75 * Math.abs(Math.sin(t * 0.5 + s.phase));
+      ctx.beginPath(); ctx.arc(s.x * W, s.y * H * 0.6, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(200,220,255,${br * 0.7})`; ctx.fill();
+    });
+
+    // Moon
+    const mx = W * 0.7, my = H * 0.13;
+    const mg = ctx.createRadialGradient(mx, my, 0, mx, my, 30);
+    mg.addColorStop(0, '#e8f2ff'); mg.addColorStop(0.5, '#b8d0f0'); mg.addColorStop(1, 'rgba(100,150,230,0)');
+    ctx.beginPath(); ctx.arc(mx, my, 30, 0, Math.PI * 2); ctx.fillStyle = mg; ctx.fill();
+
+    // Moon halo
+    const mh = ctx.createRadialGradient(mx, my, 22, mx, my, 80);
+    mh.addColorStop(0, 'rgba(140,180,255,0.12)'); mh.addColorStop(1, 'transparent');
+    ctx.beginPath(); ctx.arc(mx, my, 80, 0, Math.PI * 2); ctx.fillStyle = mh; ctx.fill();
+
+    // Moon shimmer reflection
+    for (let i = -3; i <= 3; i++) {
+      const rg = ctx.createLinearGradient(mx + i*7 - 3, H*0.64, mx + i*7 + 3, H*0.64 + 130);
+      rg.addColorStop(0, 'rgba(160,200,255,0.16)'); rg.addColorStop(1, 'transparent');
+      ctx.fillStyle = rg; ctx.fillRect(mx + i * 7 - 3, H * 0.64, 6, 130);
+    }
+
+    // Waves
+    for (let w = 0; w < 6; w++) {
+      const wY = H * (0.63 + w * 0.072);
+      const a = 0.07 + w * 0.13;
+      ctx.beginPath(); ctx.moveTo(0, wY);
+      for (let x = 0; x <= W; x += 3) {
+        const y = wY
+          + Math.sin(x * 0.007 + t * (1 + w * 0.22)) * (8 + w * 5)
+          + Math.sin(x * 0.013 - t * 0.55 + w) * (4 + w * 3);
+        ctx.lineTo(x, y);
+      }
+      ctx.lineTo(W, H); ctx.lineTo(0, H); ctx.closePath();
+      const wg = ctx.createLinearGradient(0, wY - 8, 0, wY + 45);
+      wg.addColorStop(0, `rgba(15,80,160,${a + 0.1})`);
+      wg.addColorStop(1, `rgba(4,20,70,${a * 0.45})`);
+      ctx.fillStyle = wg; ctx.fill();
+
+      ctx.beginPath(); ctx.moveTo(0, wY);
+      for (let x = 0; x <= W; x += 3) {
+        const y = wY
+          + Math.sin(x * 0.007 + t * (1 + w * 0.22)) * (8 + w * 5)
+          + Math.sin(x * 0.013 - t * 0.55 + w) * (4 + w * 3);
+        ctx.lineTo(x, y);
+      }
+      ctx.strokeStyle = `rgba(100,180,255,${0.04 + w * 0.03})`; ctx.lineWidth = 1.5; ctx.stroke();
+    }
+
+    animFrame = requestAnimationFrame(draw);
+  }
+  draw();
+}
+
+// ═══════════════════════════════════════════════
+//  INTRO SEQUENCE
+// ═══════════════════════════════════════════════
+startCosmos();
+
+const text = 'Let it be done with music';
+const words = text.split(' ');
+const introTextEl = document.getElementById('intro-text');
+let wi = 0;
+function animateWords() {
+  if (wi >= words.length) return;
+  const span = document.createElement('span');
+  span.textContent = words[wi] + ' ';
+  introTextEl.appendChild(span);
+  setTimeout(() => span.classList.add('highlight'), 80);
+  wi++;
+  setTimeout(animateWords, 400);
+}
+introTextEl.innerHTML = '';
+animateWords();
+
+const overlay = document.getElementById('introOverlay');
+overlay.addEventListener('click', () => {
+  overlay.style.animation = 'slideUp 1s ease-in forwards';
+  setTimeout(() => {
+    overlay.style.display = 'none';
+    document.body.style.overflow = 'auto';
+  }, 1000);
+});
+
+// ═══════════════════════════════════════════════
+//  AUDIO VISUALIZER + CANVAS REACTION
+// ═══════════════════════════════════════════════
+
+// Which genre each card belongs to (determines sun vs wave)
+// Reggaeton = party, HipHop mixed, Afro = pulse, RnB = soft
+// For simplicity: cards in columns 1 & 4 (reggaeton/rnb) react to sun
+// cards 2 & 3 (afro/hiphop sad) react to waves
+// We detect by parent card class
+
+document.querySelectorAll('.genre-card').forEach(card => {
+  const audios = card.querySelectorAll('.custom-audio');
+  const visualizers = card.querySelectorAll('.custom-container');
+  const isParty = card.classList.contains('reggaeton') || card.classList.contains('rnb');
+
+  audios.forEach((audio, idx) => {
     audio.addEventListener('play', () => {
-      audios.forEach(other => { if (other !== audio) other.pause(); });
+      // Update visualizer
+      visualizers.forEach((v, vi) => {
+        v.classList.toggle('playing', vi === idx);
+      });
+      // Trigger canvas effect
+      isParty ? startSun() : startWaves();
+    });
+    audio.addEventListener('pause', () => {
+      visualizers[idx].classList.remove('playing');
+      // Return to cosmos after 2s if nothing else playing
+      setTimeout(() => {
+        const anyPlaying = [...document.querySelectorAll('.custom-audio')].some(a => !a.paused);
+        if (!anyPlaying) startCosmos();
+      }, 2000);
+    });
+    audio.addEventListener('ended', () => {
+      visualizers[idx].classList.remove('playing');
+      setTimeout(() => {
+        const anyPlaying = [...document.querySelectorAll('.custom-audio')].some(a => !a.paused);
+        if (!anyPlaying) startCosmos();
+      }, 2000);
     });
   });
+});
 
-  /* ── SHUFFLE PLAYLIST CARDS ── */
-  const container1 = document.getElementById("container");
-  function getTwoUniqueIndices(length) {
-    let i1 = Math.floor(Math.random() * length), i2;
-    do { i2 = Math.floor(Math.random() * length); } while (i1 === i2);
-    return [i1, i2];
-  }
-  function switchTwoDivs() {
-    const boxes = Array.from(container1.children);
-    const [i, j] = getTwoUniqueIndices(boxes.length);
-    const b1 = boxes[i], b2 = boxes[j];
-    b1.classList.add("hidden"); b2.classList.add("hidden");
-    setTimeout(() => {
-      const temp = document.createElement("div");
-      container1.replaceChild(temp, b1);
-      container1.replaceChild(b1, b2);
-      container1.replaceChild(b2, temp);
-      setTimeout(() => { b1.classList.remove("hidden"); b2.classList.remove("hidden"); }, 50);
-    }, 1000);
-  }
-  setInterval(switchTwoDivs, 10000);
-
-  /* ── CURSOR PARTICLE TRAIL ── */
-  document.addEventListener('mousemove', (e) => {
-    if (Math.random() > 0.7) {
-      const dot = document.createElement('div');
-      dot.style.cssText = `position:fixed;width:3px;height:3px;border-radius:50%;background:#00f5c4;
-        box-shadow:0 0 6px #00f5c4;left:${e.clientX}px;top:${e.clientY}px;
-        pointer-events:none;z-index:9998;transition:all 0.8s;opacity:0.8;`;
-      document.body.appendChild(dot);
-      setTimeout(() => { dot.style.opacity = '0'; dot.style.transform = 'scale(0)'; }, 50);
-      setTimeout(() => dot.remove(), 850);
-    }
+// One audio at a time
+const allAudios = document.querySelectorAll('audio');
+allAudios.forEach(audio => {
+  audio.addEventListener('play', () => {
+    allAudios.forEach(other => { if (other !== audio) other.pause(); });
   });
+});
+
+// ═══════════════════════════════════════════════
+//  SHUFFLE PLAYLIST CARDS
+// ═══════════════════════════════════════════════
+const cardContainer = document.getElementById('container');
+function shuffleCards() {
+  const boxes = Array.from(cardContainer.children);
+  const i = Math.floor(Math.random() * boxes.length);
+  let j;
+  do { j = Math.floor(Math.random() * boxes.length); } while (i === j);
+  const b1 = boxes[i], b2 = boxes[j];
+  b1.querySelector('div').classList.add('hidden');
+  b2.querySelector('div').classList.add('hidden');
+  setTimeout(() => {
+    const tmp = document.createElement('div');
+    cardContainer.replaceChild(tmp, b1);
+    cardContainer.replaceChild(b1, b2);
+    cardContainer.replaceChild(b2, tmp);
+    setTimeout(() => {
+      b1.querySelector('div').classList.remove('hidden');
+      b2.querySelector('div').classList.remove('hidden');
+    }, 60);
+  }, 600);
+}
+setInterval(shuffleCards, 10000);
+
+// ═══════════════════════════════════════════════
+//  CURSOR PARTICLE TRAIL
+// ═══════════════════════════════════════════════
+const trailColors = ['#00f5c4', '#7b2fff', '#ff6eb4', '#c9a227'];
+document.addEventListener('mousemove', e => {
+  if (Math.random() > 0.65) {
+    const dot = document.createElement('div');
+    const col = trailColors[Math.floor(Math.random() * trailColors.length)];
+    dot.className = 'cursor-dot';
+    dot.style.cssText = `left:${e.clientX}px;top:${e.clientY}px;background:${col};box-shadow:0 0 6px ${col};opacity:0.85;`;
+    document.body.appendChild(dot);
+    setTimeout(() => { dot.style.opacity = '0'; dot.style.transform = 'scale(0)'; }, 40);
+    setTimeout(() => dot.remove(), 850);
+  }
+});
 </script>
 </body>
 </html>
