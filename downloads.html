@@ -5,78 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DOWNLOADS — VVANE SOUND WORLD</title>
   <style>
-    /* ALIEN TECH ENHANCEMENTS */
-    body { cursor: crosshair !important; }
-    body::after { animation: starField 12s ease-in-out infinite alternate; }
-    @keyframes starField { from{opacity:0.5;transform:scale(1)} to{opacity:1;transform:scale(1.02)} }
-
-    /* Animated hex grid overlay */
-    .hex-overlay {
-      position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: 0.02;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100'%3E%3Cpath d='M28 66L0 50 0 16 28 0 56 16 56 50 28 66 28 100' fill='none' stroke='%2300f5d4' stroke-width='0.5'/%3E%3Cpath d='M28 0L28 34M0 16L28 34M56 16L28 34' fill='none' stroke='%2300f5d4' stroke-width='0.5'/%3E%3C/svg%3E");
-      animation: hexDrift 30s linear infinite;
-    }
-    @keyframes hexDrift { from{background-position:0 0} to{background-position:56px 100px} }
-
-    /* Scanlines */
-    .scanlines {
-      position: fixed; inset: 0; pointer-events: none; z-index: 998;
-      background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.04) 2px, rgba(0,0,0,0.04) 4px);
-    }
-
-    /* Corner brackets */
-    .corner { position: fixed; width: 45px; height: 45px; border-color: rgba(0,245,212,0.25); border-style: solid; z-index: 997; pointer-events: none; }
-    .c-tl { top: 10px; left: 10px; border-width: 2px 0 0 2px; }
-    .c-tr { top: 10px; right: 10px; border-width: 2px 2px 0 0; }
-    .c-bl { bottom: 10px; left: 10px; border-width: 0 0 2px 2px; }
-    .c-br { bottom: 10px; right: 10px; border-width: 0 2px 2px 0; }
-
-    h1 {
-      font-family: 'Orbitron', monospace !important;
-      font-size: clamp(1rem, 3vw, 1.8rem) !important;
-      font-weight: 900 !important;
-      color: var(--plasma) !important;
-      text-shadow: var(--glow-md) !important;
-      letter-spacing: 0.3em !important;
-      text-transform: uppercase !important;
-      margin-bottom: 30px !important;
-      padding: 20px 20px 16px !important;
-    }
-    h1::before { content: '◈ '; color: var(--bio); }
-    h1::after { content: ' ◈'; color: var(--bio); }
-
-    h3 {
-      font-family: 'Orbitron', monospace !important;
-      font-size: 0.75rem !important;
-      font-weight: 700 !important;
-      letter-spacing: 0.4em !important;
-      color: var(--plasma) !important;
-      text-shadow: var(--glow-sm) !important;
-      text-transform: uppercase !important;
-      margin: 24px 0 14px 0 !important;
-      padding: 8px 0 10px !important;
-      border-bottom: 1px solid rgba(0,245,212,0.15) !important;
-    }
-    h3::before { content: '⬡ '; color: var(--bio); }
-
-    .dl-item a {
-      font-family: 'Share Tech Mono', monospace !important;
-      font-size: 0.72rem !important;
-      letter-spacing: 0.06em !important;
-      color: rgba(200,238,255,0.65) !important;
-      transition: all 0.2s !important;
-    }
-    .dl-item:hover a { color: var(--plasma) !important; text-shadow: 0 0 6px rgba(0,245,212,0.4) !important; }
-    .dl-item:hover::before { opacity: 1 !important; }
-    .dl-item:hover { background: rgba(0,245,212,0.06) !important; }
-
-    .dl-icon { width: 14px; height: 14px; opacity: 0.4; filter: hue-rotate(120deg) brightness(1.5); }
-
-    #downloads { position: relative; z-index: 1; }
-    #ddseperate { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 10px; }
-
-    /* Particle trail cursor script support */
-  
     @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;600;700&family=Share+Tech+Mono&display=swap');
 
     :root {
@@ -337,12 +265,6 @@
   </style>
 </head>
 <body>
-<div class="hex-overlay"></div>
-<div class="scanlines"></div>
-<div class="corner c-tl"></div>
-<div class="corner c-tr"></div>
-<div class="corner c-bl"></div>
-<div class="corner c-br"></div>
 <header>
   <div class="site-title">Vvane Sound World</div>
   <div class="page-label">▸ AUDIO ARCHIVE ◂</div>
@@ -512,18 +434,5 @@
   </main>
 </div>
 
-<script>
-  document.addEventListener('mousemove', (e) => {
-    if (Math.random() > 0.72) {
-      const dot = document.createElement('div');
-      dot.style.cssText = `position:fixed;width:2px;height:2px;border-radius:50%;background:#00f5d4;
-        box-shadow:0 0 5px #00f5d4;left:${e.clientX}px;top:${e.clientY}px;
-        pointer-events:none;z-index:9997;transition:all 0.7s;opacity:0.7;`;
-      document.body.appendChild(dot);
-      setTimeout(() => { dot.style.opacity='0'; dot.style.transform='scale(0)'; }, 50);
-      setTimeout(() => dot.remove(), 750);
-    }
-  });
-</script>
 </body>
 </html>
